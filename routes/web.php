@@ -24,6 +24,7 @@ Route::group([
     Route::delete('/users/{id}', [UserController::class, 'softDelete'])->name('users.softDelete');
     Route::resource('/fungsionalitas', App\Http\Controllers\FungsionalitasController::class)->only(['create', 'store', 'show']);
     Route::resource('/analisis', App\Http\Controllers\AnalisisController::class);
+    Route::resource('/ssi', App\Http\Controllers\SSIController::class);
     // Route::get('/fungsionalitas/create', [FungsionalitasController::class, 'create'])->name('fungsionalitas.create');
     // Route::post('/fungsionalitas', [FungsionalitasController::class, 'store'])->name('fungsionalitas.store');
 });

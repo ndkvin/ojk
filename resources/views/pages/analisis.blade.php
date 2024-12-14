@@ -7,13 +7,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Data SSI</h3>
+                    <h3>Data Analisis</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="">SSI</a></li>
+                            <li class="breadcrumb-item"><a href="">Analisis</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -26,51 +26,54 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="{{ route('ssi.store') }}" method="POST">
+                            <form class="form" action="{{ route('analisis.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <label for="rp">RP</label>
+                                            <label for="af-1-oq">AF 1 OQ</label>
 
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <label for="pd">Peformance Delivery</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="os">Outcome Satisfaction</label>
+                                            <label for="af-2-oq">AF 2 OQ</label>
 
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <label for="af">Adjusment Factor</label>
+                                            <label for="cf-1-oq">CF 1 OQ</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="cf-1-oq">CF 2 OQ</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" id="form-rows">
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="rp[]" step="0.01" min="0" max="10" required></input>
+                                            <textarea class="form-control" name="af-1-oq[]" rows="3" placeholder="AF 1 OQ" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="pd[]" step="0.01" min="0" max="10" required></input>
+
+                                            <textarea class="form-control" name="af-2-oq[]" rows="3" placeholder="AF 2 OQ" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="os[]" step="0.01" min="0" max="10" required></input>
+
+                                            <textarea class="form-control" name="cf-1-oq[]" rows="3" placeholder="CF 1 OQ" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="af[]" step="0.01" min="0" max="10" required></input>
+                                            <textarea class="form-control" name="cf-2-oq[]" rows="3" placeholder="CF 2 OQ" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -108,25 +111,24 @@
             const newRow = `
                 <div class="col-md-3 col-12">
                     <div class="form-group">
-                        <input class="form-control" type="number" name="rp[]" step="0.01" min="0" max="10" required></input>
+                        <textarea class="form-control" name="af-1-oq[]" rows="3" placeholder="AF 1 OQ" required></textarea>
                     </div>
                 </div>
                 <div class="col-md-3 col-12">
                     <div class="form-group">
-                        <input class="form-control" type="number" name="pd[]" step="0.01" min="0" max="10" required></input>
+                        <textarea class="form-control" name="af-2-oq[]" rows="3" placeholder="AF 2 OQ" required></textarea>
                     </div>
                 </div>
                 <div class="col-md-3 col-12">
                     <div class="form-group">
-                        <input class="form-control" type="number" name="os[]" step="0.01" min="0" max="10" required></input>
+                        <textarea class="form-control" name="cf-1-oq[]" rows="3" placeholder="CF 1 OQ" required></textarea>
                     </div>
                 </div>
                 <div class="col-md-3 col-12">
                     <div class="form-group">
-                        <input class="form-control" type="number" name="af[]" step="0.01" min="0" max="10" required></input>
+                        <textarea class="form-control" name="cf-2-oq[]" rows="3" placeholder="CF 2 OQ" required></textarea>
                     </div>
-                </div>
-                        `;
+                </div>`;
 
             // Tambahkan row baru ke dalam form
             formRows.insertAdjacentHTML('beforeend', newRow);

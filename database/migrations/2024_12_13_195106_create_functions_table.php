@@ -35,14 +35,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('fungsionalitas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('function_id')->constrained('functions')->onDelete('cascade');
-            $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
-            $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
-            $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
-            $table->timestamps();
-        });
+        // Schema::create('fungsionalitas', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('function_id')->constrained('functions')->onDelete('cascade');
+        //     $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
+        //     $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
+        //     $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
+        //     $table->timestamps();
+        // });
     }
 
     /**

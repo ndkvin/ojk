@@ -30,8 +30,18 @@ class FungsionalitasController extends Controller
             'bidang_id' => 'required|exists:bidang,id',
         ]);
 
-        Fungsionalitas::create($validated);
+        // dd($validated['bidang_id']);        
 
-        return redirect()->back()->with('success', 'Transaction successfully created.');
+        return redirect()->route('fungsionalitas.show', [
+            'pilih',
+            'function_id' => $validated['function_id'],
+            'type_id' => $validated['type_id'],
+            'satker_id' => $validated['satker_id'],
+            'bidang_id' => $validated['bidang_id'],
+        ]);
+    }
+
+    public function show() {
+        return view('pages.select');   
     }
 }

@@ -7,7 +7,6 @@
     <h1>Create Transaction</h1>
     <form action="{{ route('fungsionalitas.store') }}" method="POST">
         @csrf
-
         <div class="mb-3">
             <label for="function_id" class="form-label">Function</label>
             <div class="dropdown-container">

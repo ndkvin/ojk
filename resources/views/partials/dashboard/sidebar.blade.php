@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo" style="font-size:24px;margin-top:10px">
-                    Inputan Data
+                    OJK
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -44,12 +44,6 @@
 
                 @if (Auth::user()->role == 'superadmin')
                     <li class="sidebar-title">Menu</li>
-                    <li class="sidebar-item {{ request()->is('dashboard/post*') ? 'active' : '' }} ">
-                        <a href="" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Postingan</span>
-                        </a>
-                    </li>
                     <li class="sidebar-item {{ request()->is('verification*') ? 'active' : '' }}">
                         <a href="{{ route('verification.index') }}" class='sidebar-link'>
                             <i class="bi bi-person-circle"></i>

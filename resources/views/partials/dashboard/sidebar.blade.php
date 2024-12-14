@@ -50,10 +50,18 @@
                             <span>Postingan</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ request()->is('dashboard/user*') ? 'active' : '' }}">
-                        <a href="" class='sidebar-link'>
+                    <li class="sidebar-item {{ request()->is('verification*') ? 'active' : '' }}">
+                        <a href="{{ route('verification.index') }}" class='sidebar-link'>
                             <i class="bi bi-person-circle"></i>
                             <span>Akun Admin</span>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth::user()->role === 'superadmin' || Auth::user()->role === 'admin')
+                    <li class="sidebar-item {{ request()->is('fungsionalitas*') ? 'active' : '' }}">
+                        <a href="{{ route('fungsionalitas.create') }}" class='sidebar-link'>
+                            <i class="bi bi-person-circle"></i>
+                            <span>Fungsi</span>
                         </a>
                     </li>
                 @endif

@@ -20,6 +20,7 @@
                     </div>
                 </a>
             </div>
+            {{-- <h1>{{ $request->query('function_id') }}</h1> --}}
             <div class="col-xl-6 col-md-6 col-sm-12">
                 <a href="">
                     <div class="card">
@@ -41,7 +42,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">IKA</h4>
                                 <div class="card-text">
-                                    Data IKA
+                                    Data IPA
                                 </div>
                             </div>
 

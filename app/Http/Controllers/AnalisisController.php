@@ -11,7 +11,7 @@ class AnalisisController extends Controller
      */
     public function index()
     {
-        dd('analisis');
+        dd();
     }
 
     /**

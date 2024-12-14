@@ -42,6 +42,6 @@ class FungsionalitasController extends Controller
     }
 
     public function show() {
-        echo "U are on correct page";   
+        return view('pages.select');   
     }
 }

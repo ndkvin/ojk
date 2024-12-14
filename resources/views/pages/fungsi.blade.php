@@ -1,13 +1,12 @@
 @extends('layouts.dashboard')
 
-@section('title', 'DDashboard')
+@section('title', 'Dashboard')
 
 @section('content')
 <div class="container">
     <h1>Create Transaction</h1>
     <form action="{{ route('fungsionalitas.store') }}" method="POST">
         @csrf
-
         <div class="mb-3">
             <label for="function_id" class="form-label">Function</label>
             <select class="form-select" id="function_id" name="function_id" required>

@@ -31,32 +31,39 @@
                     <form action="{{ route('register') }}" method='post'>
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Nama" name='name' required>
+                            <input type="text" class="form-control form-control-xl" placeholder="Nama" name='name'
+                                required>
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="email" class="form-control form-control-xl" placeholder="Email" name='email' required>
+                            <input type="email" class="form-control form-control-xl" placeholder="Email"
+                                name='email' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Buat Password" name='password' required>
+                            <input type="password" class="form-control form-control-xl" placeholder="Buat Password"
+                                name='password' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
 
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Ulangi Password" name='password_confirmation' required>
+                            <input type="password" class="form-control form-control-xl" placeholder="Ulangi Password"
+                                name='password_confirmation' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
 
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Daftar</button>
+                        <div class="text-center mt-5 text-lg fs-4">
+                            <p class="text-gray-600">Sudah memiliki akun? <a href="{{ route('login') }}" class="font-bold">Masuk</a>.</p>
+                        </div>
                     </form>
                 </div>
             </div>

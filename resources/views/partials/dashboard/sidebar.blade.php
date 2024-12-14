@@ -44,12 +44,6 @@
 
                 @if (Auth::user()->role == 'superadmin')
                     <li class="sidebar-title">Menu</li>
-                    <li class="sidebar-item {{ request()->is('dashboard/post*') ? 'active' : '' }} ">
-                        <a href="" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Postingan</span>
-                        </a>
-                    </li>
                     <li class="sidebar-item {{ request()->is('verification*') ? 'active' : '' }}">
                         <a href="{{ route('verification.index') }}" class='sidebar-link'>
                             <i class="bi bi-person-circle"></i>

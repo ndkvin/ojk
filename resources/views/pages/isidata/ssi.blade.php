@@ -28,49 +28,49 @@
                         <div class="card-body">
                             <form class="form" action="{{ route('ssi.store') }}" method="POST">
                                 @csrf
+                                <div class="col-12 col-md-6 order-md-1">
+                                    <h3>Direct</h3>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="rp">RP</label>
-
+                                            <input class="form-control" type="number" name="rp" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="pd">Peformance Delivery</label>
+                                            <input class="form-control" type="number" name="pd" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="os">Outcome Satisfaction</label>
-
+                                            <input class="form-control" type="number" name="os" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="af">Adjusment Factor</label>
+                                            <input class="form-control" type="number" name="af" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" id="form-rows">
+                                <div class="col-12 col-md-6 order-md-1">
+                                    <h3>Indirect</h3>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="rp[]" step="0.01" min="0" max="10" required></input>
+                                            <label for="os">Outcome Satisfaction</label>
+                                            <input class="form-control" type="number" name="indirect_os" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="pd[]" step="0.01" min="0" max="10" required></input>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <input class="form-control" type="number" name="os[]" step="0.01" min="0" max="10" required></input>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <input class="form-control" type="number" name="af[]" step="0.01" min="0" max="10" required></input>
+                                            <label for="af">Adjusment Factor</label>
+                                            <input class="form-control" type="number" name="indirect_af" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                 </div>
@@ -78,12 +78,11 @@
                                 <input type="hidden" name='type_id' value="{{ request()->query('type_id') }}">
                                 <input type="hidden" name='satker_id' value="{{ request()->query('satker_id') }}">
                                 <input type="hidden" name='bidang_id' value="{{ request()->query('bidang_id') }}">
-                                <button type="submit" class="d-none" id="submit"></button>
+                                <button type="submit" class="btn btn-primary me-1 mb-1" id="submit">Submit</button>
                             </form>
-                            <div class="col-12 d-flex justify-content-between">
-                                <button id='add-row-btn' class="btn btn-light-secondary me-1 mb-1">Tambah Baris</button>
+                            {{-- <div class="col-12 d-flex justify-content-between">
                                 <button type="submit" onclick="submit()" class="btn btn-primary me-1 mb-1">Simpan</button>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -92,45 +91,3 @@
     </section>
 @endsection
 
-@section('scripts')
-    <script>
-        function submit() {
-            const button = document.getElementById('submit');
-
-            button.click();
-        }
-
-        document.getElementById('add-row-btn').addEventListener('click', function() {
-            // Container untuk semua row form
-            const formRows = document.getElementById('form-rows');
-
-            // HTML untuk baris baru
-            const newRow = `
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <input class="form-control" type="number" name="rp[]" step="0.01" min="0" max="10" required></input>
-                    </div>
-                </div>
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <input class="form-control" type="number" name="pd[]" step="0.01" min="0" max="10" required></input>
-                    </div>
-                </div>
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <input class="form-control" type="number" name="os[]" step="0.01" min="0" max="10" required></input>
-                    </div>
-                </div>
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <input class="form-control" type="number" name="af[]" step="0.01" min="0" max="10" required></input>
-                    </div>
-                </div>
-                        `;
-
-            // Tambahkan row baru ke dalam form
-            formRows.insertAdjacentHTML('beforeend', newRow);
-        });
-    </script>
-
-@endsection

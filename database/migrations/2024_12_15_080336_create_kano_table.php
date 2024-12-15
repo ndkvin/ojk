@@ -11,19 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ssi', function (Blueprint $table) {
+        Schema::create('kano', function (Blueprint $table) {
             $table->id();
             $table->foreignId('function_id')->constrained('functions')->onDelete('cascade');
             $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
             $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
-            // $table->string('jenis');
-            $table->double('rp');
-            $table->double('pd');
-            $table->double('os');
-            $table->double('af');
-            $table->double('indirect_os');
-            $table->double('indirect_af');
+            $table->string('attribute');
+            $table->double('puas');
+            $table->double('penting');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ssi');
+        Schema::dropIfExists('kano');
     }
 };

@@ -19,40 +19,30 @@ class SSIController extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
+        $validated = $request->validate([
             'function_id' => 'required|exists:functions,id',
             'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
-            // 'jenis' => 'required|string|max:255',
-        ];
+            'rp' => 'required|numeric',
+            'pd' => 'required|numeric',
+            'os' => 'required|numeric',
+            'af' => 'required|numeric',
+            'indirect_os' => 'required|numeric',
+            'indirect_af' => 'required|numeric',
+        ]);
 
-        foreach ($request->all() as $key => $value) {
-            if (is_array($value)) {
-                $rules[$key . '.*'] = 'required';
-            }
-        }
-        $validated = $request->validate($rules);
+        $ssi = SSI::create($validated);
 
+        return redirect()->route('ssi.show', [
+            'ssi' => $ssi->id, // ID data yang baru disimpan
+        ])->with('success', 'Data berhasil disimpan.');
+    }
 
-        // $jenis = $validated['jenis'];
-        $rp = $validated['rp'];
-        $pd = $validated['pd'];
-        $os = $validated['os'];
-        $af = $validated['af'];
+    public function show($id)
+    {
+        $ssi = SSI::findOrFail($id); // Ambil data berdasarkan ID
 
-        foreach ($rp as $key => $value) {
-            SSI::create([
-                'function_id' => $validated['function_id'],
-                'type_id' => $validated['type_id'],
-                'satker_id' => $validated['satker_id'],
-                'bidang_id' => $validated['bidang_id'],
-                'rp' => $rp[$key],
-                'pd' => $pd[$key],
-                'os' => $os[$key],
-                'af' => $af[$key],
-            ]);
-        }
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
+        return view('pages.ssi.show', compact('ssi')); // Kirim data ke view
     }
 }

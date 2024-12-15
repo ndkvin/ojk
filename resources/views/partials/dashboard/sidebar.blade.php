@@ -41,34 +41,49 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-
-                @if (Auth::user()->role == 'superadmin')
-                    <li class="sidebar-title">Menu</li>
-                    <li class="sidebar-item {{ request()->is('verification*') ? 'active' : '' }}">
-                        <a href="{{ route('verification.index') }}" class='sidebar-link'>
-                            <i class="bi bi-person-circle"></i>
-                            <span>Daftar Akun</span>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->role === 'superadmin' || Auth::user()->role === 'admin')
-                    <li class="sidebar-item {{ request()->is('fungsionalitas*') ? 'active' : '' }}">
-                        <a href="{{ route('fungsionalitas.create') }}" class='sidebar-link'>
-                            <i class="bi bi-database-add"></i>
-                            <span>Fungsi</span>
-                        </a>
-                    </li>
-                @endif
-                <li class="sidebar-item ">
-                    <a class='sidebar-link' href="#"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
+                <li class="sidebar-title">Menu</li>
+                <li class="sidebar-item {{ request()->is('/*') ? 'active' : '' }}">
+                    <a href="{{ route('home') }}" class='sidebar-link'>
+                        <i class="bi bi-house"></i>
+                        <span>Beranda</span>
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
                 </li>
+                @guest
+                    <li class="sidebar-item">
+                        <a href="{{ route('login') }}" class='sidebar-link'>
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <span>Masuk</span>
+                        </a>
+                    </li>
+                @endguest
+                @auth
+                    @if (Auth::user()->role === 'superadmin')
+                        <li class="sidebar-item {{ request()->is('verification*') ? 'active' : '' }}">
+                            <a href="{{ route('verification.index') }}" class='sidebar-link'>
+                                <i class="bi bi-person-circle"></i>
+                                <span>Daftar Akun</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->role === 'superadmin' || Auth::user()->role === 'admin')
+                        <li class="sidebar-item {{ request()->is('fungsionalitas*') ? 'active' : '' }}">
+                            <a href="{{ route('fungsionalitas.create') }}" class='sidebar-link'>
+                                <i class="bi bi-gear"></i>
+                                <span>Fungsi</span>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="sidebar-item ">
+                        <a class='sidebar-link' href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Keluar</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
 
             </ul>
         </div>

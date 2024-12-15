@@ -45,6 +45,34 @@
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" placeholder="NIK" name='nik'  min="16" max="6"
+                                required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-123"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" placeholder="NIM" name='nim' min="8" max="8"
+                                required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-123"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" placeholder="Fakultas" name='fakultas' 
+                                required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-house"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" placeholder="Prodi" name='prodi' 
+                                required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-house"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
                             <input type="password" class="form-control form-control-xl" placeholder="Buat Password"
                                 name='password' required>
                             <div class="form-control-icon">

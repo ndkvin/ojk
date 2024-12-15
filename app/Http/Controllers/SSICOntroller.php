@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Analisis;
+use App\Models\SSI;
 use Illuminate\Http\Request;
 
-class AnalisisController extends Controller
+class SSICOntroller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.analisis');
+        return view('pages.ssi');
     }
 
     /**
@@ -33,22 +33,26 @@ class AnalisisController extends Controller
             'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
-            'af_1_oq' => 'required|string',
-            'af_2_oq' => 'required|string',
-            'cf_1_oq' => 'required|string',
-            'cf_2_oq' => 'required|string',
+            'rp' => 'required|decimal:0,10',
+            'pb' => 'required|decimal:0,10',
+            'os' => 'required|decimal:0,10',
+            'af' => 'required|decimal:0,10',
+            'or' => 'required|decimal:0,10',
+            'as' => 'required|decimal:0,10'
         ]);
 
 
-        Analisis::create([
+        SSI::create([
             'function_id' => $request->function_id,
             'type_id' => $request->type_id,
             'satker_id' => $request->satker_id,
             'bidang_id' => $request->bidang_id,
-            'af_1_oq' => $request->af_1_oq,
-            'af_2_oq' => $request->af_2_oq,
-            'cf_1_oq' => $request->cf_1_oq,
-            'cf_2_oq' => $request->cf_2_oq,
+            'rp' => $request->rp,
+            'pb' => $request->pb,
+            'os' => $request->os,
+            'af' => $request->af,
+            'or' => $request->or,
+            'as' => $request->as
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil disimpan');

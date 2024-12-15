@@ -56,24 +56,24 @@
                                 <div class="row" id="form-rows">
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="af-1-oq[]" rows="3" placeholder="AF 1 OQ" required></textarea>
+                                            <textarea class="form-control" name="af_1_oq" rows="3" placeholder="AF 1 OQ" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
 
-                                            <textarea class="form-control" name="af-2-oq[]" rows="3" placeholder="AF 2 OQ" required></textarea>
+                                            <textarea class="form-control" name="af_2_oq" rows="3" placeholder="AF 2 OQ" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
 
-                                            <textarea class="form-control" name="cf-1-oq[]" rows="3" placeholder="CF 1 OQ" required></textarea>
+                                            <textarea class="form-control" name="cf_1_oq" rows="3" placeholder="CF 1 OQ" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="cf-2-oq[]" rows="3" placeholder="CF 2 OQ" required></textarea>
+                                            <textarea class="form-control" name="cf_2_oq" rows="3" placeholder="CF 2 OQ" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -83,8 +83,7 @@
                                 <input type="hidden" name='bidang_id' value="{{ request()->query('bidang_id') }}">
                                 <button type="submit" class="d-none" id="submit"></button>
                             </form>
-                            <div class="col-12 d-flex justify-content-between">
-                                <button id='add-row-btn' class="btn btn-light-secondary me-1 mb-1">Tambah Baris</button>
+                            <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" onclick="submit()" class="btn btn-primary me-1 mb-1">Simpan</button>
                             </div>
                         </div>
@@ -102,37 +101,6 @@
 
             button.click();
         }
-
-        document.getElementById('add-row-btn').addEventListener('click', function() {
-            // Container untuk semua row form
-            const formRows = document.getElementById('form-rows');
-
-            // HTML untuk baris baru
-            const newRow = `
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <textarea class="form-control" name="af-1-oq[]" rows="3" placeholder="AF 1 OQ" required></textarea>
-                    </div>
-                </div>
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <textarea class="form-control" name="af-2-oq[]" rows="3" placeholder="AF 2 OQ" required></textarea>
-                    </div>
-                </div>
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <textarea class="form-control" name="cf-1-oq[]" rows="3" placeholder="CF 1 OQ" required></textarea>
-                    </div>
-                </div>
-                <div class="col-md-3 col-12">
-                    <div class="form-group">
-                        <textarea class="form-control" name="cf-2-oq[]" rows="3" placeholder="CF 2 OQ" required></textarea>
-                    </div>
-                </div>`;
-
-            // Tambahkan row baru ke dalam form
-            formRows.insertAdjacentHTML('beforeend', newRow);
-        });
     </script>
 
 @endsection

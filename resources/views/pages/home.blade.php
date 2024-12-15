@@ -22,11 +22,13 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    @if (auth()->user()->role == 'user')
-                        <h5 class="card-title">
-                            Tunggu Admin Verifikasi Data Anda
-                        </h5>
-                    @endif
+                    @auth
+                        @if (auth()->user()->role == 'user')
+                            <h5 class="card-title">
+                                Tunggu Admin Verifikasi Data Anda
+                            </h5>
+                        @endif
+                    @endauth
                 </div>
             </div>
         </section>

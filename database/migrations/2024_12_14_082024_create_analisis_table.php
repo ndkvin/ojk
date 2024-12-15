@@ -17,11 +17,14 @@ return new class extends Migration
             $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
             $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
-            $table->text('af_1_oq');
-            $table->text('af_2_oq');
-            $table->text('cf_1_oq');
-            $table->text('cf_2_oq');
+            $table->longText('af_1_oq');
+            $table->longText('af_2_oq');
+            $table->longText('cf_1_oq');
+            $table->longText('cf_2_oq');
             $table->timestamps();
+
+
+            $table->index(['function_id', 'type_id', 'satker_id', 'bidang_id']);
         });
     }
 

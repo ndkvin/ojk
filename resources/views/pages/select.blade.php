@@ -65,11 +65,17 @@
                 </a>
             </div>
             <div class="col-xl-6 col-md-6 col-sm-12">
-                <a href="">
+                 <a
+                    href="{{ route('ipa.create', [
+                        'function_id' => request()->query('function_id'),
+                        'type_id' => request()->query('type_id'),
+                        'satker_id' => request()->query('satker_id'),
+                        'bidang_id' => request()->query('bidang_id'),
+                    ]) }}">
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
-                                <h4 class="card-title">IKA</h4>
+                                <h4 class="card-title">IPA</h4>
                                 <div class="card-text">
                                     Data IPA
                                 </div>

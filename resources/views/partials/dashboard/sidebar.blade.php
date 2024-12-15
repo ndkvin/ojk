@@ -54,7 +54,7 @@
                 @if (Auth::user()->role === 'superadmin' || Auth::user()->role === 'admin')
                     <li class="sidebar-item {{ request()->is('fungsionalitas*') ? 'active' : '' }}">
                         <a href="{{ route('fungsionalitas.create') }}" class='sidebar-link'>
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-database-add"></i>
                             <span>Fungsi</span>
                         </a>
                     </li>

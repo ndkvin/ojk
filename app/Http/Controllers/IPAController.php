@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Analisis;
-use App\Models\Kano;
+use App\Models\IPA;
 use Illuminate\Http\Request;
 
-class KanoController extends Controller
+class IPAController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +20,7 @@ class KanoController extends Controller
      */
     public function create()
     {
-        return view('pages.isidata.kano');
+        return view('pages.isidata.ipa');
     }
 
     /**
@@ -45,52 +44,28 @@ class KanoController extends Controller
         $validated = $request->validate($rules);
 
 
-        $attribute = $validated['attribute'];
-        $puas = $validated['puas'];
-        $penting = $validated['penting'];
+        $dimensi = $validated['dimensi'];
+        $score = $validated['score'];
 
-        foreach ($attribute as $key => $value) {
-            Kano::create([
+        foreach ($dimensi as $key => $value) {
+            IPA::create([
                 'function_id' => $validated['function_id'],
                 'type_id' => $validated['type_id'],
                 'satker_id' => $validated['satker_id'],
                 'bidang_id' => $validated['bidang_id'],
-                'attribute' => $attribute[$key],
-                'puas' => $puas[$key],
-                'penting' => $penting[$key],
+                'dimensi' => $dimensi[$key],
+                'score' => $score[$key],
             ]);
         }
-        return redirect()->route('kano.show', [
-            'function_id' => $validated['function_id'],
-            'type_id' => $validated['type_id'],
-            'satker_id' => $validated['satker_id'],
-            'bidang_id' => $validated['bidang_id'],
-        ])->with('success', 'Data berhasil disimpan.');
+        return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($function_id, $type_id, $satker_id, $bidang_id)
+    public function show(string $id)
     {
-
-        $data = Kano::where('function_id', $function_id)
-            ->where('bidang_id', $bidang_id)
-            ->where('satker_id', $satker_id)
-            ->where('type_id', $type_id)
-            ->get()
-            ->map(function ($item) {
-                return [
-                    'x' => $item->puas,  // Misalnya kolom puas sebagai X-axis
-                    'y' => $item->penting, // Misalnya kolom penting sebagai Y-axis
-                    'label' => $item->attribute, // Label untuk setiap titik
-                ];
-            });
-
-        // dd($data);
-
-        // Passing data ke view
-        return view('pages.kano.show', compact('data'));
+        //
     }
 
     /**

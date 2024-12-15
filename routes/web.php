@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\DashoardController;
 use App\Http\Controllers\FungsionalitasController;
+use App\Http\Controllers\KanoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/dashboard', App\Http\Controllers\DashoardController::class);
 
+Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.show');
+
 Route::group([
     'middleware' => ['auth', App\Http\Middleware\IsAdmin::class],
 ], function () {
@@ -28,6 +31,7 @@ Route::group([
     Route::resource('/fungsionalitas', App\Http\Controllers\FungsionalitasController::class)->only(['create', 'store', 'show']);
     Route::resource('/analisis', App\Http\Controllers\AnalisisController::class);
     Route::resource('/kano', App\Http\Controllers\KanoController::class)->only(['create', 'store']);
+    Route::resource('/ipa', App\Http\Controllers\IPAController::class)->only(['create', 'store']);
     Route::get('/ssi/create', [SSIController::class, 'create'])->name('ssi.create');
     Route::post('/ssi', [SSIController::class, 'store'])->name('ssi.store');
     Route::get('/ssi/{ssi}', [SSIController::class, 'show'])->name('ssi.show');

@@ -4,15 +4,18 @@
 
 @section('content')
 <div class="container">
-    <h1>Create Transaction</h1>
-    <form action="{{ route('fungsionalitas.store') }}" method="POST">
+    <h1>Create Data</h1>
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                 <form action="{{ route('fungsionalitas.store') }}" method="POST">
         @csrf
         <div class="mb-3">
-            <label for="function_id" class="form-label">Function</label>
+            <label for="function_id" class="form-label">Fungsi</label>
             <div class="dropdown-container">
                 <div class="dropdown">
                     <button type="button" class="dropdown-btn" onclick="toggleDropdown('functionDropdown')">
-                        Select Function
+                        Pilih Fungsi
                     </button>
                     <div class="dropdown-content" id="functionDropdown">
                         <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
@@ -30,11 +33,11 @@
         </div>
 
         <div class="mb-3">
-            <label for="type_id" class="form-label">Type</label>
+            <label for="type_id" class="form-label">Tipe</label>
             <div class="dropdown-container">
                 <div class="dropdown">
                     <button type="button" class="dropdown-btn" onclick="toggleDropdown('typeDropdown')">
-                        Select Type
+                        Pilih Tipe
                     </button>
                     <div class="dropdown-content" id="typeDropdown">
                         <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
@@ -52,11 +55,11 @@
         </div>
 
         <div class="mb-3">
-            <label for="satker_id" class="form-label">Satker</label>
+            <label for="satker_id" class="form-label">Satuan Kerja</label>
             <div class="dropdown-container">
                 <div class="dropdown">
                     <button type="button" class="dropdown-btn" onclick="toggleDropdown('satkerDropdown')">
-                        Select Satker
+                        Pilih Satuan Kerja
                     </button>
                     <div class="dropdown-content" id="satkerDropdown">
                         <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
@@ -78,7 +81,7 @@
             <div class="dropdown-container">
                 <div class="dropdown">
                     <button type="button" class="dropdown-btn" onclick="toggleDropdown('bidangDropdown')">
-                        Select Bidang
+                        Pilih Bidang
                     </button>
                     <div class="dropdown-content" id="bidangDropdown">
                         <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
@@ -97,5 +100,8 @@
 
         <button type="submit" class="btn btn-primary">Isi Data</button>
     </form>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

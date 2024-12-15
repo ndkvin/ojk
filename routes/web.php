@@ -25,4 +25,5 @@ Route::group([
 ], function () {
     Route::resource('/fungsionalitas', App\Http\Controllers\FungsionalitasController::class)->only(['create', 'store', 'show']);
     Route::resource('/analisis', App\Http\Controllers\AnalisisController::class);
+    Route::resource('/ssi', App\Http\Controllers\SSICOntroller::class);
 });

@@ -41,7 +41,9 @@ class FungsionalitasController extends Controller
         ]);
     }
 
-    public function show() {
-        return view('pages.select');   
+    public function show()
+    {
+        // dd();
+        return view('pages.select');
     }
 }

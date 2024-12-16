@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Analisis;
+use App\Models\IPA;
 use Illuminate\Http\Request;
 
-class AnalisisController extends Controller
+class IPAController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class AnalisisController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.isidata.ipa');
     }
 
     /**
@@ -28,29 +28,35 @@ class AnalisisController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'function_id' => 'required|exists:functions,id',
             'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
-            'af_1_oq' => 'required|string',
-            'af_2_oq' => 'required|string',
-            'cf_1_oq' => 'required|string',
-            'cf_2_oq' => 'required|string',
-        ]);
+        ];
+
+        // Dinamis menambahkan aturan validasi untuk keys lainnya
+        foreach ($request->all() as $key => $value) {
+            if (is_array($value)) {
+                $rules[$key . '.*'] = 'required|string';
+            }
+        }
+        $validated = $request->validate($rules);
 
 
-        Analisis::create([
-            'function_id' => $request->function_id,
-            'type_id' => $request->type_id,
-            'satker_id' => $request->satker_id,
-            'bidang_id' => $request->bidang_id,
-            'af_1_oq' => $request->af_1_oq,
-            'af_2_oq' => $request->af_2_oq,
-            'cf_1_oq' => $request->cf_1_oq,
-            'cf_2_oq' => $request->cf_2_oq,
-        ]);
+        $dimensi = $validated['dimensi'];
+        $score = $validated['score'];
 
+        foreach ($dimensi as $key => $value) {
+            IPA::create([
+                'function_id' => $validated['function_id'],
+                'type_id' => $validated['type_id'],
+                'satker_id' => $validated['satker_id'],
+                'bidang_id' => $validated['bidang_id'],
+                'dimensi' => $dimensi[$key],
+                'score' => $score[$key],
+            ]);
+        }
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 

@@ -61,7 +61,7 @@
                         <li class="sidebar-item {{ request()->is('verification*') ? 'active' : '' }}">
                             <a href="{{ route('verification.index') }}" class='sidebar-link'>
                                 <i class="bi bi-person-circle"></i>
-                                <span>Akun Admin</span>
+                                <span>Daftar Akun</span>
                             </a>
                         </li>
                     @endif

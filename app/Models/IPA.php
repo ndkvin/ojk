@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SSI extends Model
+class IPA extends Model
 {
-    protected $table = 'ssi';
+    protected $table = 'ipa';
 
     protected $guarded = ['id'];
 }

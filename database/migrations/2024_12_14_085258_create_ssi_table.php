@@ -25,6 +25,8 @@ return new class extends Migration
             $table->double('indirect_os');
             $table->double('indirect_af');
             $table->timestamps();
+
+            $table->index(['function_id', 'type_id', 'satker_id', 'bidang_id']);
         });
     }
 

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('dimensi');
             $table->double('score');
             $table->timestamps();
+
+            $table->index(['function_id', 'type_id', 'satker_id', 'bidang_id']);
         });
     }
 

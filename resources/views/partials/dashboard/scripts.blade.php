@@ -10,7 +10,6 @@
 <script src={{ asset('assets/static/js/pages/summernote.js') }}></script>
 <script src={{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}></script>
 <script src={{ asset('assets/static/js/pages/sweetalert2.js') }}></script>
-
 @if ($errors->any())
     <script>
         let errorMessages = '';
@@ -35,6 +34,8 @@
 @endif
 
 <script>
+
+
     function toggleDropdown(dropdownId) {
         const dropdown = document.getElementById(dropdownId);
         dropdown.classList.toggle('active');
@@ -59,7 +60,7 @@
         dropdown.classList.remove('active');
     }
 
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', function(e) {
         const dropdowns = document.querySelectorAll('.dropdown-content');
         dropdowns.forEach(dropdown => {
             if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
@@ -67,7 +68,6 @@
             }
         });
     });
+
+    
 </script>
-
-
-

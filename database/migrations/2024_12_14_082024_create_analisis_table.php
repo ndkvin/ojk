@@ -17,10 +17,8 @@ return new class extends Migration
             $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
             $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
-            $table->longText('af_1_oq');
-            $table->longText('af_2_oq');
-            $table->longText('cf_1_oq');
-            $table->longText('cf_2_oq');
+            $table->longText('kritik');
+            $table->longText('saran');
             $table->timestamps();
 
 

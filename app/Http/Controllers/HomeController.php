@@ -36,7 +36,7 @@ class HomeController extends Controller
         $type_id = $request->get('type_id');
         $satker_id = $request->get('satker_id');
         $bidang_id = $request->get('bidang_id');
-        $jenis_af = $request->get('jenis_af');
+
 
         $ssi = null;
         $kano = null;
@@ -75,8 +75,7 @@ class HomeController extends Controller
                 ->where('type_id', $type_id)
                 ->first();
         }
-
-
+        // dd($ipa);
         $functions = Fungsi::all();
         $types = Type::all();
         $satkers = Satker::all();
@@ -90,8 +89,7 @@ class HomeController extends Controller
             'ssi' => $ssi,
             'kano' => $kano,
             'ipa' => $ipa,
-            'analisis' => $analisis,
-            'jenis_af' => $jenis_af
+            'analisis' => $analisis
         ]);
     }
 }

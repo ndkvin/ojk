@@ -63,15 +63,30 @@ class IPAController extends Controller
         $score = $validated['score'];
 
         foreach ($dimensi as $key => $value) {
-            IPA::create([
-                'function_id' => $validated['function_id'],
-                'type_id' => $validated['type_id'],
-                'satker_id' => $validated['satker_id'],
-                'bidang_id' => $validated['bidang_id'],
-                'attribute' => $attribute[$key],
-                'dimensi' => $dimensi[$key],
-                'score' => $score[$key],
-            ]);
+
+            // check ipa dengan dimensi sama apakah sudah ada 
+            $existingData = IPA::where('function_id', $validated['function_id'])
+                ->where('type_id', $validated['type_id'])
+                ->where('satker_id', $validated['satker_id'])
+                ->where('bidang_id', $validated['bidang_id'])
+                ->first();
+
+            if ($existingData) {
+                $existingData->update([
+                    'score' => $score[$key],
+                    'dimensi' => $dimensi[$key],
+                ]);
+            } else {
+                IPA::create([
+                    'function_id' => $validated['function_id'],
+                    'type_id' => $validated['type_id'],
+                    'satker_id' => $validated['satker_id'],
+                    'bidang_id' => $validated['bidang_id'],
+                    'attribute' => $attribute[$key],
+                    'dimensi' => $dimensi[$key],
+                    'score' => $score[$key],
+                ]);
+            }
         }
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     }

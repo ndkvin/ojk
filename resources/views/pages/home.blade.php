@@ -1,5 +1,26 @@
 @extends('layouts.dashboard')
 
+@section('head')
+
+<style>
+    /* Custom Styling for the Card */
+    .custom-card {
+        background-color: #ffffff; /* Warna latar belakang (contoh: pink lembut) */
+        border: 1px solid #ffffff; /* Border warna pink */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow untuk efek 3D */
+        border-radius: 10px; /* Membuat sudut agak melengkung */
+    }
+
+    .custom-card .card-title {
+        color: #721c24; /* Warna judul yang kontras */
+    }
+
+    .custom-card .card-text {
+        color: #495057; /* Warna teks konten */
+    }
+</style>
+@endsection
+
 @section('title', 'Dashboard')
 
 @section('content')
@@ -93,32 +114,6 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label for="satker_id" class="form-label">Satuan Kerja</label>
-                                                <div class="dropdown-container">
-                                                    <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn"
-                                                            onclick="toggleDropdown('satkerDropdown')">
-                                                            Satuan Kerja
-                                                        </button>
-                                                        <div class="dropdown-content" id="satkerDropdown">
-                                                            <input type="text" class="dropdown-search"
-                                                                placeholder="Search..." oninput="filterDropdown(this)">
-                                                            <ul class="dropdown-list">
-                                                                @foreach ($satkers as $satker)
-                                                                    <li data-value="{{ $satker->id }}"
-                                                                        onclick="selectDropdownItem(this, 'satker_id')">
-                                                                        {{ $satker->satker }}
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" id="satker_id" name="satker_id" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-12">
-                                            <div class="form-group">
                                                 <label for="bidang_id" class="form-label">Bidang</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
@@ -145,7 +140,33 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label for="bidang_id" class="form-label">AF</label>
+                                                <label for="satker_id" class="form-label">Satuan Kerja</label>
+                                                <div class="dropdown-container">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="dropdown-btn"
+                                                            onclick="toggleDropdown('satkerDropdown')">
+                                                            Satuan Kerja
+                                                        </button>
+                                                        <div class="dropdown-content" id="satkerDropdown">
+                                                            <input type="text" class="dropdown-search"
+                                                                placeholder="Search..." oninput="filterDropdown(this)">
+                                                            <ul class="dropdown-list">
+                                                                @foreach ($satkers as $satker)
+                                                                    <li data-value="{{ $satker->id }}"
+                                                                        onclick="selectDropdownItem(this, 'satker_id')">
+                                                                        {{ $satker->satker }}
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="satker_id" name="satker_id" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="afdd" class="form-label">AF</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
@@ -194,74 +215,95 @@
             </div>
         </section>
         <section>
-        <div class="row">
-            <div class="col-md-6 col-12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <center>
-                                <h4 class="card-title">Direct</h4>
-                            </center>
-                            <center>
-                                @php
-                                    if ($ssi) {
-                                        $direct_af = 0;
-                                        $indirect_af = 0;
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title text-center">
+                    <h2>
+                        SSI
+                    </h2>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="body">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="container">
+                                <div class="card custom-card mx-auto" style="max-width: 400px">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <center>
+                                            <h4 class="card-title">Direct</h4>
+                                        </center>
+                                        <center>
+                                            @php
+                                                if ($ssi) {
+                                                    $direct_af = 0;
+                                                    $indirect_af = 0;
+            
+                                                    if (request()->query('af') == 'af_1_oq') {
+                                                        $direct_af = $ssi->af_1_oq;
+                                                        $indirect_af = $ssi->indirect_af_1_oq;
+                                                    } elseif (request()->query('af') == 'af_2_oq') {
+                                                        $direct_af = $ssi->af_2_oq;
+                                                        $indirect_af = $ssi->indirect_af_2_oq;
+                                                    } elseif (request()->query('af') == 'cf_1_oq') {
+                                                        $direct_af = $ssi->cf_1_oq;
+                                                        $indirect_af = $ssi->indirect_cf_1_oq;
+                                                    } elseif (request()->query('af') == 'cf_2_oq') {
+                                                        $direct_af = $ssi->cf_2_oq;
+                                                        $indirect_af = $ssi->indirect_cf_2_oq;
+                                                    }
+                                                }
+                                            @endphp
+                                            <h5 class="card-text">
+                                                {{ $ssi == null ? 'Tidak Ada Data' : $ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1 }}
+                                            </h5>
+                                        </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="container">
 
-                                        if (request()->query('af') == 'af_1_oq') {
-                                            $direct_af = $ssi->af_1_oq;
-                                            $indirect_af = $ssi->indirect_af_1_oq;
-                                        } elseif (request()->query('af') == 'af_2_oq') {
-                                            $direct_af = $ssi->af_2_oq;
-                                            $indirect_af = $ssi->indirect_af_2_oq;
-                                        } elseif (request()->query('af') == 'cf_1_oq') {
-                                            $direct_af = $ssi->cf_1_oq;
-                                            $indirect_af = $ssi->indirect_cf_1_oq;
-                                        } elseif (request()->query('af') == 'cf_2_oq') {
-                                            $direct_af = $ssi->cf_2_oq;
-                                            $indirect_af = $ssi->indirect_cf_2_oq;
-                                        }
-                                    }
-                                @endphp
-                                <h5 class="card-text">
-                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1 }}
-                                </h5>
-                            </center>
+                                <div class="card custom-card mx-auto" style="max-width: 400px">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <center>
+                                                <h4 class="card-title">Indirect</h4>
+                                            </center>
+                                            <center>
+                                                <h5 class="card-text">
+                                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->indirect_os * 0.9 + $indirect_af * 0.1 }}
+                                                </h5>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <center>
-                                <h4 class="card-title">Indirect</h4>
-                            </center>
-                            <center>
-                                <h5 class="card-text">
-                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->indirect_os * 0.9 + $indirect_af * 0.1 }}
-                                </h5>
-                            </center>
+                    <div class="row">
+                        <div class="mx-auto col-md-8 col-12">
+                            <div class="card custom-card mx-auto" style="max-width: 500px">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <center>
+                                            <h4 class="card-title">Total</h4>
+                                        </center>
+                                        <center>
+                                            <h5 class="card-text">
+                                                {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.2 }}
+                                            </h5>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="mx-auto col-md-8 col-12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <center>
-                                <h4 class="card-title">Total</h4>
-                            </center>
-                            <center>
-                                <h5 class="card-text">
-                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.2 }}
-                                </h5>
-                            </center>
-                        </div>
+                    <div class="col text-center mb-3">
+                        <a class="btn btn-primary" href="{{ route('ssi.show', $ssi->id) }}">Detail</a>
                     </div>
                 </div>
             </div>

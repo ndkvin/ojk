@@ -2,23 +2,29 @@
 
 @section('head')
 
-<style>
-    /* Custom Styling for the Card */
-    .custom-card {
-        background-color: #ffffff; /* Warna latar belakang (contoh: pink lembut) */
-        border: 1px solid #ffffff; /* Border warna pink */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow untuk efek 3D */
-        border-radius: 10px; /* Membuat sudut agak melengkung */
-    }
+    <style>
+        /* Custom Styling for the Card */
+        .custom-card {
+            background-color: #ffffff;
+            /* Warna latar belakang (contoh: pink lembut) */
+            border: 1px solid #ffffff;
+            /* Border warna pink */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Shadow untuk efek 3D */
+            border-radius: 10px;
+            /* Membuat sudut agak melengkung */
+        }
 
-    .custom-card .card-title {
-        color: #721c24; /* Warna judul yang kontras */
-    }
+        .custom-card .card-title {
+            color: #721c24;
+            /* Warna judul yang kontras */
+        }
 
-    .custom-card .card-text {
-        color: #495057; /* Warna teks konten */
-    }
-</style>
+        .custom-card .card-text {
+            color: #495057;
+            /* Warna teks konten */
+        }
+    </style>
 @endsection
 
 @section('title', 'Dashboard')
@@ -201,7 +207,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
-                                            <button type="submit" class="w-100 btn btn-primary"
+                                            <button type="submit" class="w-100 btn btn-danger"
                                                 style="margin-top:30px">Filter</button>
                                         </div>
                                         {{-- <button type="submit" class="d-none" id="submit"></button> --}}
@@ -215,67 +221,86 @@
             </div>
         </section>
         <section>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title text-center">
-                    <h2>
-                        SSI
-                    </h2>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title text-center">
+                        <h2>
+                            SSI
+                        </h2>
+                    </div>
                 </div>
-            </div>
-            <div class="card-content">
-                <div class="body">
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <div class="container">
-                                <div class="card custom-card mx-auto" style="max-width: 400px">
-                                    <div class="card-content">
-                                        <div class="card-body">
-                                            <center>
-                                            <h4 class="card-title">Direct</h4>
-                                        </center>
-                                        <center>
-                                            @php
-                                                if ($ssi) {
-                                                    $direct_af = 0;
-                                                    $indirect_af = 0;
-            
-                                                    if (request()->query('af') == 'af_1_oq') {
-                                                        $direct_af = $ssi->af_1_oq;
-                                                        $indirect_af = $ssi->indirect_af_1_oq;
-                                                    } elseif (request()->query('af') == 'af_2_oq') {
-                                                        $direct_af = $ssi->af_2_oq;
-                                                        $indirect_af = $ssi->indirect_af_2_oq;
-                                                    } elseif (request()->query('af') == 'cf_1_oq') {
-                                                        $direct_af = $ssi->cf_1_oq;
-                                                        $indirect_af = $ssi->indirect_cf_1_oq;
-                                                    } elseif (request()->query('af') == 'cf_2_oq') {
-                                                        $direct_af = $ssi->cf_2_oq;
-                                                        $indirect_af = $ssi->indirect_cf_2_oq;
-                                                    }
-                                                }
-                                            @endphp
-                                            <h5 class="card-text">
-                                                {{ $ssi == null ? 'Tidak Ada Data' : $ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1 }}
-                                            </h5>
-                                        </center>
+                <div class="card-content">
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="container">
+                                    <div class="card custom-card mx-auto" style="max-width: 400px">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <center>
+                                                    <h4 class="card-title">Direct</h4>
+                                                </center>
+                                                <center>
+                                                    @php
+                                                        if ($ssi) {
+                                                            $direct_af = 0;
+                                                            $indirect_af = 0;
+
+                                                            if (request()->query('af') == 'af_1_oq') {
+                                                                $direct_af = $ssi->af_1_oq;
+                                                                $indirect_af = $ssi->indirect_af_1_oq;
+                                                            } elseif (request()->query('af') == 'af_2_oq') {
+                                                                $direct_af = $ssi->af_2_oq;
+                                                                $indirect_af = $ssi->indirect_af_2_oq;
+                                                            } elseif (request()->query('af') == 'cf_1_oq') {
+                                                                $direct_af = $ssi->cf_1_oq;
+                                                                $indirect_af = $ssi->indirect_cf_1_oq;
+                                                            } elseif (request()->query('af') == 'cf_2_oq') {
+                                                                $direct_af = $ssi->cf_2_oq;
+                                                                $indirect_af = $ssi->indirect_cf_2_oq;
+                                                            }
+                                                        }
+                                                    @endphp
+                                                    <h5 class="card-text">
+                                                        {{ $ssi == null ? 'Tidak Ada Data' : $ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1 }}
+                                                    </h5>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="container">
+
+                                    <div class="card custom-card mx-auto" style="max-width: 400px">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <center>
+                                                    <h4 class="card-title">Indirect</h4>
+                                                </center>
+                                                <center>
+                                                    <h5 class="card-text">
+                                                        {{ $ssi == null ? 'Tidak Ada Data' : $ssi->indirect_os * 0.9 + $indirect_af * 0.1 }}
+                                                    </h5>
+                                                </center>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-12">
-                            <div class="container">
-
-                                <div class="card custom-card mx-auto" style="max-width: 400px">
+                        <div class="row">
+                            <div class="mx-auto col-md-8 col-12">
+                                <div class="card custom-card mx-auto" style="max-width: 500px">
                                     <div class="card-content">
                                         <div class="card-body">
                                             <center>
-                                                <h4 class="card-title">Indirect</h4>
+                                                <h4 class="card-title">Total</h4>
                                             </center>
                                             <center>
                                                 <h5 class="card-text">
-                                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->indirect_os * 0.9 + $indirect_af * 0.1 }}
+                                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.2 }}
                                                 </h5>
                                             </center>
                                         </div>
@@ -283,267 +308,249 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($ssi)
+                            <div class="col text-center mb-3">
+                                <a class="btn btn-danger" href="{{ route('ssi.show', $ssi->id) }}">Detail</a>
+                            </div>
+                        @endif
                     </div>
-                    <div class="row">
-                        <div class="mx-auto col-md-8 col-12">
-                            <div class="card custom-card mx-auto" style="max-width: 500px">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <center>
-                                            <h4 class="card-title">Total</h4>
-                                        </center>
-                                        <center>
-                                            <h5 class="card-text">
-                                                {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.2 }}
-                                            </h5>
-                                        </center>
+                </div>
+            </div>
+            <section id="multiple-column-form">
+
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <h3 class="pt-5">
+                                <center>Kano</center>
+                            </h3>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <center>
+                                        <h5 class="card-text">
+                                            @if ($kano == null)
+                                                Tidak Ada Data
+                                            @elseif(!$kano->count())
+                                                Tidak Ada Data
+                                            @endif
+                                        </h5>
+                                    </center>
+                                    @if (session('success'))
+                                        <div>{{ session('success') }}</div>
+                                    @endif
+                                    <div>
+                                        <canvas id="quadrantChart"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col text-center mb-3">
-                        <a class="btn btn-primary" href="{{ route('ssi.show', $ssi->id) }}">Detail</a>
-                    </div>
                 </div>
-            </div>
-        </div>
-        <section id="multiple-column-form">
-            <h3>
-                <center>Kano</center>
-            </h3>
-            <div class="row match-height">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <center>
-                                    <h5 class="card-text">
-                                        @if ($kano == null)
-                                            Tidak Ada Data
-                                        @elseif(!$kano->count())
-                                            Tidak Ada Data
-                                        @endif
-                                    </h5>
-                                </center>
-                                @if (session('success'))
-                                    <div>{{ session('success') }}</div>
-                                @endif
-                                <div>
-                                    <canvas id="quadrantChart"></canvas>
+            </section>
+
+            <section class="section card">
+                <h3 class="pt-5">
+                    <center>IPA</center>
+                </h3>
+                <div class="row" id="basic-table">
+                    @if ($ipa != null)
+                        @if (!$ipa->count())
+                            <div class="col-12 mx-auto col-12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <center>
+                                                <h4 class="card-title">Tidak Ada Data</h4>
+                                            </center>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <h2>
-            <center>IPA</center>
-        </h2>
-        <section class="section">
-            <div class="row" id="basic-table">
-                @if ($ipa != null)
-                    @if (!$ipa->count())
-                        <div class="col-12 mx-auto col-12">
+                        @else
+                            @foreach ($ipa as $ipa)
+                                <div class="col-md-4 col-12 mx-auto">
+                                    <div class="card custom-card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-lg">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="2">Attribute: {{ $ipa->attribute }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-bold-500">Dimensi: {{ $ipa->dimensi }}
+                                                                </td>
+                                                                <td>Score: {{ $ipa->score }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @else
+                        <div class="col-12 mx-auto">
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <center>
                                             <h4 class="card-title">Tidak Ada Data</h4>
                                         </center>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @else
-                        @foreach ($ipa as $ipa)
-                            <div class="col-md-4 col-12 mx-auto">
-                                <div class="card">
-                                    <div class="card-content">
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-lg">
-                                                    <thead>
-                                                        <tr>
-                                                            <th colspan="2">Attribute: {{ $ipa->attribute }}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="text-bold-500">Dimensi: {{ $ipa->dimensi }}</td>
-                                                            <td>Score: {{ $ipa->score }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
                     @endif
-                @else
-                    <div class="col-12 mx-auto">
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <center>
-                                        <h4 class="card-title">Tidak Ada Data</h4>
-                                    </center>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
 
 
 
-            </div>
-        </section>
-    @endsection
+                </div>
+            </section>
+        @endsection
 
-    @section('scripts')
-        <script>
-            function submit() {
-                const button = document.getElementById('submit');
+        @section('scripts')
+            <script>
+                function submit() {
+                    const button = document.getElementById('submit');
 
-                button.click();
-            }
-        </script>
-        <script>
-            // Data dari Controller
-            const chartData = @json($kano);
+                    button.click();
+                }
+            </script>
+            <script>
+                // Data dari Controller
+                const chartData = @json($kano);
 
 
-            function getRandomColor() {
-                const r = Math.floor(Math.random() * 255);
-                const g = Math.floor(Math.random() * 255);
-                const b = Math.floor(Math.random() * 255);
-                return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
-            }
+                function getRandomColor() {
+                    const r = Math.floor(Math.random() * 255);
+                    const g = Math.floor(Math.random() * 255);
+                    const b = Math.floor(Math.random() * 255);
+                    return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
+                }
 
-            // Tambahkan warna random ke setiap titik dalam data
-            const dataWithColors = chartData.map(point => ({
-                ...point,
-                backgroundColor: getRandomColor()
-            }));
+                // Tambahkan warna random ke setiap titik dalam data
+                const dataWithColors = chartData.map(point => ({
+                    ...point,
+                    backgroundColor: getRandomColor()
+                }));
 
-            const ctx = document.getElementById('quadrantChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: '',
-                        data: dataWithColors,
-                        pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
-                        radius: 10,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            min: -6,
-                            max: 6,
-                            title: {
-                                display: true,
-                                text: 'Puas (X-Axis)'
+                const ctx = document.getElementById('quadrantChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: '',
+                            data: dataWithColors,
+                            pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
+                            radius: 10,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                min: -6,
+                                max: 6,
+                                title: {
+                                    display: true,
+                                    text: 'Puas (X-Axis)'
+                                },
+                                grid: {
+                                    drawBorder: true,
+                                    color: function(context) {
+                                        return context.tick.value === 0 ? '#000' : '#ddd';
+                                    }
+                                }
                             },
-                            grid: {
-                                drawBorder: true,
-                                color: function(context) {
-                                    return context.tick.value === 0 ? '#000' : '#ddd';
+                            y: {
+                                min: -6,
+                                max: 6,
+                                title: {
+                                    display: true,
+                                    text: 'Penting (Y-Axis)'
+                                },
+                                grid: {
+                                    drawBorder: true,
+                                    color: function(context) {
+                                        return context.tick.value === 0 ? '#000' : '#ddd';
+                                    }
                                 }
                             }
                         },
-                        y: {
-                            min: -6,
-                            max: 6,
-                            title: {
-                                display: true,
-                                text: 'Penting (Y-Axis)'
-                            },
-                            grid: {
-                                drawBorder: true,
-                                color: function(context) {
-                                    return context.tick.value === 0 ? '#000' : '#ddd';
+                        plugins: {
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)', // Warna background tooltip
+                                titleColor: '#ffffff', // Warna judul
+                                bodyColor: '#ffffff', // Warna isi teks
+                                titleFont: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }, // Styling font title
+                                bodyFont: {
+                                    size: 14
+                                }, // Styling font body
+                                padding: 12, // Padding dalam tooltip
+                                cornerRadius: 8, // Sudut melengkung tooltip
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Bayangan (custom CSS)
+                                callbacks: {
+                                    label: function(context) {
+                                        const dataPoint = context.raw;
+                                        return [
+                                            `Attribute: ${dataPoint.label}`,
+                                            `Penting: ${dataPoint.y}`,
+                                            `Puas: ${dataPoint.x}`
+                                        ];
+                                    }
                                 }
                             }
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
                         }
-                    },
-                    plugins: {
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Warna background tooltip
-                            titleColor: '#ffffff', // Warna judul
-                            bodyColor: '#ffffff', // Warna isi teks
-                            titleFont: {
-                                size: 16,
-                                weight: 'bold'
-                            }, // Styling font title
-                            bodyFont: {
-                                size: 14
-                            }, // Styling font body
-                            padding: 12, // Padding dalam tooltip
-                            cornerRadius: 8, // Sudut melengkung tooltip
-                            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Bayangan (custom CSS)
-                            callbacks: {
-                                label: function(context) {
-                                    const dataPoint = context.raw;
-                                    return [
-                                        `Attribute: ${dataPoint.label}`,
-                                        `Penting: ${dataPoint.y}`,
-                                        `Puas: ${dataPoint.x}`
-                                    ];
-                                }
-                            }
-                        }
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
                     }
+                });
+            </script>
+            <script>
+                function toggleDropdown(dropdownId) {
+                    const dropdown = document.getElementById(dropdownId);
+                    dropdown.classList.toggle('active');
                 }
-            });
-        </script>
-        <script>
 
+                function filterDropdown(input) {
+                    const filter = input.value.toLowerCase();
+                    const items = input.nextElementSibling.querySelectorAll('li');
+                    items.forEach(item => {
+                        const text = item.textContent || item.innerText;
+                        item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+                    });
+                }
 
-            function toggleDropdown(dropdownId) {
-                const dropdown = document.getElementById(dropdownId);
-                dropdown.classList.toggle('active');
-            }
+                function selectDropdownItem(item, hiddenInputId) {
+                    const dropdown = item.closest('.dropdown-content');
+                    const button = dropdown.previousElementSibling;
+                    const hiddenInput = document.getElementById(hiddenInputId);
 
-            function filterDropdown(input) {
-                const filter = input.value.toLowerCase();
-                const items = input.nextElementSibling.querySelectorAll('li');
-                items.forEach(item => {
-                    const text = item.textContent || item.innerText;
-                    item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+                    button.textContent = item.textContent;
+                    hiddenInput.value = item.getAttribute('data-value');
+                    dropdown.classList.remove('active');
+                }
+
+                document.addEventListener('click', function(e) {
+                    const dropdowns = document.querySelectorAll('.dropdown-content');
+                    dropdowns.forEach(dropdown => {
+                        if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
+                            dropdown.classList.remove('active');
+                        }
+                    });
                 });
-            }
-
-            function selectDropdownItem(item, hiddenInputId) {
-                const dropdown = item.closest('.dropdown-content');
-                const button = dropdown.previousElementSibling;
-                const hiddenInput = document.getElementById(hiddenInputId);
-
-                button.textContent = item.textContent;
-                hiddenInput.value = item.getAttribute('data-value');
-                dropdown.classList.remove('active');
-            }
-
-            document.addEventListener('click', function(e) {
-                const dropdowns = document.querySelectorAll('.dropdown-content');
-                dropdowns.forEach(dropdown => {
-                    if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
-                        dropdown.classList.remove('active');
-                    }
-                });
-            });
-
-            
-        </script>
-    @endsection
+            </script>
+        @endsection

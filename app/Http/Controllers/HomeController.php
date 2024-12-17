@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
+        // dd($request);
         $function_id =  $request->get('function_id');
         $type_id = $request->get('type_id');
         $satker_id = $request->get('satker_id');
@@ -75,7 +75,7 @@ class HomeController extends Controller
                 ->where('type_id', $type_id)
                 ->first();
         }
-    // dd($ipa);
+        // dd($ipa);
         $functions = Fungsi::all();
         $types = Type::all();
         $satkers = Satker::all();
@@ -89,7 +89,7 @@ class HomeController extends Controller
             'ssi' => $ssi,
             'kano' => $kano,
             'ipa' => $ipa,
-            'analisis' => $analisis,
+            'analisis' => $analisis
         ]);
     }
 }

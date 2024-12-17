@@ -140,8 +140,8 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="bidang_id" name="bidang_id" required>
                                                 </div>
+                                                <input type="hidden" id="jenis_af" name="jenis_af" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
@@ -194,9 +194,7 @@
                 </div>
             </div>
         </section>
-        <h2>
-            <center>SSI</center>
-        </h2>
+        <section>
         <div class="row">
             <div class="col-md-6 col-12">
                 <div class="card">
@@ -261,7 +259,7 @@
                             </center>
                             <center>
                                 <h5 class="card-text">
-                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.6 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.4 }}
+                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.2 }}
                                 </h5>
                             </center>
                         </div>
@@ -468,5 +466,43 @@
                     }
                 }
             });
+        </script>
+        <script>
+
+
+            function toggleDropdown(dropdownId) {
+                const dropdown = document.getElementById(dropdownId);
+                dropdown.classList.toggle('active');
+            }
+
+            function filterDropdown(input) {
+                const filter = input.value.toLowerCase();
+                const items = input.nextElementSibling.querySelectorAll('li');
+                items.forEach(item => {
+                    const text = item.textContent || item.innerText;
+                    item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+                });
+            }
+
+            function selectDropdownItem(item, hiddenInputId) {
+                const dropdown = item.closest('.dropdown-content');
+                const button = dropdown.previousElementSibling;
+                const hiddenInput = document.getElementById(hiddenInputId);
+
+                button.textContent = item.textContent;
+                hiddenInput.value = item.getAttribute('data-value');
+                dropdown.classList.remove('active');
+            }
+
+            document.addEventListener('click', function(e) {
+                const dropdowns = document.querySelectorAll('.dropdown-content');
+                dropdowns.forEach(dropdown => {
+                    if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            });
+
+            
         </script>
     @endsection

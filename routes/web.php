@@ -38,7 +38,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'api'
-], function() {
+], function () {
     Route::get('/type/{function_id}', [App\Http\Controllers\ApiController::class, 'type']);
     Route::get('/bidang/{type_id}', [App\Http\Controllers\ApiController::class, 'bidang']);
     Route::get('/satker/{bidang_id}', [App\Http\Controllers\ApiController::class, 'bidang']);

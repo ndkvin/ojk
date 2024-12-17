@@ -2,84 +2,91 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\SSI;
+use Illuminate\Http\Request;
 
-class SSIController extends Controller
+class SSICOntroller extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return view('ssi');
+        return view('pages.ssi');
     }
 
-    public function create(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $functionId = $request->query('function_id');
-        $typeId = $request->query('type_id');
-        $satkerId = $request->query('satker_id');
-        $bidangId = $request->query('bidang_id');
-
-        // Cek data lama berdasarkan kombinasi
-        $existingData = SSI::where('function_id', $functionId)
-            ->where('type_id', $typeId)
-            ->where('satker_id', $satkerId)
-            ->where('bidang_id', $bidangId)
-            ->first();
-
-        // Kirim data lama (jika ada) ke view
-        return view('pages.isidata.ssi', compact('existingData', 'functionId', 'typeId', 'satkerId', 'bidangId'));
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'function_id' => 'required|exists:functions,id',
             'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
-            'rp' => 'nullable|numeric',
-            'pd' => 'nullable|numeric',
-            'os' => 'nullable|numeric',
-            'af_1_oq' => 'nullable|numeric',
-            'af_2_oq' => 'nullable|numeric',
-            'cf_1_oq' => 'nullable|numeric',
-            'cf_2_oq' => 'nullable|numeric',
-            'indirect_os' => 'nullable|numeric',
-            'indirect_af_1_oq' => 'nullable|numeric',
-            'indirect_af_2_oq' => 'nullable|numeric',
-            'indirect_cf_1_oq' => 'nullable|numeric',
-            'indirect_cf_2_oq' => 'nullable|numeric',
+            'rp' => 'required|decimal:0,10',
+            'pb' => 'required|decimal:0,10',
+            'os' => 'required|decimal:0,10',
+            'af' => 'required|decimal:0,10',
+            'or' => 'required|decimal:0,10',
+            'as' => 'required|decimal:0,10'
         ]);
 
-        $existingData = SSI::where('function_id', $validated['function_id'])
-            ->where('type_id', $validated['type_id'])
-            ->where('satker_id', $validated['satker_id'])
-            ->where('bidang_id', $validated['bidang_id'])
-            ->first();
 
-        if ($existingData) {
-            foreach ($validated as $key => $value) {
-                if (is_null($value)) {
-                    $validated[$key] = $existingData->$key;
-                }
-            }
-            $existingData->update($validated);
-            $ssi = $existingData;
-        } else {
-            $ssi = SSI::create($validated);
-        }
+        SSI::create([
+            'function_id' => $request->function_id,
+            'type_id' => $request->type_id,
+            'satker_id' => $request->satker_id,
+            'bidang_id' => $request->bidang_id,
+            'rp' => $request->rp,
+            'pb' => $request->pb,
+            'os' => $request->os,
+            'af' => $request->af,
+            'or' => $request->or,
+            'as' => $request->as
+        ]);
 
-        return redirect()->route('ssi.show', [
-            'ssi' => $ssi->id,
-        ])->with('success', $existingData ? 'Data berhasil diperbarui.' : 'Data berhasil disimpan.');
+        return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 
-
-
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $ssi = SSI::findOrFail($id);
+        //
+    }
 
-        return view('pages.ssi.show', compact('ssi'));
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

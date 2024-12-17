@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\IPA;
+use App\Models\Kano;
 use Illuminate\Http\Request;
 
 class IPAController extends Controller
@@ -10,17 +11,32 @@ class IPAController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
         return view('pages.analisis');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('pages.isidata.ipa');
+        $functionId = $request->get('function_id');
+        $typeId = $request->get('type_id');
+        $satkerId = $request->get('satker_id');
+        $bidangId = $request->get('bidang_id');
+
+        $attributes = Kano::where('function_id', $functionId)
+            ->where('type_id', $typeId)
+            ->where('satker_id', $satkerId)
+            ->where('bidang_id', $bidangId)
+            ->distinct('attribute')  // Getting unique values in the 'attribute' column
+            ->pluck('attribute');
+
+        return view('pages.isidata.ipa', [
+            'attributes' => $attributes,
+        ]);
     }
 
     /**
@@ -42,8 +58,7 @@ class IPAController extends Controller
             }
         }
         $validated = $request->validate($rules);
-
-
+        $attribute = $validated['attribute'];
         $dimensi = $validated['dimensi'];
         $score = $validated['score'];
 
@@ -53,6 +68,7 @@ class IPAController extends Controller
                 'type_id' => $validated['type_id'],
                 'satker_id' => $validated['satker_id'],
                 'bidang_id' => $validated['bidang_id'],
+                'attribute' => $attribute[$key],
                 'dimensi' => $dimensi[$key],
                 'score' => $score[$key],
             ]);

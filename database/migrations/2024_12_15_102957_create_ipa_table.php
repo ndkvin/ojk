@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
             $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
+            $table->string('attribute');
             $table->string('dimensi');
             $table->double('score');
             $table->timestamps();

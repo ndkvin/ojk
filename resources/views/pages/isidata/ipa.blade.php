@@ -29,29 +29,56 @@
                             <form class="form" action="{{ route('ipa.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-9 col-12">
+                                    <div class="col-md-5 col-12">
                                         <div class="form-group">
-                                            <label for="dimensi"><h5>Dimensi</h5></label>
+                                            <label for="attribute">
+                                                <h5>Attribute</h5>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-12">
+                                        <div class="form-group">
+                                            <label for="dimensi">
+                                                <h5>Dimensi</h5>
+                                            </label>
 
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-2 col-12">
                                         <div class="form-group">
-                                            <label for="score"><h5>Score</h5></label>
+                                            <label for="score">
+                                                <h5>Score</h5>
+                                            </label>
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" id="form-rows">
-                                    <div class="col-md-9 col-12">
+                                    <div class="col-md-5 col-12">
+
                                         <div class="form-group">
-                                            <input class="form-control" name="dimensi[]" type="text" placeholder="Nama dimensi" required></input>
+                                            <select name="attribute[]" id="attribute" class="form-select" required>
+                                                <option value="" selected disabled>Pilih Attribute</option>
+                                                @foreach ($attributes as $attribute)
+                                                    <option value="{{ $attribute }}">{{ $attribute }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-md-5 col-12">
+                                        <div class="form-group">
+                                            <input class="form-control" name="dimensi[]" type="text"
+                                                placeholder="Nama dimensi" required></input>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-2 col-12">
                                         <div class="form-group">
 
-                                            <input class="form-control" name="score[]" type="number" max="5" min="-5" step="0.1" required></input>
+                                            <input class="form-control" name="score[]" type="number" max="5"
+                                                min="-5" step="0.1" required></input>
                                         </div>
                                     </div>
                                 </div>
@@ -87,12 +114,23 @@
 
             // HTML untuk baris baru
             const newRow = `
-                <div class="col-md-9 col-12">
+                <div class="col-md-5 col-12">
+                    <div class="form-group">
+                        <select name="attribute[]" id="attribute" class="form-select" required>
+                            <option value="" selected disabled>Pilih Attribute</option>
+                            @foreach ($attributes as $attribute)
+                                <option value="{{ $attribute }}">{{ $attribute }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5 col-12">
                     <div class="form-group">
                         <input class="form-control" name="dimensi[]" type="text" placeholder="Nama dimensi" required></input>
                     </div>
                 </div>
-                <div class="col-md-3 col-12">
+                <div class="col-md-2 col-12">
                     <div class="form-group">
                         <input class="form-control" name="score[]" type="number" max="5" min="-5" step="0.1" required></input>
                     </div>

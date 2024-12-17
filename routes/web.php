@@ -29,7 +29,7 @@ Route::group([
 ], function () {
     Route::resource('/fungsionalitas', App\Http\Controllers\FungsionalitasController::class)->only(['create', 'store', 'show', 'update']);
     Route::resource('/analisis', App\Http\Controllers\AnalisisController::class);
-    Route::resource('/kano', App\Http\Controllers\KanoController::class)->only(['create', 'store']);
+    Route::resource('/kano', App\Http\Controllers\KanoController::class)->only(['create', 'store', 'show']);
     Route::resource('/ipa', App\Http\Controllers\IPAController::class)->only(['create', 'store']);
     Route::get('/ssi/create', [SSIController::class, 'create'])->name('ssi.create');
     Route::post('/ssi', [SSIController::class, 'store'])->name('ssi.store');

@@ -69,8 +69,12 @@ class SSIController extends Controller
             $ssi = SSI::create($validated);
         }
 
-        return redirect()->route('ssi.show', [
-            'ssi' => $ssi->id,
+        return redirect()->route('fungsionalitas.show', [
+            'pilih',
+            'function_id' => $validated['function_id'],
+            'type_id' => $validated['type_id'],
+            'satker_id' => $validated['satker_id'],
+            'bidang_id' => $validated['bidang_id'],
         ])->with('success', $existingData ? 'Data berhasil diperbarui.' : 'Data berhasil disimpan.');
     }
 

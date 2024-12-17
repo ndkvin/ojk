@@ -33,6 +33,8 @@ return new class extends Migration
             $table->decimal('indirect_cf_2_oq', 10, 2)->nullable();
 
             $table->timestamps();
+
+            $table->index(['function_id', 'type_id', 'satker_id', 'bidang_id']);
         });
     }
 

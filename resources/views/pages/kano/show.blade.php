@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            @if(session('success'))
+                            @if (session('success'))
                                 <div>{{ session('success') }}</div>
                             @endif
                             <div>
@@ -102,32 +102,37 @@
                     }
                 },
                 plugins: {
-            tooltip: {
-                backgroundColor: 'rgba(0, 0, 0, 0.8)', // Warna background tooltip
-                titleColor: '#ffffff', // Warna judul
-                bodyColor: '#ffffff', // Warna isi teks
-                titleFont: { size: 16, weight: 'bold' }, // Styling font title
-                bodyFont: { size: 14 }, // Styling font body
-                padding: 12, // Padding dalam tooltip
-                cornerRadius: 8, // Sudut melengkung tooltip
-                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Bayangan (custom CSS)
-                callbacks: {
-                    label: function(context) {
-                        const dataPoint = context.raw;
-                        return [
-                            `Attribute: ${dataPoint.label}`,
-                            `Penting: ${dataPoint.y}`,
-                            `Puas: ${dataPoint.x}`
-                        ];
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)', // Warna background tooltip
+                        titleColor: '#ffffff', // Warna judul
+                        bodyColor: '#ffffff', // Warna isi teks
+                        titleFont: {
+                            size: 16,
+                            weight: 'bold'
+                        }, // Styling font title
+                        bodyFont: {
+                            size: 14
+                        }, // Styling font body
+                        padding: 12, // Padding dalam tooltip
+                        cornerRadius: 8, // Sudut melengkung tooltip
+                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Bayangan (custom CSS)
+                        callbacks: {
+                            label: function(context) {
+                                const dataPoint = context.raw;
+                                return [
+                                    `Attribute: ${dataPoint.label}`,
+                                    `Penting: ${dataPoint.y}`,
+                                    `Puas: ${dataPoint.x}`
+                                ];
+                            }
+                        }
                     }
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
                 }
             }
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        }
-    }
-});
+        });
     </script>
 @endsection

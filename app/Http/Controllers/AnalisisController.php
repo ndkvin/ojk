@@ -10,9 +10,22 @@ class AnalisisController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.analisis');
+        $functionId = $request->get('function_id');
+        $typeId = $request->get('type_id');
+        $satkerId = $request->get('satker_id');
+        $bidangId = $request->get('bidang_id');
+
+        $analisis = Analisis::where('function_id', $functionId)
+            ->where('type_id', $typeId)
+            ->where('satker_id', $satkerId)
+            ->where('bidang_id', $bidangId)
+            ->first();
+ 
+        return view('pages.analisis', [
+            'analisis' => $analisis,
+        ]);
     }
 
     /**
@@ -33,10 +46,8 @@ class AnalisisController extends Controller
             'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
-            'af_1_oq' => 'required|string',
-            'af_2_oq' => 'required|string',
-            'cf_1_oq' => 'required|string',
-            'cf_2_oq' => 'required|string',
+            'kritik' => 'required|string',
+            'saran' => 'required|string'
         ]);
 
 
@@ -45,10 +56,8 @@ class AnalisisController extends Controller
             'type_id' => $request->type_id,
             'satker_id' => $request->satker_id,
             'bidang_id' => $request->bidang_id,
-            'af_1_oq' => $request->af_1_oq,
-            'af_2_oq' => $request->af_2_oq,
-            'cf_1_oq' => $request->cf_1_oq,
-            'cf_2_oq' => $request->cf_2_oq,
+            'kritik' => $request->kritik,
+            'saran' => $request->saran,
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil disimpan');
@@ -59,7 +68,7 @@ class AnalisisController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -67,7 +76,7 @@ class AnalisisController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -75,7 +84,28 @@ class AnalisisController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'function_id' => 'required|exists:functions,id',
+            'type_id' => 'required|exists:types,id',
+            'satker_id' => 'required|exists:satuan_kerja,id',
+            'bidang_id' => 'required|exists:bidang,id',
+            'kritik' => 'required|string',
+            'saran' => 'required|string'
+        ]);
+
+        $analisis = Analisis::where('function_id', $request->function_id)
+            ->where('type_id', $request->type_id)
+            ->where('satker_id', $request->satker_id)
+            ->where('bidang_id', $request->bidang_id)
+            ->first();
+        
+
+        $analisis->update([
+            'kritik' => $request->kritik,
+            'saran' => $request->saran,
+        ]);
+
+        return redirect()->back()->with('success', 'Data berhasil diperbarui');
     }
 
     /**

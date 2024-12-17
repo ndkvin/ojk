@@ -21,6 +21,8 @@ return new class extends Migration
             $table->double('puas');
             $table->double('penting');
             $table->timestamps();
+
+            $table->index(['function_id', 'type_id', 'satker_id', 'bidang_id']);
         });
     }
 

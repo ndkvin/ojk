@@ -32,7 +32,6 @@
                                     <div class="col-md-8 col-12">
                                         <div class="form-group">
                                             <label for="attribute">Attribute</label>
-
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-12">

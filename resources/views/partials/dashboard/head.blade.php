@@ -5,6 +5,7 @@
 <link rel="stylesheet" href={{ asset('assets/extensions/summernote/summernote-lite.css') }}>
 <link rel="stylesheet" crossorigin href={{ asset('/assets/compiled/css/form-editor-summernote.css') }}>
 <link rel="stylesheet" href={{ asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
@@ -64,6 +65,13 @@
     .dropdown-list li:hover {
         background-color: #f0f0f0;
     }
+
+    .sidebar-item.active a {
+        background-color: red !important;
+        /* !important ditempatkan setelah nilai properti */
+    }
+
+    #main {
+        background-color: #ffececb6 !important
+    }
 </style>
-
-

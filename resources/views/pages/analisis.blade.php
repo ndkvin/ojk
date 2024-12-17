@@ -26,54 +26,35 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="{{ route('analisis.store') }}" method="POST">
+                            <form class="form" action="{{ $analisis == null ? route('analisis.store') : route('analisis.update',1 ) }}" method="POST">
+                                @if ($analisis != null)
+                                    @method('PUT')
+                                @endif
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="af-1-oq">AF 1 OQ</label>
+                                            <label for="af-1-oq">Kritik</label>
 
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="af-2-oq">AF 2 OQ</label>
+                                            <label for="af-2-oq">Saran</label>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="cf-1-oq">CF 1 OQ</label>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="cf-1-oq">CF 2 OQ</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" id="form-rows">
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="af_1_oq" rows="3" placeholder="AF 1 OQ" required></textarea>
+                                            <textarea class="form-control" name="kritik" rows="3" placeholder="Kritik" required>{{ $analisis == null ? '': $analisis->kritik }}</textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-6 col-12">
                                         <div class="form-group">
 
-                                            <textarea class="form-control" name="af_2_oq" rows="3" placeholder="AF 2 OQ" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-
-                                            <textarea class="form-control" name="cf_1_oq" rows="3" placeholder="CF 1 OQ" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="cf_2_oq" rows="3" placeholder="CF 2 OQ" required></textarea>
+                                            <textarea class="form-control" name="saran" rows="3" placeholder="Saran" required>{{ $analisis == null ? '' : $analisis->saran }}</textarea>
                                         </div>
                                     </div>
                                 </div>

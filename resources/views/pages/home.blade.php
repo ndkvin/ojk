@@ -313,7 +313,7 @@
                                         <center>
                                             <h4 class="card-title">Tidak Ada Data</h4>
                                         </center>
-
+                                        
                                     </div>
                                 </div>
                             </div>

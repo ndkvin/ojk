@@ -90,7 +90,7 @@
                             </form>
                             <div class="col-12 d-flex justify-content-between">
                                 <button id='add-row-btn' class="btn btn-light-secondary me-1 mb-1">Tambah Baris</button>
-                                <button type="submit" onclick="submit()" class="btn btn-primary me-1 mb-1">Simpan</button>
+                                <button type="submit" onclick="submit()" class="btn btn-danger me-1 mb-1">Simpan</button>
                             </div>
                         </div>
                     </div>

@@ -65,7 +65,7 @@
                                 <button type="submit" class="d-none" id="submit"></button>
                             </form>
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" onclick="submit()" class="btn btn-primary me-1 mb-1">Simpan</button>
+                                <button type="submit" onclick="submit()" class="btn btn-danger me-1 mb-1">Simpan</button>
                             </div>
                         </div>
                     </div>

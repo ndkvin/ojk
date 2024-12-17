@@ -37,3 +37,5 @@ Route::group([
     // Route::get('/fungsionalitas/create', [FungsionalitasController::class, 'create'])->name('fungsionalitas.create');
     // Route::post('/fungsionalitas', [FungsionalitasController::class, 'store'])->name('fungsionalitas.store');
 });
+
+Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.show');

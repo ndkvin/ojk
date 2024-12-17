@@ -40,14 +40,14 @@
                             <div class="card-body">
                                 <form class="form" method="GET">
                                     <div class="row" id="form-rows">
-                                        <div class="col-md-3 col-12">
+                                        <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="function_id" class="form-label">Fungsi</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('functionDropdown')">
-                                                            Pilih Fungsi
+                                                            Fungsi
                                                         </button>
                                                         <div class="dropdown-content" id="functionDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -66,14 +66,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-12">
+                                        <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="type_id" class="form-label">Tipe</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('typeDropdown')">
-                                                            Pilih Tipe
+                                                            Tipe
                                                         </button>
                                                         <div class="dropdown-content" id="typeDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -92,14 +92,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-12">
+                                        <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="satker_id" class="form-label">Satuan Kerja</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('satkerDropdown')">
-                                                            Pilih Satuan Kerja
+                                                            Satuan Kerja
                                                         </button>
                                                         <div class="dropdown-content" id="satkerDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -118,14 +118,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-12">
+                                        <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="bidang_id" class="form-label">Bidang</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('bidangDropdown')">
-                                                            Pilih Bidang
+                                                            Bidang
                                                         </button>
                                                         <div class="dropdown-content" id="bidangDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -144,13 +144,50 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="d-none" id="submit"></button>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="bidang_id" class="form-label">AF</label>
+                                                <div class="dropdown-container">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="dropdown-btn"
+                                                            onclick="toggleDropdown('afdd')">
+                                                            AF
+                                                        </button>
+                                                        <div class="dropdown-content" id="afdd">
+                                                            <input type="text" class="dropdown-search"
+                                                                placeholder="Search..." oninput="filterDropdown(this)">
+                                                            <ul class="dropdown-list">
+                                                                <li data-value="af_1_oq"
+                                                                    onclick="selectDropdownItem(this, 'af')">
+                                                                    Adjusment Factor 1 Open Question
+                                                                </li>
+                                                                <li data-value="af_2_oq"
+                                                                    onclick="selectDropdownItem(this, 'af')">
+                                                                    Adjusment Factor 2 Open Question
+                                                                </li>
+                                                                <li data-value="cf_1_oq"
+                                                                    onclick="selectDropdownItem(this, 'af')">
+                                                                    Confirmation Factor 1 Open Question
+                                                                </li>
+                                                                <li data-value="cf_2_oq"
+                                                                    onclick="selectDropdownItem(this, 'af')">
+                                                                    Confirmation Factor 1 Open Question
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="af" name="af" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <button type="submit" class="w-100 btn btn-primary"
+                                                style="margin-top:30px">Filter</button>
+                                        </div>
+                                        {{-- <button type="submit" class="d-none" id="submit"></button> --}}
                                     </div>
                                 </form>
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" onclick="submit()"
-                                        class="btn btn-primary me-1 mb-1">Filter</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -169,8 +206,28 @@
                                 <h4 class="card-title">Direct</h4>
                             </center>
                             <center>
+                                @php
+                                    if ($ssi) {
+                                        $direct_af = 0;
+                                        $indirect_af = 0;
+
+                                        if (request()->query('af') == 'af_1_oq') {
+                                            $direct_af = $ssi->af_1_oq;
+                                            $indirect_af = $ssi->indirect_af_1_oq;
+                                        } elseif (request()->query('af') == 'af_2_oq') {
+                                            $direct_af = $ssi->af_2_oq;
+                                            $indirect_af = $ssi->indirect_af_2_oq;
+                                        } elseif (request()->query('af') == 'cf_1_oq') {
+                                            $direct_af = $ssi->cf_1_oq;
+                                            $indirect_af = $ssi->indirect_cf_1_oq;
+                                        } elseif (request()->query('af') == 'cf_2_oq') {
+                                            $direct_af = $ssi->cf_2_oq;
+                                            $indirect_af = $ssi->indirect_cf_2_oq;
+                                        }
+                                    }
+                                @endphp
                                 <h5 class="card-text">
-                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $ssi->af * 0.1 }}
+                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1 }}
                                 </h5>
                             </center>
                         </div>
@@ -186,7 +243,7 @@
                             </center>
                             <center>
                                 <h5 class="card-text">
-                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->indirect_os * 0.9 + $ssi->indirect_af * 0.1 }}
+                                    {{ $ssi == null ? 'Tidak Ada Data' : $ssi->indirect_os * 0.9 + $indirect_af * 0.1 }}
                                 </h5>
                             </center>
                         </div>
@@ -204,7 +261,7 @@
                             </center>
                             <center>
                                 <h5 class="card-text">
-                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $ssi->af * 0.1) * 0.6 + ($ssi->indirect_os * 0.9 + $ssi->indirect_af * 0.1) * 0.4 }}
+                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.6 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.4 }}
                                 </h5>
                             </center>
                         </div>
@@ -223,7 +280,7 @@
                             <div class="card-body">
                                 <center>
                                     <h5 class="card-text">
-                                        {{ $kano == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $ssi->af * 0.1) * 0.6 + ($ssi->indirect_os * 0.9 + $ssi->indirect_af * 0.1) * 0.4 }}
+                                        {{ $kano == null ? 'Tidak Ada Data' : '' }}
                                     </h5>
                                 </center>
                                 @if (session('success'))
@@ -236,6 +293,55 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <h2>
+            <center>IPA</center>
+        </h2>
+        <section class="section">
+            <div class="row" id="basic-table">
+                @if (!$ipa->count())
+                    <div class="col-12 mx-auto col-md-4">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <center>
+                                        <h4 class="card-title">No Data</h4>
+                                    </center>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @foreach ($ipa as $ipa)
+                    <div class="col-12 col-md-4">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-lg">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">Attribute: {{ $ipa->attribute }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-bold-500">Dimensi: {{ $ipa->dimensi }}</td>
+                                                    <td>Score: {{ $ipa->score }}</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
         </section>
     @endsection

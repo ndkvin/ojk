@@ -36,13 +36,14 @@
                                     </div>
                                     <div class="col-md-2 col-12">
                                         <div class="form-group">
-                                            <label for="puas">Kepuasan</label>
+                                            <label for="puas">Tingkat Kepuasan</label>
 
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-12">
                                         <div class="form-group">
-                                            <label for="penting">Kepentingan</label>
+                                            <label for="penting">Tingkat Kepentingan</label>
+
                                         </div>
                                     </div>
                                 </div>

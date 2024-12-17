@@ -27,11 +27,11 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>NIK</th>
                                 <th>NIM</th>
                                 <th>Fakultas</th>
                                 <th>Prodi</th>
-                                <th>Fakultas</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

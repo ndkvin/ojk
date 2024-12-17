@@ -32,48 +32,92 @@
                                     <h3>Direct</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
-                                            <label for="rp">RP</label>
-                                            <input class="form-control" type="number" name="rp" step="0.01" min="0" max="10" required></input>
+                                            <label for="rp">Resource Perception</label>
+                                            <input class="form-control" value="{{ $existingData->rp ?? old('rp') }}" type="number" name="rp" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="pd">Peformance Delivery</label>
-                                            <input class="form-control" type="number" name="pd" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->pd ?? old('pd') }}" type="number" name="pd" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="os">Outcome Satisfaction</label>
-                                            <input class="form-control" type="number" name="os" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->os ?? old('os') }}" type="number" name="os" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                </div>            
+                                @if (Auth::user()->role == 'superadmin')                                        
+                                <div class="row mt-2 mb-2">
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="af_1_oq">Adjusment Factor 1 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->af_1_oq ?? old('af_1_oq') }}" type="number" name="af_1_oq" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
-                                            <label for="af">Adjusment Factor</label>
-                                            <input class="form-control" type="number" name="af" step="0.01" min="0" max="10" required></input>
+                                            <label for="af_2_oq">Adjusment Factor 2 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->af_2_oq ?? old('af_2_oq') }}" type="number" name="af_2_oq" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="cf_1_oq">Confirmation Factor 1 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->cf_1_oq ?? old('cf_1_oq') }}" type="number" name="cf_1_oq" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="cf_2_oq">Confirmation Factor 2 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->cf_2_oq ?? old('cf_2_oq') }}" type="number" name="cf_2_oq" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 <div class="col-12 col-md-6 order-md-1">
                                     <h3>Indirect</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
-                                            <label for="os">Outcome Satisfaction</label>
-                                            <input class="form-control" type="number" name="indirect_os" step="0.01" min="0" max="10" required></input>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="af">Adjusment Factor</label>
-                                            <input class="form-control" type="number" name="indirect_af" step="0.01" min="0" max="10" required></input>
+                                            <label for="indirect_os">Outcome Satisfaction</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_os ?? old('indirect_os') }}" type="number" name="indirect_os" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                 </div>
+                                @if (Auth::user()->role == 'superadmin')                                        
+                                <div class="row">
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="indirect_af_1_oq">Adjusment Factor 1 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_af_1_oq ?? old('indirect_af_1_oq') }}" type="number" name="indirect_af_1_oq" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="indirect_af_2_oq">Adjusment Factor 2 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_af_2_oq ?? old('indirect_af_2_oq') }}" type="number" name="indirect_af_2_oq" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="indirect_cf_1_oq">Confirmation Factor 1 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_cf_1_oq ?? old('indirect_cf_1_oq') }}" type="number" name="indirect_cf_1_oq" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="indirect_cf_2_oq">Confirmation Factor 2 Open Question</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_cf_2_oq ?? old('indirect_cf_2_oq') }}" type="number" name="indirect_cf_2_oq" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif    
                                 <input type="hidden" name='function_id' value="{{ request()->query('function_id') }}">
                                 <input type="hidden" name='type_id' value="{{ request()->query('type_id') }}">
                                 <input type="hidden" name='satker_id' value="{{ request()->query('satker_id') }}">

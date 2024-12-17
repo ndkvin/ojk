@@ -36,30 +36,44 @@ class KanoController extends Controller
             'bidang_id' => 'required|exists:bidang,id',
         ];
 
-        // Dinamis menambahkan aturan validasi untuk keys lainnya
         foreach ($request->all() as $key => $value) {
             if (is_array($value)) {
                 $rules[$key . '.*'] = 'required|string';
             }
         }
-        $validated = $request->validate($rules);
 
+        $validated = $request->validate($rules);
 
         $attribute = $validated['attribute'];
         $puas = $validated['puas'];
         $penting = $validated['penting'];
 
         foreach ($attribute as $key => $value) {
-            Kano::create([
-                'function_id' => $validated['function_id'],
-                'type_id' => $validated['type_id'],
-                'satker_id' => $validated['satker_id'],
-                'bidang_id' => $validated['bidang_id'],
-                'attribute' => $attribute[$key],
-                'puas' => $puas[$key],
-                'penting' => $penting[$key],
-            ]);
+            $existingData = Kano::where('function_id', $validated['function_id'])
+                ->where('type_id', $validated['type_id'])
+                ->where('satker_id', $validated['satker_id'])
+                ->where('bidang_id', $validated['bidang_id'])
+                ->where('attribute', $attribute[$key])
+                ->first();
+
+            if ($existingData) {
+                $existingData->update([
+                    'puas' => $puas[$key],
+                    'penting' => $penting[$key],
+                ]);
+            } else {
+                Kano::create([
+                    'function_id' => $validated['function_id'],
+                    'type_id' => $validated['type_id'],
+                    'satker_id' => $validated['satker_id'],
+                    'bidang_id' => $validated['bidang_id'],
+                    'attribute' => $attribute[$key],
+                    'puas' => $puas[$key],
+                    'penting' => $penting[$key],
+                ]);
+            }
         }
+
         return redirect()->route('kano.show', [
             'function_id' => $validated['function_id'],
             'type_id' => $validated['type_id'],
@@ -67,6 +81,7 @@ class KanoController extends Controller
             'bidang_id' => $validated['bidang_id'],
         ])->with('success', 'Data berhasil disimpan.');
     }
+
 
     /**
      * Display the specified resource.

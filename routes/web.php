@@ -43,3 +43,5 @@ Route::group([
     Route::get('/bidang/{type_id}', [App\Http\Controllers\ApiController::class, 'bidang']);
     Route::get('/satker/{bidang_id}', [App\Http\Controllers\ApiController::class, 'bidang']);
 });
+
+Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.show');

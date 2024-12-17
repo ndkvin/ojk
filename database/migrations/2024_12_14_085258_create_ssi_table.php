@@ -18,12 +18,20 @@ return new class extends Migration
             $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
             $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
             // $table->string('jenis');
-            $table->double('rp');
-            $table->double('pd');
-            $table->double('os');
-            $table->double('af');
-            $table->double('indirect_os');
-            $table->double('indirect_af');
+            $table->decimal('rp', 10, 2)->nullable();
+            $table->decimal('pd', 10, 2)->nullable();
+            $table->decimal('os', 10, 2)->nullable();
+            $table->decimal('af_1_oq', 10, 2)->nullable();
+            $table->decimal('af_2_oq', 10, 2)->nullable();
+            $table->decimal('cf_1_oq', 10, 2)->nullable();
+            $table->decimal('cf_2_oq', 10, 2)->nullable();
+
+            $table->decimal('indirect_os', 10, 2)->nullable();
+            $table->decimal('indirect_af_1_oq', 10, 2)->nullable();
+            $table->decimal('indirect_af_2_oq', 10, 2)->nullable();
+            $table->decimal('indirect_cf_1_oq', 10, 2)->nullable();
+            $table->decimal('indirect_cf_2_oq', 10, 2)->nullable();
+
             $table->timestamps();
 
             $table->index(['function_id', 'type_id', 'satker_id', 'bidang_id']);

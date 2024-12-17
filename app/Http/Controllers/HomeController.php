@@ -37,30 +37,31 @@ class HomeController extends Controller
         $satker_id = $request->get('satker_id');
         $bidang_id = $request->get('bidang_id');
 
+
         $ssi = null;
         $kano = null;
         $ipa = null;
         $analisis = null;
 
-        if($function_id && $type_id && $satker_id && $bidang_id) {
+        if ($function_id && $type_id && $satker_id && $bidang_id) {
             $ssi = SSI::where('function_id', $function_id)
-            ->where('type_id', $type_id)
-            ->where('satker_id', $satker_id)
-            ->where('bidang_id', $bidang_id)
-            ->first();
+                ->where('type_id', $type_id)
+                ->where('satker_id', $satker_id)
+                ->where('bidang_id', $bidang_id)
+                ->first();
 
             $kano = Kano::where('function_id', $function_id)
-            ->where('bidang_id', $bidang_id)
-            ->where('satker_id', $satker_id)
-            ->where('type_id', $type_id)
-            ->get()
-            ->map(function ($item) {
-                return [
-                    'x' => $item->puas,  // Misalnya kolom puas sebagai X-axis
-                    'y' => $item->penting, // Misalnya kolom penting sebagai Y-axis
-                    'label' => $item->attribute, // Label untuk setiap titik
-                ];
-            });
+                ->where('bidang_id', $bidang_id)
+                ->where('satker_id', $satker_id)
+                ->where('type_id', $type_id)
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'x' => $item->puas,  // Misalnya kolom puas sebagai X-axis
+                        'y' => $item->penting, // Misalnya kolom penting sebagai Y-axis
+                        'label' => $item->attribute, // Label untuk setiap titik
+                    ];
+                });
 
             $ipa = IPA::where('function_id', $function_id)
                 ->where('bidang_id', $bidang_id)
@@ -74,8 +75,7 @@ class HomeController extends Controller
                 ->where('type_id', $type_id)
                 ->first();
         }
-    
-
+    // dd($ipa);
         $functions = Fungsi::all();
         $types = Type::all();
         $satkers = Satker::all();

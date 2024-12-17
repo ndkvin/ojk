@@ -254,7 +254,7 @@
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="container">
-                                    <div class="card custom-card mx-auto" style="max-width: 400px">
+                                    <div class="card custom-card mx-auto" style="max-width: 500px">
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <center>
@@ -293,7 +293,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="container">
 
-                                    <div class="card custom-card mx-auto" style="max-width: 400px">
+                                    <div class="card custom-card mx-auto" style="max-width: 500px">
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <center>
@@ -330,7 +330,7 @@
                         </div>
                         @if ($ssi)
                             <div class="col text-center mb-3">
-                                <a class="btn btn-danger" href="{{ route('ssi.show', $ssi->id) }}">Detail</a>
+                                <a class="btn btn-primary" href="{{ route('ssi.show', [$ssi->id, request()->query('af')]) }}">Detail</a>
                             </div>
                         @endif
                     </div>

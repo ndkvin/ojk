@@ -80,10 +80,24 @@ class SSIController extends Controller
 
 
 
-    public function show($id)
+    public function show($id, $jenis_af)
     {
         $ssi = SSI::findOrFail($id);
 
-        return view('pages.ssi.show', compact('ssi'));
+        if ($jenis_af == 'af_1_oq') {
+            $direct_af = $ssi->af_1_oq;
+            $indirect_af = $ssi->indirect_af_1_oq;
+        } else if ($jenis_af == 'af_2_oq') {
+            $direct_af = $ssi->af_2_oq;
+            $indirect_af = $ssi->indirect_af_2_oq;
+        } else if ($jenis_af == 'cf_1_oq') {
+            $direct_af = $ssi->cf_1_oq;
+            $indirect_af = $ssi->indirect_cf_1_oq;
+        } else {
+            $direct_af = $ssi->cf_2_oq;
+            $indirect_af = $ssi->indirect_cf_2_oq;
+        }
+
+        return view('pages.ssi.show', compact('ssi', 'direct_af', 'indirect_af'));
     }
 }

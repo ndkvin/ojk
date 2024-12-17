@@ -33,7 +33,7 @@ Route::group([
     Route::resource('/ipa', App\Http\Controllers\IPAController::class)->only(['create', 'store']);
     Route::get('/ssi/create', [SSIController::class, 'create'])->name('ssi.create');
     Route::post('/ssi', [SSIController::class, 'store'])->name('ssi.store');
-    Route::get('/ssi/{ssi}', [SSIController::class, 'show'])->name('ssi.show');
+    Route::get('/ssi/{ssi}/{type_af}', [SSIController::class, 'show'])->name('ssi.show');
 });
 
 Route::group([

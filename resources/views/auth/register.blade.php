@@ -15,6 +15,11 @@
     <link rel="stylesheet" crossorigin href="{{ asset('assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" crossorigin href="{{ asset('assets/compiled/css/auth.css') }}">
     <link rel="stylesheet" href={{ asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}>
+    <style>
+        body {
+            background-color: #ffecec62 !important
+        }
+    </style>
 </head>
 
 <body>
@@ -22,11 +27,11 @@
     <div id="auth">
 
         <div class="row h-100">
-            <div class="col-lg-5 col-12">
+            <div class="col-lg-5 mx-auto col-12">
                 <div id="auth-left">
 
-                    <h1 class="auth-title">Register</h1>
-                    <p class="auth-subtitle mb-5">Daftar akun baru</p>
+                    <h1 class="auth-title text-danger">Register</h1>
+                    <p class="auth-subtitle mb-5 text-danger">Daftar akun baru</p>
 
                     <form action="{{ route('register') }}" method='post'>
                         @csrf
@@ -45,29 +50,29 @@
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="NIK" name='nik'  min="16" max="6"
-                                required>
+                            <input type="text" class="form-control form-control-xl" placeholder="NIK" name='nik'
+                                min="16" max="6" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-123"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="NIM" name='nim' min="8" max="8"
-                                required>
+                            <input type="text" class="form-control form-control-xl" placeholder="NIM" name='nim'
+                                min="8" max="8" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-123"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Fakultas" name='fakultas' 
-                                required>
+                            <input type="text" class="form-control form-control-xl" placeholder="Fakultas"
+                                name='fakultas' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-house"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Prodi" name='prodi' 
-                                required>
+                            <input type="text" class="form-control form-control-xl" placeholder="Prodi"
+                                name='prodi' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-house"></i>
                             </div>
@@ -88,16 +93,12 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Daftar</button>
+                        <button class="btn btn-danger btn-block btn-lg shadow-lg mt-5">Daftar</button>
                         <div class="text-center mt-5 text-lg fs-4">
-                            <p class="text-gray-600">Sudah memiliki akun? <a href="{{ route('login') }}" class="font-bold">Masuk</a>.</p>
+                            <p class="text-gray-600">Sudah memiliki akun? <a href="{{ route('login') }}"
+                                    class="font-bold text-danger">Masuk</a>.</p>
                         </div>
                     </form>
-                </div>
-            </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-
                 </div>
             </div>
         </div>

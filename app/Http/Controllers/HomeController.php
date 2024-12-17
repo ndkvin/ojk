@@ -44,6 +44,7 @@ class HomeController extends Controller
         $analisis = null;
 
         if ($function_id && $type_id && $satker_id && $bidang_id) {
+            // dd("here");
             $ssi = SSI::where('function_id', $function_id)
                 ->where('type_id', $type_id)
                 ->where('satker_id', $satker_id)
@@ -75,7 +76,7 @@ class HomeController extends Controller
                 ->where('type_id', $type_id)
                 ->first();
         }
-        // dd($ipa);
+
         $functions = Fungsi::all();
         $types = Type::all();
         $satkers = Satker::all();

@@ -17,7 +17,7 @@ class ApiController extends Controller
         return Bidang::where('type_id', $type_id)->get();
     }
 
-    public function satket($bidang_id) {
+    public function satker($bidang_id) {
         return Satker::where('bidang_id', $bidang_id)->get();
     }
 }

@@ -38,10 +38,10 @@ class HomeController extends Controller
         $bidang_id = $request->get('bidang_id');
 
 
-        $ssi = null;
-        $kano = null;
-        $ipa = null;
-        $analisis = null;
+        $functions = Fungsi::all();
+        $types = Type::all();
+        $satkers = Satker::all();
+        $bidangs = Bidang::all();
 
         if ($function_id && $type_id && $satker_id && $bidang_id) {
             // dd("here");
@@ -75,12 +75,14 @@ class HomeController extends Controller
                 ->where('satker_id', $satker_id)
                 ->where('type_id', $type_id)
                 ->first();
+
+                $functions = Fungsi::all();
+                $types = Type::where('function_id', $function_id)->get();
+                $satkers = Satker::where('bidang_id', $bidang_id)->get();
+                $bidangs = Bidang::where('type_id', $type_id)->get();
         }
 
-        $functions = Fungsi::all();
-        $types = Type::all();
-        $satkers = Satker::all();
-        $bidangs = Bidang::all();
+
 
         return view('pages.home', [
             'functions' => $functions,

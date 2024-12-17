@@ -280,7 +280,11 @@
                             <div class="card-body">
                                 <center>
                                     <h5 class="card-text">
-                                        {{ $kano == null ? 'Tidak Ada Data' : '' }}
+                                        @if ($kano == null)
+                                            Tidak Ada Data
+                                        @elseif(!$kano->count())
+                                            Tidak Ada Data
+                                        @endif
                                     </h5>
                                 </center>
                                 @if (session('success'))
@@ -300,47 +304,63 @@
         </h2>
         <section class="section">
             <div class="row" id="basic-table">
-                @if (!$ipa->count())
-                    <div class="col-12 mx-auto col-md-4">
+                @if ($ipa != null)
+                    @if (!$ipa->count())
+                        <div class="col-12 mx-auto col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <center>
+                                            <h4 class="card-title">Tidak Ada Data</h4>
+                                        </center>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        @foreach ($ipa as $ipa)
+                            <div class="col-md-4 col-12 mx-auto">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-lg">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="2">Attribute: {{ $ipa->attribute }}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-bold-500">Dimensi: {{ $ipa->dimensi }}</td>
+                                                            <td>Score: {{ $ipa->score }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @else
+                    <div class="col-12 mx-auto">
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
                                     <center>
-                                        <h4 class="card-title">No Data</h4>
+                                        <h4 class="card-title">Tidak Ada Data</h4>
                                     </center>
-                                    
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endif
-                @foreach ($ipa as $ipa)
-                    <div class="col-12 col-md-4">
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-lg">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2">Attribute: {{ $ipa->attribute }}</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-bold-500">Dimensi: {{ $ipa->dimensi }}</td>
-                                                    <td>Score: {{ $ipa->score }}</td>
 
-                                                </tr>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
 
             </div>
         </section>
@@ -357,6 +377,7 @@
         <script>
             // Data dari Controller
             const chartData = @json($kano);
+
 
             function getRandomColor() {
                 const r = Math.floor(Math.random() * 255);

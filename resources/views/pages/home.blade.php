@@ -73,7 +73,7 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('functionDropdown')">
-                                                            Fungsi
+                                                            {{ request()->get('function_id') ? $functions->where('id', request()->get('function_id'))->first()->function : 'Fungsi' }}
                                                         </button>
                                                         <div class="dropdown-content" id="functionDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -88,7 +88,9 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="function_id" name="function_id" required>
+                                                    <input type="hidden"
+                                                        value="{{ request()->get('function_id') ? $functions->where('id', request()->get('function_id'))->first()->id : '' }}"
+                                                        id="function_id" name="function_id" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,7 +101,7 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('typeDropdown')">
-                                                            Tipe
+                                                            {{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->type : 'Tipe' }}
                                                         </button>
                                                         <div class="dropdown-content" id="typeDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -114,7 +116,9 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="type_id" name="type_id" required>
+                                                    <input type="hidden" id="type_id"
+                                                        value="{{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->id : '' }}"
+                                                        name="type_id" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -125,7 +129,7 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('bidangDropdown')">
-                                                            Bidang
+                                                            {{ request()->get('bidang_id') ? $bidangs->where('id', request()->get('bidang_id'))->first()->bidang : 'Bidang' }}
                                                         </button>
                                                         <div class="dropdown-content" id="bidangDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -141,7 +145,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="bidang_id" name="bidang_id" required>
+                                                <input type="hidden"
+                                                    value="{{ request()->get('bidang_id') ? $bidangs->where('id', request()->get('bidang_id'))->first()->id : '' }}"
+                                                    id="bidang_id" name="bidang_id" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
@@ -151,7 +157,7 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('satkerDropdown')">
-                                                            Satuan Kerja
+                                                            {{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->satker : 'Satker' }}
                                                         </button>
                                                         <div class="dropdown-content" id="satkerDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -166,7 +172,9 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="satker_id" name="satker_id" required>
+                                                    <input type="hidden"
+                                                        value="{{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->id : '' }}"
+                                                        id="satker_id" name="satker_id" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,7 +185,17 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             onclick="toggleDropdown('afdd')">
-                                                            AF
+                                                            @if (request()->get('af') == 'af_1_oq')
+                                                                Adjusment Factor 1 Open Question
+                                                            @elseif(request()->get('af') == 'af_2_oq')
+                                                                Adjusment Factor 2 Open Question
+                                                            @elseif(request()->get('af') == 'cf_1_oq')
+                                                                Confirmation Factor 1 Open Question
+                                                            @elseif(request()->get('af') == 'cf_2_oq')
+                                                                Confirmation Factor 2 Open Question
+                                                            @else
+                                                                AF
+                                                            @endif
                                                         </button>
                                                         <div class="dropdown-content" id="afdd">
                                                             <input type="text" class="dropdown-search"
@@ -202,7 +220,9 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="af" name="af" required>
+                                                    <input type="hidden"
+                                                        value="{{ request()->get('af') ? request()->get('af') : '' }}"
+                                                        id="af" name="af" required>
                                                 </div>
                                             </div>
                                         </div>

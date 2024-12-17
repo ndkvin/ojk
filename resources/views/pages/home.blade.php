@@ -304,7 +304,7 @@
                         </div>
                     </div>
                     <div class="col text-center mb-3">
-                        <a class="btn btn-primary" href="{{ route('ssi.show', $ssi->id) }}">Detail</a>
+                        <a class="btn btn-primary" href="{{ route('ssi.show', [$ssi->id, request()->query('af')]) }}">Detail</a>
                     </div>
                 </div>
             </div>

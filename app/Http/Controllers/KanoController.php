@@ -74,12 +74,13 @@ class KanoController extends Controller
             }
         }
 
-        return redirect()->route('kano.show', [
+        return redirect()->route('fungsionalitas.show', [
+            'pilih',
             'function_id' => $validated['function_id'],
             'type_id' => $validated['type_id'],
             'satker_id' => $validated['satker_id'],
             'bidang_id' => $validated['bidang_id'],
-        ])->with('success', 'Data berhasil disimpan.');
+        ])->with('success', $existingData ? 'Data berhasil diperbarui.' : 'Data berhasil disimpan.');
     }
 
 

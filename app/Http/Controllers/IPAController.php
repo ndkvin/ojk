@@ -69,12 +69,13 @@ class IPAController extends Controller
                 ->where('type_id', $validated['type_id'])
                 ->where('satker_id', $validated['satker_id'])
                 ->where('bidang_id', $validated['bidang_id'])
+                ->where('attribute', $attribute[$key])
+                ->where('dimensi', $dimensi[$key])
                 ->first();
 
             if ($existingData) {
                 $existingData->update([
                     'score' => $score[$key],
-                    'dimensi' => $dimensi[$key],
                 ]);
             } else {
                 IPA::create([
@@ -88,7 +89,13 @@ class IPAController extends Controller
                 ]);
             }
         }
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
+        return redirect()->route('fungsionalitas.show', [
+            'pilih',
+            'function_id' => $validated['function_id'],
+            'type_id' => $validated['type_id'],
+            'satker_id' => $validated['satker_id'],
+            'bidang_id' => $validated['bidang_id'],
+        ])->with('success', $existingData ? 'Data berhasil diperbarui.' : 'Data berhasil disimpan.');
     }
 
     /**

@@ -15,6 +15,11 @@
     <link rel="stylesheet" crossorigin href="{{ asset('assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" crossorigin href="{{ asset('assets/compiled/css/auth.css') }}">
     <link rel="stylesheet" href={{ asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}>
+    <style>
+        body {
+            background-color: #ffecec62 !important
+        }
+    </style>
 </head>
 
 <body>
@@ -22,11 +27,11 @@
     <div id="auth">
 
         <div class="row h-100">
-            <div class="col-lg-5 col-12">
+            <div class="col-lg-5 col-12 mx-auto">
                 <div id="auth-left">
 
-                    <h1 class="auth-title">Masuk.</h1>
-                    <p class="auth-subtitle mb-5">Masuk dengan akun yang ada</p>
+                    <h1 class="auth-title text-danger">Masuk.</h1>
+                    <p class="auth-subtitle mb-5 text-danger">Masuk dengan akun yang ada</p>
 
                     <form action="{{ route('login') }}" method='post'>
                         @csrf
@@ -45,17 +50,13 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Masuk</button>
+                        <button class="btn btn-danger btn-block btn-lg shadow-lg mt-5 ">Masuk</button>
                         <div class="text-center mt-5 text-lg fs-4">
-                            <p class="text-gray-600">Belum memiliki akun? <a href="{{ route('register') }}" class="font-bold">Daftar</a>.</p>
-                            
+                            <p class="text-gray-600">Belum memiliki akun? <a href="{{ route('register') }}"
+                                    class="font-bold color-danger text-danger">Daftar</a>.</p>
+
                         </div>
                     </form>
-                </div>
-            </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-
                 </div>
             </div>
         </div>

@@ -31,7 +31,6 @@
                 </section>
             @endif
         @endauth
-
         <section id="multiple-column-form">
             <div class="row match-height">
                 <div class="col-12">
@@ -141,7 +140,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="jenis_af" name="jenis_af" required>
+                                                <input type="hidden" id="bidang_id" name="bidang_id" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">

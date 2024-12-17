@@ -67,11 +67,13 @@
     }
 
     .sidebar-item.active a {
-        background-color: red !important;
+        background-color: #dc3545 !important;
         /* !important ditempatkan setelah nilai properti */
     }
 
     #main {
-        background-color: #ffececb6 !important
+        background-color: #ffecec62 !important
     }
+
+    
 </style>

@@ -216,7 +216,7 @@
                                                                 </li>
                                                                 <li data-value="cf_2_oq"
                                                                     onclick="selectDropdownItem(this, 'af')">
-                                                                    Confirmation Factor 1 Open Question
+                                                                    Confirmation Factor 2 Open Question
                                                                 </li>
                                                             </ul>
                                                         </div>

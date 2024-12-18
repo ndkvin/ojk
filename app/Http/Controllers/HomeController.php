@@ -64,10 +64,12 @@ class HomeController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
+                'cf_2_oq' => $ssi->avg('cf_2_oq'),
                 'indirect_os' => $ssi->avg('indirect_os'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
+                'indirect_cf_2_oq' => $ssi->avg('indirect_cf_2_oq'),
             ];
 
             $kano = Kano::where('function_id', $function_id)
@@ -115,10 +117,12 @@ class HomeController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
+                'cf_2_oq' => $ssi->avg('cf_2_oq'),
                 'indirect_os' => $ssi->avg('indirect_os'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
+                'indirect_cf_2_oq' => $ssi->avg('indirect_cf_2_oq'),
             ];
 
             $kano = Kano::where('function_id', $function_id)
@@ -161,10 +165,12 @@ class HomeController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
+                'cf_2_oq' => $ssi->avg('cf_2_oq'),
                 'indirect_os' => $ssi->avg('indirect_os'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
+                'indirect_cf_2_oq' => $ssi->avg('indirect_cf_2_oq'),
             ];
 
             $kano = Kano::where('function_id', $function_id)
@@ -202,12 +208,14 @@ class HomeController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
+                'cf_2_oq' => $ssi->avg('cf_2_oq'),
                 'indirect_os' => $ssi->avg('indirect_os'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
+                'indirect_cf_2_oq' => $ssi->avg('indirect_cf_2_oq'),
             ];
-            
+
             $kano = Kano::where('function_id', $function_id)
                 ->get()
                 ->map(function ($item) {

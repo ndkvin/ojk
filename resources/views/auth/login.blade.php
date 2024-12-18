@@ -17,7 +17,8 @@
     <link rel="stylesheet" href={{ asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}>
     <style>
         body {
-            background-color: #ffecec62 !important
+            background-color: #ffecec62 !important;
+            font-family: "Roboto", sans-serif !important;
         }
     </style>
 </head>

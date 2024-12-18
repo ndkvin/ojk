@@ -9,6 +9,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
+    body {
+        font-family: "Roboto", sans-serif !important;
+    }
     .dropdown-container {
         position: relative;
     }

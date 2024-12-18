@@ -25,11 +25,38 @@
             /* Warna teks konten */
         }
     </style>
+    <style>
+        .header {
+            background-color: rgb(255, 255, 255); /* Set the background color to red */
+            max-height: 200px; /* Set the maximum height to 200px */
+            color: white; /* Set text color to white for contrast */
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Center items vertically */
+            padding: 10px; /* Add some padding */
+            font-family: 'Roboto', sans-serif; /* Change font to Roboto */
+            justify-content: center; /* Center the image */
+        }
+        .header img {
+            max-height: 150px; /* Set a maximum height for the image */
+            margin-right: 15px; /* Add some space between the image and text */
+        }
+        .header h1 {
+            margin: 0; /* Remove default margin from h1 */ /* Allow h1 to take up remaining space */
+        }
+    </style>
 @endsection
 
 @section('title', 'Dashboard')
 
 @section('content')
+<div class="row">
+    <div class="col-12 mb-3" style="max-height: 400px">
+        <header class="header" >
+            <img src="{{ asset('assets\img\OJK_Logo.png') }}" class="mb-3 mt-3" style="max-width: 150px" alt="Logo" /> <!-- Replace with your image URL -->
+            <h4 class="d-none d-md-block mb-3 mt-4" style="color: rgb(142, 141, 141)">SURVEY TINGKAT KEPUASAN STAKEHOLDERS OJK</h4>
+        </header>
+    </div>
+</div>
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
@@ -39,7 +66,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href"/dashboard">Dashboard</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -75,7 +102,7 @@
                                                             onclick="toggleDropdown('functionDropdown')">
                                                             {{ request()->get('function_id') ? $functions->where('id', request()->get('function_id'))->first()->function : 'Fungsi' }}
                                                         </button>
-                                                        <div class="dropdown-content" id="functionDropdown">
+                                                    <div class="dropdown-content" id="functionDropdown">
                                                             <input type="text" class="dropdown-search"
                                                                 placeholder="Search..." oninput="filterDropdown(this)">
                                                             <ul class="dropdown-list">

@@ -93,9 +93,6 @@
                                 <input type="hidden" id="satker_id" name="satker_id" required>
                             </div>
                         </div>
-
-
-
                         <button type="submit" class="btn btn-danger">Isi Data</button>
                     </form>
                 </div>

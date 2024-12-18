@@ -99,7 +99,7 @@
                                                 <label for="type_id" class="form-label">Tipe</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button"  id="typeDropdownBtn" class="dropdown-btn"
+                                                        <button type="button" id="typeDropdownBtn" class="dropdown-btn"
                                                             onclick="toggleDropdown('typeDropdown')">
                                                             {{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->type : 'Tipe' }}
                                                         </button>
@@ -155,7 +155,8 @@
                                                 <label for="satker_id" class="form-label">Satuan Kerja</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn" id="satkerDropdownBtn"
+                                                        <button type="button" class="dropdown-btn"
+                                                            id="satkerDropdownBtn"
                                                             onclick="toggleDropdown('satkerDropdown')">
                                                             {{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->satker : 'Satker' }}
                                                         </button>
@@ -227,12 +228,11 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
-                                            <div class="w-100 btn btn-secondary"
-                                                style="margin-top:10px" onclick="clearFilter()">Clear</div>
+                                            <div class="w-100 btn btn-secondary" style="margin-top:10px"
+                                                onclick="clearFilter()">Clear</div>
                                             <button type="submit" class="w-100 btn btn-danger"
                                                 style="margin-top:10px">Filter</button>
                                         </div>
-                                        {{-- <button type="submit" class="d-none" id="submit"></button> --}}
                                     </div>
                                 </form>
                             </div>
@@ -268,22 +268,22 @@
                                                             $indirect_af = 0;
 
                                                             if (request()->query('af') == 'af_1_oq') {
-                                                                $direct_af = $ssi->af_1_oq;
-                                                                $indirect_af = $ssi->indirect_af_1_oq;
+                                                                $direct_af = $ssi['af_1_oq'];
+                                                                $indirect_af = $ssi['indirect_af_1_oq'];
                                                             } elseif (request()->query('af') == 'af_2_oq') {
-                                                                $direct_af = $ssi->af_2_oq;
-                                                                $indirect_af = $ssi->indirect_af_2_oq;
+                                                                $direct_af = $ssi['af_2_oq'];
+                                                                $indirect_af = $ssi['indirect_af_2_oq'];
                                                             } elseif (request()->query('af') == 'cf_1_oq') {
-                                                                $direct_af = $ssi->cf_1_oq;
-                                                                $indirect_af = $ssi->indirect_cf_1_oq;
+                                                                $direct_af = $ssi['cf_1_oq'];
+                                                                $indirect_af = $ssi['indirect_cf_1_oq'];
                                                             } elseif (request()->query('af') == 'cf_2_oq') {
-                                                                $direct_af = $ssi->cf_2_oq;
-                                                                $indirect_af = $ssi->indirect_cf_2_oq;
+                                                                $direct_af = $ssi['cf_2_oq'];
+                                                                $indirect_af = $ssi['indirect_cf_2_oq'];
                                                             }
                                                         }
                                                     @endphp
                                                     <h5 class="card-text">
-                                                        {{ $ssi == null ? 'Tidak Ada Data' : $ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1 }}
+                                                        {{ $ssi == null ? 'Tidak Ada Data' : $ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1 }}
                                                     </h5>
                                                 </center>
                                             </div>
@@ -302,7 +302,7 @@
                                                 </center>
                                                 <center>
                                                     <h5 class="card-text">
-                                                        {{ $ssi == null ? 'Tidak Ada Data' : $ssi->indirect_os * 0.9 + $indirect_af * 0.1 }}
+                                                        {{ $ssi == null ? 'Tidak Ada Data' : $ssi['indirect_os'] * 0.9 + $indirect_af * 0.1 }}
                                                     </h5>
                                                 </center>
                                             </div>
@@ -321,7 +321,7 @@
                                             </center>
                                             <center>
                                                 <h5 class="card-text">
-                                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi->rp * 0.3 + $ssi->pd * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1) * 0.2 }}
+                                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi['indirect_os'] * 0.9 + $indirect_af * 0.1) * 0.2 }}
                                                 </h5>
                                             </center>
                                         </div>
@@ -332,7 +332,14 @@
                         @if ($ssi)
                             <div class="col text-center mb-3">
                                 <a class="btn btn-danger"
-                                    href="{{ route('ssi.show', [$ssi->id, request()->query('af')]) }}">Detail</a>
+                                    href="{{ route('ssi.show', [
+                                        'detail',
+                                        'function_id' => request()->query('function_id'),
+                                        'type_id' => request()->query('type_id'),
+                                        'satker_id' => request()->query('satker_id'),
+                                        'bidang_id' => request()->query('bidang_id'),
+                                        'af' => request()->query('af')
+                                        ]) }}">Detail</a>
                             </div>
                         @endif
                     </div>
@@ -433,263 +440,314 @@
                     @endif
                 </div>
             </section>
-        @endsection
 
-        @section('scripts')
-            <script>
-                function clearFilter() {
-                    document.getElementById('function_id').value = '';
-                    document.getElementById('type_id').value = '';
-                    document.getElementById('bidang_id').value = '';
-                    document.getElementById('satker_id').value = '';
-                    document.getElementById('af').value = '';
+            <section class="section card">
+                <h3 class="pt-5">
+                    <center>Analisis</center>
+                </h3>
+                <div class="row" id="basic-table">
+                    @if ($analisis != null)
+                        @if (!$analisis->count())
+                            <div class="col-12 mx-auto col-12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <center>
+                                                <h4 class="card-title">Tidak Ada Data</h4>
+                                            </center>
 
-                    const functionDropdownBtn = document.getElementById('functionDropdownBtn');
-                    functionDropdownBtn.textContent = 'Fungsi';
-                    const typeDropdownBtn = document.getElementById('typeDropdownBtn');
-                    typeDropdownBtn.textContent = 'Tipe';
-                    const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
-                    bidangDropdownBtn.textContent = 'Bidang';
-                    const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
-                    satkerDropdownBtn.textContent = 'Satker';
-                    const afDropdownBtn = document.getElementById('afDropdownBtn');
-                    afDropdownBtn.textContent = 'AF';
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            @foreach ($analisis as $analisis)
+                                <div class="col-md-4 col-12 mx-auto">
+                                    <div class="card custom-card">
+                                        <div class="card-content">
+                                            <div class="card-body">
 
-                }
+                                                <div class="fs-6 text">Saran: {{ $analisis->saran }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+                @endforeach
+                @endif
+            @else
+                <div class="col-12 mx-auto">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <center>
+                                    <h4 class="card-title">Tidak Ada Data</h4>
+                                </center>
 
-                function selectFunction(element) {
-                    selectDropdownItem(element, 'function_id')
-                    const functionId = element.getAttribute('data-value');
-                    document.getElementById('function_id').value = functionId;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+    </div>
+    </section>
+@endsection
 
-                    const typeDropdownBtn = document.getElementById('typeDropdownBtn');
-                    typeDropdownBtn.disabled = false;
+@section('scripts')
+    <script>
+        function clearFilter() {
+            document.getElementById('function_id').value = '';
+            document.getElementById('type_id').value = '';
+            document.getElementById('bidang_id').value = '';
+            document.getElementById('satker_id').value = '';
+            document.getElementById('af').value = '';
 
-                    fetchTypes(functionId);
-                }
+            const functionDropdownBtn = document.getElementById('functionDropdownBtn');
+            functionDropdownBtn.textContent = 'Fungsi';
+            const typeDropdownBtn = document.getElementById('typeDropdownBtn');
+            typeDropdownBtn.textContent = 'Tipe';
+            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+            bidangDropdownBtn.textContent = 'Bidang';
+            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+            satkerDropdownBtn.textContent = 'Satker';
+            const afDropdownBtn = document.getElementById('afDropdownBtn');
+            afDropdownBtn.textContent = 'AF';
 
-                function fetchTypes(functionId) {
-                    // Make an AJAX request to fetch types based on the selected function
-                    fetch(`/api/type/${functionId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const typeDropdownList = document.getElementById('typeDropdownList');
-                            typeDropdownList.innerHTML = ''; // Clear existing options
+        }
 
-                            data.forEach(type => {
-                                const li = document.createElement('li');
-                                li.setAttribute('data-value', type.id);
-                                li.onclick = function() {
-                                    selectType(this);
-                                };
-                                li.textContent = type.type;
-                                typeDropdownList.appendChild(li);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching types:', error));
-                }
+        function selectFunction(element) {
+            selectDropdownItem(element, 'function_id')
+            const functionId = element.getAttribute('data-value');
+            document.getElementById('function_id').value = functionId;
 
-                function selectType(element) {
-                    selectDropdownItem(element, 'type_id')
-                    const typeId = element.getAttribute('data-value');
-                    document.getElementById('type_id').value = typeId;
+            const typeDropdownBtn = document.getElementById('typeDropdownBtn');
+            typeDropdownBtn.disabled = false;
 
-                    const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
-                    bidangDropdownBtn.disabled = false;
+            fetchTypes(functionId);
+        }
 
-                    fetchBidang(typeId);
-                }
+        function fetchTypes(functionId) {
+            // Make an AJAX request to fetch types based on the selected function
+            fetch(`/api/type/${functionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const typeDropdownList = document.getElementById('typeDropdownList');
+                    typeDropdownList.innerHTML = ''; // Clear existing options
 
-                function fetchBidang(typeId) {
-                    fetch(`/api/bidang/${typeId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const bidangDropdownList = document.getElementById('bidangDropdownList');
-                            bidangDropdownList.innerHTML = ''; // Clear existing options
+                    data.forEach(type => {
+                        const li = document.createElement('li');
+                        li.setAttribute('data-value', type.id);
+                        li.onclick = function() {
+                            selectType(this);
+                        };
+                        li.textContent = type.type;
+                        typeDropdownList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching types:', error));
+        }
 
-                            data.forEach(type => {
-                                const li = document.createElement('li');
-                                li.setAttribute('data-value', type.id);
-                                li.onclick = function() {
-                                    selectBidang(this);
-                                };
-                                li.textContent = type.bidang;
-                                bidangDropdownList.appendChild(li);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching types:', error));
-                }
+        function selectType(element) {
+            selectDropdownItem(element, 'type_id')
+            const typeId = element.getAttribute('data-value');
+            document.getElementById('type_id').value = typeId;
 
-                function selectBidang(element) {
-                    selectDropdownItem(element, 'bidang_id')
-                    const bidangId = element.getAttribute('data-value');
-                    document.getElementById('type_id').value = bidangId;
+            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+            bidangDropdownBtn.disabled = false;
 
-                    const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
-                    bidangDropdownBtn.disabled = false;
+            fetchBidang(typeId);
+        }
 
-                    fetchSatker(bidangId);
-                }
+        function fetchBidang(typeId) {
+            fetch(`/api/bidang/${typeId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const bidangDropdownList = document.getElementById('bidangDropdownList');
+                    bidangDropdownList.innerHTML = ''; // Clear existing options
 
-                function fetchSatker(bidangId) {
-                    // Make an AJAX request to fetch types based on the selected function
-                    fetch(`/api/satker/${bidangId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const bidangDropdownList = document.getElementById('satkerDropdownList');
-                            bidangDropdownList.innerHTML = ''; // Clear existing options
-                            data.forEach(type => {
-                                const li = document.createElement('li');
-                                li.setAttribute('data-value', type.id);
-                                li.onclick = function() {
-                                    selectDropdownItem(this, 'satker_id');
-                                };
-                                li.textContent = type.satker;
-                                bidangDropdownList.appendChild(li);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching types:', error));
-                }
-            </script>
+                    data.forEach(type => {
+                        const li = document.createElement('li');
+                        li.setAttribute('data-value', type.id);
+                        li.onclick = function() {
+                            selectBidang(this);
+                        };
+                        li.textContent = type.bidang;
+                        bidangDropdownList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching types:', error));
+        }
 
-            <script>
-                function submit() {
-                    const button = document.getElementById('submit');
+        function selectBidang(element) {
+            selectDropdownItem(element, 'bidang_id')
+            const bidangId = element.getAttribute('data-value');
+            document.getElementById('type_id').value = bidangId;
 
-                    button.click();
-                }
-            </script>
-            <script>
-                // Data dari Controller
-                const chartData = @json($kano);
+            const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
+            bidangDropdownBtn.disabled = false;
+
+            fetchSatker(bidangId);
+        }
+
+        function fetchSatker(bidangId) {
+            // Make an AJAX request to fetch types based on the selected function
+            fetch(`/api/satker/${bidangId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const bidangDropdownList = document.getElementById('satkerDropdownList');
+                    bidangDropdownList.innerHTML = ''; // Clear existing options
+                    data.forEach(type => {
+                        const li = document.createElement('li');
+                        li.setAttribute('data-value', type.id);
+                        li.onclick = function() {
+                            selectDropdownItem(this, 'satker_id');
+                        };
+                        li.textContent = type.satker;
+                        bidangDropdownList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching types:', error));
+        }
+    </script>
+
+    <script>
+        function submit() {
+            const button = document.getElementById('submit');
+
+            button.click();
+        }
+    </script>
+    <script>
+        // Data dari Controller
+        const chartData = @json($kano);
 
 
-                function getRandomColor() {
-                    const r = Math.floor(Math.random() * 255);
-                    const g = Math.floor(Math.random() * 255);
-                    const b = Math.floor(Math.random() * 255);
-                    return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
-                }
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
+            return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
+        }
 
-                // Tambahkan warna random ke setiap titik dalam data
-                const dataWithColors = chartData.map(point => ({
-                    ...point,
-                    backgroundColor: getRandomColor()
-                }));
+        // Tambahkan warna random ke setiap titik dalam data
+        const dataWithColors = chartData.map(point => ({
+            ...point,
+            backgroundColor: getRandomColor()
+        }));
 
-                const ctx = document.getElementById('quadrantChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'scatter',
-                    data: {
-                        datasets: [{
-                            label: 'lalala',
-                            data: dataWithColors,
-                            pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
-                            radius: 15,
-                        }]
+        const ctx = document.getElementById('quadrantChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'lalala',
+                    data: dataWithColors,
+                    pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
+                    radius: 15,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        min: 0,
+                        max: 6,
+                        title: {
+                            display: true,
+                            text: 'Tingkat Kepuasan (X-Axis)'
+                        },
+                        grid: {
+                            drawBorder: false,
+                            color: function(context) {
+                                return context.tick.value === 0 ? '#000' : '#ddd';
+                            }
+                        }
                     },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            x: {
-                                min: 0,
-                                max: 6,
-                                title: {
-                                    display: true,
-                                    text: 'Tingkat Kepuasan (X-Axis)'
-                                },
-                                grid: {
-                                    drawBorder: false,
-                                    color: function(context) {
-                                        return context.tick.value === 0 ? '#000' : '#ddd';
-                                    }
-                                }
-                            },
-                            y: {
-                                min: 0,
-                                max: 6,
-                                title: {
-                                    display: true,
-                                    text: 'Tingkat Kepentingan (Y-Axis)'
-                                },
-                                grid: {
-                                    drawBorder: false,
-                                    color: function(context) {
-                                        return context.tick.value === 0 ? '#000' : '#ddd';
-                                    }
-                                }
-                            }
+                    y: {
+                        min: 0,
+                        max: 6,
+                        title: {
+                            display: true,
+                            text: 'Tingkat Kepentingan (Y-Axis)'
                         },
-                        plugins: {
-                            legend: {
-                                display: false // Hilangkan legend dari chart
-                            },
-                            tooltip: {
-                                backgroundColor: '#BCCCDC', // Warna background tooltip
-                                titleColor: '#000000', // Warna judul
-                                bodyColor: '#000000', // Warna isi teks
-                                borderColor: '#00BFFF',
-                                titleFont: {
-                                    size: 16,
-                                    weight: 'bold'
-                                }, // Styling font title
-                                bodyFont: {
-                                    size: 14
-                                }, // Styling font body
-                                padding: 12, // Padding dalam tooltip
-                                cornerRadius: 8, // Sudut melengkung tooltip
-                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0)', // Bayangan (custom CSS)
-                                callbacks: {
-                                    label: function(context) {
-                                        const dataPoint = context.raw;
-                                        return [
-                                            `Nama Attribute          : ${dataPoint.label}`,
-                                            `Tingkat Kepentingan : ${dataPoint.y}`,
-                                            `Tingkat Kepuasan     : ${dataPoint.x}`
-                                        ];
-                                    }
-                                }
+                        grid: {
+                            drawBorder: false,
+                            color: function(context) {
+                                return context.tick.value === 0 ? '#000' : '#ddd';
                             }
-                        },
-                        hover: {
-                            mode: 'nearest',
-                            intersect: true
                         }
                     }
-                });
-            </script>
-            <script>
-                function toggleDropdown(dropdownId) {
-                    const dropdown = document.getElementById(dropdownId);
-                    dropdown.classList.toggle('active');
+                },
+                plugins: {
+                    legend: {
+                        display: false // Hilangkan legend dari chart
+                    },
+                    tooltip: {
+                        backgroundColor: '#BCCCDC', // Warna background tooltip
+                        titleColor: '#000000', // Warna judul
+                        bodyColor: '#000000', // Warna isi teks
+                        borderColor: '#00BFFF',
+                        titleFont: {
+                            size: 16,
+                            weight: 'bold'
+                        }, // Styling font title
+                        bodyFont: {
+                            size: 14
+                        }, // Styling font body
+                        padding: 12, // Padding dalam tooltip
+                        cornerRadius: 8, // Sudut melengkung tooltip
+                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0)', // Bayangan (custom CSS)
+                        callbacks: {
+                            label: function(context) {
+                                const dataPoint = context.raw;
+                                return [
+                                    `Nama Attribute          : ${dataPoint.label}`,
+                                    `Tingkat Kepentingan : ${dataPoint.y}`,
+                                    `Tingkat Kepuasan     : ${dataPoint.x}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
                 }
+            }
+        });
+    </script>
+    <script>
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('active');
+        }
 
-                function filterDropdown(input) {
-                    const filter = input.value.toLowerCase();
-                    const items = input.nextElementSibling.querySelectorAll('li');
-                    items.forEach(item => {
-                        const text = item.textContent || item.innerText;
-                        item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
-                    });
-                }
+        function filterDropdown(input) {
+            const filter = input.value.toLowerCase();
+            const items = input.nextElementSibling.querySelectorAll('li');
+            items.forEach(item => {
+                const text = item.textContent || item.innerText;
+                item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+            });
+        }
 
-                function selectDropdownItem(item, hiddenInputId) {
-                    const dropdown = item.closest('.dropdown-content');
-                    const button = dropdown.previousElementSibling;
-                    const hiddenInput = document.getElementById(hiddenInputId);
+        function selectDropdownItem(item, hiddenInputId) {
+            const dropdown = item.closest('.dropdown-content');
+            const button = dropdown.previousElementSibling;
+            const hiddenInput = document.getElementById(hiddenInputId);
 
-                    button.textContent = item.textContent;
-                    hiddenInput.value = item.getAttribute('data-value');
+            button.textContent = item.textContent;
+            hiddenInput.value = item.getAttribute('data-value');
+            dropdown.classList.remove('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdowns = document.querySelectorAll('.dropdown-content');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
                     dropdown.classList.remove('active');
                 }
-
-                document.addEventListener('click', function(e) {
-                    const dropdowns = document.querySelectorAll('.dropdown-content');
-                    dropdowns.forEach(dropdown => {
-                        if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
-                            dropdown.classList.remove('active');
-                        }
-                    });
-                });
-            </script>
-        @endsection
+            });
+        });
+    </script>
+@endsection

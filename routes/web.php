@@ -35,7 +35,7 @@ Route::group([
     Route::post('/ssi', [SSIController::class, 'store'])->name('ssi.store');
 });
 
-Route::get('/ssi/{ssi}/{type_af}', [SSIController::class, 'show'])->name('ssi.show');
+Route::get('/ssi/{ssi}', [SSIController::class, 'show'])->name('ssi.show');
 Route::group([
     'prefix' => 'api'
 ], function () {

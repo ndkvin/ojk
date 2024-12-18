@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <h1>{{ $ssi->pd * 0.3 + $ssi->rp * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1 }}</h1>
+                            <h1>{{ $ssi['pd'] * 0.3 + $ssi['rp'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1 }}</h1>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <h1>{{ $ssi->indirect_os * 0.9 + $indirect_af * 0.1}}</h1>
+                            <h1>{{ $ssi['indirect_os'] * 0.9 + $ssi['indirect_af'] * 0.1}}</h1>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <h1>{{ ($ssi->pd * 0.3 + $ssi->rp * 0.3 + $ssi->os * 0.3 + $direct_af * 0.1)*0.8 + ($ssi->indirect_os * 0.9 + $indirect_af * 0.1)*0.2 }}</h1>
+                            <h1>{{ ($ssi['pd'] * 0.3 + $ssi['rp'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1)*0.8 + ($ssi['indirect_os'] * 0.9 + $ssi['indirect_af'] * 0.1)*0.2 }}</h1>
                         </div>
                     </div>
                 </div>
@@ -79,19 +79,19 @@
                                     <table class="table table-bordered">
                                         <tr>
                                             <th>RP</th>
-                                            <td>{{ $ssi->rp }}</td>
+                                            <td>{{ $ssi['rp'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Performance Delivery</th>
-                                            <td>{{ $ssi->pd }}</td>
+                                            <td>{{ $ssi['pd'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Outcome Satisfaction</th>
-                                            <td>{{ $ssi->os }}</td>
+                                            <td>{{ $ssi['os'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Adjustment Factor</th>
-                                            <td>{{ $direct_af }}</td>
+                                            <td>{{ $ssi['direct_af'] }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -101,11 +101,11 @@
                                     <table class="table table-bordered">
                                         <tr>
                                             <th>Outcome Satisfaction</th>
-                                            <td>{{ $ssi->indirect_os }}</td>
+                                            <td>{{ $ssi['indirect_os'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Adjustment Factor</th>
-                                            <td>{{ $indirect_af }}</td>
+                                            <td>{{ $ssi['indirect_af'] }}</td>
                                         </tr>
                                     </table>
                                 </div>

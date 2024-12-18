@@ -14,11 +14,11 @@ class FungsionalitasController extends Controller
     public function create()
     {
         $functions = Fungsi::all();
-        $types = Type::all();
-        $satkers = Satker::all();
-        $bidangs = Bidang::all();
+        // $types = Type::all();
+        // $satkers = Satker::all();
+        // $bidangs = Bidang::all();
 
-        return view('pages.fungsi', compact('functions', 'types', 'satkers', 'bidangs'));
+        return view('pages.fungsi', compact('functions'));
     }
 
     public function store(Request $request)
@@ -30,8 +30,20 @@ class FungsionalitasController extends Controller
             'bidang_id' => 'required|exists:bidang,id',
         ]);
 
-        Fungsionalitas::create($validated);
+        // dd($validated['bidang_id']);        
 
-        return redirect()->back()->with('success', 'Transaction successfully created.');
+        return redirect()->route('fungsionalitas.show', [
+            'pilih',
+            'function_id' => $validated['function_id'],
+            'type_id' => $validated['type_id'],
+            'satker_id' => $validated['satker_id'],
+            'bidang_id' => $validated['bidang_id'],
+        ]);
+    }
+
+    public function show()
+    {
+        // dd();
+        return view('pages.select');
     }
 }

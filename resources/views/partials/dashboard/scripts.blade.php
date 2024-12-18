@@ -1,4 +1,4 @@
-<script src={{ asset('assets/static/js/components/dark.js') }}></script>
+{{-- <script src={{ asset('assets/static/js/components/dark.js') }}></script> --}}
 <script src={{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}></script>
 <script src={{ asset('assets/compiled/js/app.js') }}></script>
 <script src={{ asset('assets/static/js/pages/dashboard.js') }}></script>
@@ -32,3 +32,42 @@
         })
     </script>
 @endif
+
+<script>
+
+
+    function toggleDropdown(dropdownId) {
+        const dropdown = document.getElementById(dropdownId);
+        dropdown.classList.toggle('active');
+    }
+
+    function filterDropdown(input) {
+        const filter = input.value.toLowerCase();
+        const items = input.nextElementSibling.querySelectorAll('li');
+        items.forEach(item => {
+            const text = item.textContent || item.innerText;
+            item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+        });
+    }
+
+    function selectDropdownItem(item, hiddenInputId) {
+        const dropdown = item.closest('.dropdown-content');
+        const button = dropdown.previousElementSibling;
+        const hiddenInput = document.getElementById(hiddenInputId);
+
+        button.textContent = item.textContent;
+        hiddenInput.value = item.getAttribute('data-value');
+        dropdown.classList.remove('active');
+    }
+
+    document.addEventListener('click', function(e) {
+        const dropdowns = document.querySelectorAll('.dropdown-content');
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+    });
+
+    
+</script>

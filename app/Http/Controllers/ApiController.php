@@ -9,15 +9,18 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    public function type($function_id) {
+    public function type($function_id)
+    {
         return Type::where('function_id', $function_id)->get();
     }
 
-    public function bidang($type_id) {
+    public function bidang($type_id)
+    {
         return Bidang::where('type_id', $type_id)->get();
     }
 
-    public function satket($bidang_id) {
+    public function satker($bidang_id)
+    {
         return Satker::where('bidang_id', $bidang_id)->get();
     }
 }

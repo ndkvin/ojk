@@ -81,7 +81,7 @@
                                                             <ul class="dropdown-list">
                                                                 @foreach ($functions as $function)
                                                                     <li data-value="{{ $function->id }}"
-                                                                        onclick="selectDropdownItem(this, 'function_id')">
+                                                                        onclick="selectFunction(this)">
                                                                         {{ $function->function }}
                                                                     </li>
                                                                 @endforeach
@@ -99,17 +99,17 @@
                                                 <label for="type_id" class="form-label">Tipe</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn"
+                                                        <button type="button"  id="typeDropdownBtn" class="dropdown-btn"
                                                             onclick="toggleDropdown('typeDropdown')">
                                                             {{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->type : 'Tipe' }}
                                                         </button>
                                                         <div class="dropdown-content" id="typeDropdown">
                                                             <input type="text" class="dropdown-search"
                                                                 placeholder="Search..." oninput="filterDropdown(this)">
-                                                            <ul class="dropdown-list">
+                                                            <ul class="dropdown-list" id="typeDropdownList">
                                                                 @foreach ($types as $type)
                                                                     <li data-value="{{ $type->id }}"
-                                                                        onclick="selectDropdownItem(this, 'type_id')">
+                                                                        onclick="selectType(this)">
                                                                         {{ $type->type }}
                                                                     </li>
                                                                 @endforeach
@@ -127,17 +127,17 @@
                                                 <label for="bidang_id" class="form-label">Bidang</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn"
+                                                        <button type="button" class="dropdown-btn" id="bidangDropdownBtn"
                                                             onclick="toggleDropdown('bidangDropdown')">
                                                             {{ request()->get('bidang_id') ? $bidangs->where('id', request()->get('bidang_id'))->first()->bidang : 'Bidang' }}
                                                         </button>
                                                         <div class="dropdown-content" id="bidangDropdown">
                                                             <input type="text" class="dropdown-search"
                                                                 placeholder="Search..." oninput="filterDropdown(this)">
-                                                            <ul class="dropdown-list">
+                                                            <ul class="dropdown-list" id="bidangDropdownList">
                                                                 @foreach ($bidangs as $bidang)
                                                                     <li data-value="{{ $bidang->id }}"
-                                                                        onclick="selectDropdownItem(this, 'bidang_id')">
+                                                                        onclick="selectBidang(this)">
                                                                         {{ $bidang->bidang }}
                                                                     </li>
                                                                 @endforeach
@@ -155,14 +155,14 @@
                                                 <label for="satker_id" class="form-label">Satuan Kerja</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn"
+                                                        <button type="button" class="dropdown-btn" id="satkerDropdownBtn"
                                                             onclick="toggleDropdown('satkerDropdown')">
                                                             {{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->satker : 'Satker' }}
                                                         </button>
                                                         <div class="dropdown-content" id="satkerDropdown">
                                                             <input type="text" class="dropdown-search"
                                                                 placeholder="Search..." oninput="filterDropdown(this)">
-                                                            <ul class="dropdown-list">
+                                                            <ul class="dropdown-list" id="satkerDropdownList">
                                                                 @foreach ($satkers as $satker)
                                                                     <li data-value="{{ $satker->id }}"
                                                                         onclick="selectDropdownItem(this, 'satker_id')">
@@ -233,7 +233,6 @@
                                         {{-- <button type="submit" class="d-none" id="submit"></button> --}}
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -330,7 +329,8 @@
                         </div>
                         @if ($ssi)
                             <div class="col text-center mb-3">
-                                <a class="btn btn-primary" href="{{ route('ssi.show', [$ssi->id, request()->query('af')]) }}">Detail</a>
+                                <a class="btn btn-danger"
+                                    href="{{ route('ssi.show', [$ssi->id, request()->query('af')]) }}">Detail</a>
                             </div>
                         @endif
                     </div>
@@ -429,14 +429,107 @@
                             </div>
                         </div>
                     @endif
-
-
-
                 </div>
             </section>
         @endsection
 
         @section('scripts')
+            <script>
+                function selectFunction(element) {
+                    selectDropdownItem(element, 'function_id')
+                    const functionId = element.getAttribute('data-value');
+                    document.getElementById('function_id').value = functionId;
+
+                    const typeDropdownBtn = document.getElementById('typeDropdownBtn');
+                    typeDropdownBtn.disabled = false;
+
+                    fetchTypes(functionId);
+                }
+
+                function fetchTypes(functionId) {
+                    // Make an AJAX request to fetch types based on the selected function
+                    fetch(`/api/type/${functionId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const typeDropdownList = document.getElementById('typeDropdownList');
+                            typeDropdownList.innerHTML = ''; // Clear existing options
+
+                            data.forEach(type => {
+                                const li = document.createElement('li');
+                                li.setAttribute('data-value', type.id);
+                                li.onclick = function() {
+                                    selectType(this);
+                                };
+                                li.textContent = type.type;
+                                typeDropdownList.appendChild(li);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching types:', error));
+                }
+
+                function selectType(element) {
+                    selectDropdownItem(element, 'type_id')
+                    const typeId = element.getAttribute('data-value');
+                    document.getElementById('type_id').value = typeId;
+
+                    const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+                    bidangDropdownBtn.disabled = false;
+
+                    fetchBidang(typeId);
+                }
+
+                function fetchBidang(typeId) {
+                    fetch(`/api/bidang/${typeId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const bidangDropdownList = document.getElementById('bidangDropdownList');
+                            bidangDropdownList.innerHTML = ''; // Clear existing options
+
+                            data.forEach(type => {
+                                const li = document.createElement('li');
+                                li.setAttribute('data-value', type.id);
+                                li.onclick = function() {
+                                    selectBidang(this);
+                                };
+                                li.textContent = type.bidang;
+                                bidangDropdownList.appendChild(li);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching types:', error));
+                }
+
+                function selectBidang(element) {
+                    selectDropdownItem(element, 'bidang_id')
+                    const bidangId = element.getAttribute('data-value');
+                    document.getElementById('type_id').value = bidangId;
+
+                    const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
+                    bidangDropdownBtn.disabled = false;
+
+                    fetchSatker(bidangId);
+                }
+
+                function fetchSatker(bidangId) {
+                    // Make an AJAX request to fetch types based on the selected function
+                    fetch(`/api/satker/${bidangId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const bidangDropdownList = document.getElementById('satkerDropdownList');
+                            bidangDropdownList.innerHTML = ''; // Clear existing options
+                            data.forEach(type => {
+                                const li = document.createElement('li');
+                                li.setAttribute('data-value', type.id);
+                                li.onclick = function() {
+                                    selectDropdownItem(this, 'satker_id');
+                                };
+                                li.textContent = type.satker;
+                                bidangDropdownList.appendChild(li);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching types:', error));
+                }
+            </script>
+
             <script>
                 function submit() {
                     const button = document.getElementById('submit');
@@ -467,38 +560,38 @@
                     type: 'scatter',
                     data: {
                         datasets: [{
-                            label: '',
+                            label: 'lalala',
                             data: dataWithColors,
                             pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
-                            radius: 10,
+                            radius: 15,
                         }]
                     },
                     options: {
                         responsive: true,
                         scales: {
                             x: {
-                                min: -6,
+                                min: 0,
                                 max: 6,
                                 title: {
                                     display: true,
-                                    text: 'Puas (X-Axis)'
+                                    text: 'Tingkat Kepuasan (X-Axis)'
                                 },
                                 grid: {
-                                    drawBorder: true,
+                                    drawBorder: false,
                                     color: function(context) {
                                         return context.tick.value === 0 ? '#000' : '#ddd';
                                     }
                                 }
                             },
                             y: {
-                                min: -6,
+                                min: 0,
                                 max: 6,
                                 title: {
                                     display: true,
-                                    text: 'Penting (Y-Axis)'
+                                    text: 'Tingkat Kepentingan (Y-Axis)'
                                 },
                                 grid: {
-                                    drawBorder: true,
+                                    drawBorder: false,
                                     color: function(context) {
                                         return context.tick.value === 0 ? '#000' : '#ddd';
                                     }
@@ -506,10 +599,14 @@
                             }
                         },
                         plugins: {
+                            legend: {
+                                display: false // Hilangkan legend dari chart
+                            },
                             tooltip: {
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)', // Warna background tooltip
-                                titleColor: '#ffffff', // Warna judul
-                                bodyColor: '#ffffff', // Warna isi teks
+                                backgroundColor: '#BCCCDC', // Warna background tooltip
+                                titleColor: '#000000', // Warna judul
+                                bodyColor: '#000000', // Warna isi teks
+                                borderColor: '#00BFFF',
                                 titleFont: {
                                     size: 16,
                                     weight: 'bold'
@@ -519,14 +616,14 @@
                                 }, // Styling font body
                                 padding: 12, // Padding dalam tooltip
                                 cornerRadius: 8, // Sudut melengkung tooltip
-                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)', // Bayangan (custom CSS)
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0)', // Bayangan (custom CSS)
                                 callbacks: {
                                     label: function(context) {
                                         const dataPoint = context.raw;
                                         return [
-                                            `Attribute: ${dataPoint.label}`,
-                                            `Penting: ${dataPoint.y}`,
-                                            `Puas: ${dataPoint.x}`
+                                            `Nama Attribute          : ${dataPoint.label}`,
+                                            `Tingkat Kepentingan : ${dataPoint.y}`,
+                                            `Tingkat Kepuasan     : ${dataPoint.x}`
                                         ];
                                     }
                                 }

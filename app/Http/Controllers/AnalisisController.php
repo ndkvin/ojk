@@ -23,7 +23,7 @@ class AnalisisController extends Controller
             ->where('bidang_id', $bidangId)
             ->first();
  
-        return view('pages.analisis', [
+        return view('pages.isidata.analisis', [
             'analisis' => $analisis,
         ]);
     }

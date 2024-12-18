@@ -33,15 +33,15 @@ Route::group([
     Route::resource('/ipa', App\Http\Controllers\IPAController::class)->only(['create', 'store']);
     Route::get('/ssi/create', [SSIController::class, 'create'])->name('ssi.create');
     Route::post('/ssi', [SSIController::class, 'store'])->name('ssi.store');
-    Route::get('/ssi/{ssi}/{type_af}', [SSIController::class, 'show'])->name('ssi.show');
 });
 
+Route::get('/ssi/{ssi}/{type_af}', [SSIController::class, 'show'])->name('ssi.show');
 Route::group([
     'prefix' => 'api'
 ], function () {
     Route::get('/type/{function_id}', [App\Http\Controllers\ApiController::class, 'type']);
     Route::get('/bidang/{type_id}', [App\Http\Controllers\ApiController::class, 'bidang']);
-    Route::get('/satker/{bidang_id}', [App\Http\Controllers\ApiController::class, 'satket']);
+    Route::get('/satker/{bidang_id}', [App\Http\Controllers\ApiController::class, 'satker']);
 });
 
 Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.show');

@@ -48,7 +48,9 @@ class HomeController extends Controller
         $bidangs = Bidang::all();
 
         if ($function_id && $type_id && $satker_id && $bidang_id) {
-            // dd("here");
+            if(!$request->get('af')) {
+                return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
+            }
             $ssi = SSI::where('function_id', $function_id)
                 ->where('type_id', $type_id)
                 ->where('satker_id', $satker_id)
@@ -84,9 +86,94 @@ class HomeController extends Controller
             $types = Type::where('function_id', $function_id)->get();
             $satkers = Satker::where('bidang_id', $bidang_id)->get();
             $bidangs = Bidang::where('type_id', $type_id)->get();
+        } else if ($function_id && $type_id && $satker_id) {
+            if(!$request->get('af')) {
+                return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
+            }
+            $ssi = SSI::where('function_id', $function_id)
+                ->where('type_id', $type_id)
+                ->where('satker_id', $satker_id)
+                ->first();
+
+            $kano = Kano::where('function_id', $function_id)
+                ->where('satker_id', $satker_id)
+                ->where('type_id', $type_id)
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'x' => $item->puas,  // Misalnya kolom puas sebagai X-axis
+                        'y' => $item->penting, // Misalnya kolom penting sebagai Y-axis
+                        'label' => $item->attribute, // Label untuk setiap titik
+                    ];
+                });
+
+            $ipa = IPA::where('function_id', $function_id)
+                ->where('satker_id', $satker_id)
+                ->where('type_id', $type_id)
+                ->get();
+
+            $analisis = Analisis::where('function_id', $function_id)
+                ->where('satker_id', $satker_id)
+                ->where('type_id', $type_id)
+                ->first();
+
+            $functions = Fungsi::all();
+            $types = Type::where('function_id', $function_id)->get();
+            $satkers = Satker::where('bidang_id', $bidang_id)->get();
+        } else if ($function_id && $type_id) {
+            if(!$request->get('af')) {
+                return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
+            }
+            $ssi = SSI::where('function_id', $function_id)
+                ->where('type_id', $type_id)
+                ->first();
+
+            $kano = Kano::where('function_id', $function_id)
+                ->where('type_id', $type_id)
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'x' => $item->puas,  // Misalnya kolom puas sebagai X-axis
+                        'y' => $item->penting, // Misalnya kolom penting sebagai Y-axis
+                        'label' => $item->attribute, // Label untuk setiap titik
+                    ];
+                });
+
+            $ipa = IPA::where('function_id', $function_id)
+                ->where('type_id', $type_id)
+                ->get();
+
+            $analisis = Analisis::where('function_id', $function_id)
+                ->where('type_id', $type_id)
+                ->first();
+
+            $functions = Fungsi::all();
+            $types = Type::where('function_id', $function_id)->get();
+        } else if ($function_id) {
+            if(!$request->get('af')) {
+                return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
+            }
+            $ssi = SSI::where('function_id', $function_id)
+                ->first();
+
+            $kano = Kano::where('function_id', $function_id)
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'x' => $item->puas,  // Misalnya kolom puas sebagai X-axis
+                        'y' => $item->penting, // Misalnya kolom penting sebagai Y-axis
+                        'label' => $item->attribute, // Label untuk setiap titik
+                    ];
+                });
+
+            $ipa = IPA::where('function_id', $function_id)
+                ->get();
+
+            $analisis = Analisis::where('function_id', $function_id)
+                ->first();
+
+            $functions = Fungsi::all();
         }
-
-
 
         return view('pages.home', [
             'functions' => $functions,

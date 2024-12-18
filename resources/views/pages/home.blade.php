@@ -71,7 +71,7 @@
                                                 <label for="function_id" class="form-label">Fungsi</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn"
+                                                        <button type="button" class="dropdown-btn" id="functionDropdownBtn"
                                                             onclick="toggleDropdown('functionDropdown')">
                                                             {{ request()->get('function_id') ? $functions->where('id', request()->get('function_id'))->first()->function : 'Fungsi' }}
                                                         </button>
@@ -183,7 +183,7 @@
                                                 <label for="afdd" class="form-label">AF</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn"
+                                                        <button type="button" class="dropdown-btn" id="afDropdownBtn"
                                                             onclick="toggleDropdown('afdd')">
                                                             @if (request()->get('af') == 'af_1_oq')
                                                                 Adjusment Factor 1 Open Question
@@ -227,8 +227,10 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
+                                            <div class="w-100 btn btn-secondary"
+                                                style="margin-top:10px" onclick="clearFilter()">Clear</div>
                                             <button type="submit" class="w-100 btn btn-danger"
-                                                style="margin-top:30px">Filter</button>
+                                                style="margin-top:10px">Filter</button>
                                         </div>
                                         {{-- <button type="submit" class="d-none" id="submit"></button> --}}
                                     </div>
@@ -435,6 +437,26 @@
 
         @section('scripts')
             <script>
+                function clearFilter() {
+                    document.getElementById('function_id').value = '';
+                    document.getElementById('type_id').value = '';
+                    document.getElementById('bidang_id').value = '';
+                    document.getElementById('satker_id').value = '';
+                    document.getElementById('af').value = '';
+
+                    const functionDropdownBtn = document.getElementById('functionDropdownBtn');
+                    functionDropdownBtn.textContent = 'Fungsi';
+                    const typeDropdownBtn = document.getElementById('typeDropdownBtn');
+                    typeDropdownBtn.textContent = 'Tipe';
+                    const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+                    bidangDropdownBtn.textContent = 'Bidang';
+                    const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+                    satkerDropdownBtn.textContent = 'Satker';
+                    const afDropdownBtn = document.getElementById('afDropdownBtn');
+                    afDropdownBtn.textContent = 'AF';
+
+                }
+
                 function selectFunction(element) {
                     selectDropdownItem(element, 'function_id')
                     const functionId = element.getAttribute('data-value');

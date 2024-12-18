@@ -11,81 +11,6 @@
                     <form action="{{ route('fungsionalitas.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-    <label for="function_id" class="form-label">Fungsi</label>
-    <div class="dropdown-container">
-        <div class="dropdown">
-            <button type="button" class="dropdown-btn" onclick="toggleDropdown('functionDropdown')">
-                Pilih Fungsi
-            </button>
-            <div class="dropdown-content" id="functionDropdown">
-                <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
-                <ul class="dropdown-list">
-                    @foreach ($functions as $function)
-                        <li data-value="{{ $function->id }}" onclick="selectFunction(this)">
-                            {{ $function->function }}
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-        <input type="hidden" id="function_id" name="function_id" required>
-    </div>
-</div>
-
-<div class="mb-3">
-    <label for="type_id" class="form-label">Tipe</label>
-    <div class="dropdown-container">
-        <div class="dropdown">
-            <button type="button" class="dropdown-btn" id="typeDropdownBtn" onclick="toggleDropdown('typeDropdown')" disabled>
-                Pilih Tipe
-            </button>
-            <div class="dropdown-content" id="typeDropdown">
-                <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
-                <ul class="dropdown-list" id="typeDropdownList">
-                    <!-- Types will be populated here based on selected function -->
-                </ul>
-            </div>
-        </div>
-        <input type="hidden" id="type_id" name="type_id" required>
-    </div>
-</div>
-
-<div class="mb-3">
-    <label for="type_id" class="form-label">Bidang</label>
-    <div class="dropdown-container">
-        <div class="dropdown">
-            <button type="button" class="dropdown-btn" id="bidangDropdownBtn" onclick="toggleDropdown('bidangDropdown')" disabled>
-                Pilih Bidang
-            </button>
-            <div class="dropdown-content" id="bidangDropdown">
-                <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
-                <ul class="dropdown-list" id="bidangDropdownList">
-                    <!-- Types will be populated here based on selected function -->
-                </ul>
-            </div>
-        </div>
-        <input type="hidden" id="bidang_id" name="bidang_id" required>
-    </div>
-</div>
-
-<div class="mb-3">
-    <label for="type_id" class="form-label">Satuan Kerja</label>
-    <div class="dropdown-container">
-        <div class="dropdown">
-            <button type="button" class="dropdown-btn" id="satkerDropdownBtn" onclick="toggleDropdown('satkerDropdown')" disabled>
-                Pilih Satuan Kerja
-            </button>
-            <div class="dropdown-content" id="satkerDropdown">
-                <input type="text" class="dropdown-search" placeholder="Search..." oninput="filterDropdown(this)">
-                <ul class="dropdown-list" id="satkerDropdownList">
-                    <!-- Types will be populated here based on selected function -->
-                </ul>
-            </div>
-        </div>
-        <input type="hidden" id="satker_id" name="satker_id" required>
-    </div>
-</div>
-                        {{-- <div class="mb-3">
                             <label for="function_id" class="form-label">Fungsi</label>
                             <div class="dropdown-container">
                                 <div class="dropdown">
@@ -98,8 +23,7 @@
                                             oninput="filterDropdown(this)">
                                         <ul class="dropdown-list">
                                             @foreach ($functions as $function)
-                                                <li data-value="{{ $function->id }}"
-                                                    onclick="selectDropdownItem(this, 'function_id')">
+                                                <li data-value="{{ $function->id }}" onclick="selectFunction(this)">
                                                     {{ $function->function }}
                                                 </li>
                                             @endforeach
@@ -108,80 +32,71 @@
                                 </div>
                                 <input type="hidden" id="function_id" name="function_id" required>
                             </div>
-                        </div> --}}
-{{-- 
+                        </div>
+
                         <div class="mb-3">
                             <label for="type_id" class="form-label">Tipe</label>
                             <div class="dropdown-container">
                                 <div class="dropdown">
-                                    <button type="button" class="dropdown-btn" onclick="toggleDropdown('typeDropdown')">
+                                    <button type="button" class="dropdown-btn" id="typeDropdownBtn"
+                                        onclick="toggleDropdown('typeDropdown')" disabled>
                                         Pilih Tipe
                                     </button>
                                     <div class="dropdown-content" id="typeDropdown">
                                         <input type="text" class="dropdown-search" placeholder="Search..."
                                             oninput="filterDropdown(this)">
-                                        <ul class="dropdown-list">
-                                            @foreach ($types as $type)
-                                                <li data-value="{{ $type->id }}"
-                                                    onclick="selectDropdownItem(this, 'type_id')">
-                                                    {{ $type->type }}
-                                                </li>
-                                            @endforeach
+                                        <ul class="dropdown-list" id="typeDropdownList">
+                                            <!-- Types will be populated here based on selected function -->
                                         </ul>
                                     </div>
                                 </div>
                                 <input type="hidden" id="type_id" name="type_id" required>
                             </div>
-                        </div> --}}
-                        {{-- <div class="mb-3">
-                            <label for="bidang_id" class="form-label">Bidang</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="type_id" class="form-label">Bidang</label>
                             <div class="dropdown-container">
                                 <div class="dropdown">
-                                    <button type="button" class="dropdown-btn" onclick="toggleDropdown('bidangDropdown')">
+                                    <button type="button" class="dropdown-btn" id="bidangDropdownBtn"
+                                        onclick="toggleDropdown('bidangDropdown')" disabled>
                                         Pilih Bidang
                                     </button>
                                     <div class="dropdown-content" id="bidangDropdown">
                                         <input type="text" class="dropdown-search" placeholder="Search..."
                                             oninput="filterDropdown(this)">
-                                        <ul class="dropdown-list">
-                                            @foreach ($bidangs as $bidang)
-                                                <li data-value="{{ $bidang->id }}"
-                                                    onclick="selectDropdownItem(this, 'bidang_id')">
-                                                    {{ $bidang->bidang }}
-                                                </li>
-                                            @endforeach
+                                        <ul class="dropdown-list" id="bidangDropdownList">
+                                            <!-- Types will be populated here based on selected function -->
                                         </ul>
                                     </div>
                                 </div>
                                 <input type="hidden" id="bidang_id" name="bidang_id" required>
                             </div>
-                        </div> --}}
-                        {{-- <div class="mb-3">
-                            <label for="satker_id" class="form-label">Satuan Kerja</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="type_id" class="form-label">Satuan Kerja</label>
                             <div class="dropdown-container">
                                 <div class="dropdown">
-                                    <button type="button" class="dropdown-btn" onclick="toggleDropdown('satkerDropdown')">
+                                    <button type="button" class="dropdown-btn" id="satkerDropdownBtn"
+                                        onclick="toggleDropdown('satkerDropdown')" disabled>
                                         Pilih Satuan Kerja
                                     </button>
                                     <div class="dropdown-content" id="satkerDropdown">
                                         <input type="text" class="dropdown-search" placeholder="Search..."
                                             oninput="filterDropdown(this)">
-                                        <ul class="dropdown-list">
-                                            @foreach ($satkers as $satker)
-                                                <li data-value="{{ $satker->id }}"
-                                                    onclick="selectDropdownItem(this, 'satker_id')">
-                                                    {{ $satker->satker }}
-                                                </li>
-                                            @endforeach
+                                        <ul class="dropdown-list" id="satkerDropdownList">
+                                            <!-- Types will be populated here based on selected function -->
                                         </ul>
                                     </div>
                                 </div>
                                 <input type="hidden" id="satker_id" name="satker_id" required>
                             </div>
-                        </div> --}}
+                        </div>
 
 
-                        <button type="submit" class="btn btn-primary">Isi Data</button>
+
+                        <button type="submit" class="btn btn-danger">Isi Data</button>
                     </form>
                 </div>
             </div>
@@ -219,7 +134,9 @@
                     data.forEach(type => {
                         const li = document.createElement('li');
                         li.setAttribute('data-value', type.id);
-                        li.onclick = function() { selectType(this); };
+                        li.onclick = function() {
+                            selectType(this);
+                        };
                         li.textContent = type.type;
                         typeDropdownList.appendChild(li);
                     });
@@ -249,7 +166,9 @@
                     data.forEach(bidang => {
                         const li = document.createElement('li');
                         li.setAttribute('data-value', bidang.id);
-                        li.onclick = function() { selectBidang(this); };
+                        li.onclick = function() {
+                            selectBidang(this);
+                        };
                         li.textContent = bidang.bidang;
                         bidangDropdownList.appendChild(li);
                     });
@@ -280,13 +199,14 @@
                         console.log(satker);
                         const li = document.createElement('li');
                         li.setAttribute('data-value', satker.id);
-                        li.onclick = function() { selectDropdownItem(this, 'satker_id'); };
+                        li.onclick = function() {
+                            selectDropdownItem(this, 'satker_id');
+                        };
                         li.textContent = satker.satker;
                         satkerDropdownList.appendChild(li);
                     });
                 })
                 .catch(error => console.error('Error fetching types:', error));
         }
-
     </script>
 @endsection

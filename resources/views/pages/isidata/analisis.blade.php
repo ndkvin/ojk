@@ -32,28 +32,16 @@
                                 @endif
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-12">
                                         <div class="form-group">
-                                            <label for="af-1-oq">Kritik</label>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="af-2-oq">Saran</label>
+                                            <label for="af-2-oq">Rekomendasi</label>
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" id="form-rows">
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="kritik" rows="3" placeholder="Kritik" required>{{ $analisis == null ? '': $analisis->kritik }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-
                                             <textarea class="form-control" name="saran" rows="3" placeholder="Saran" required>{{ $analisis == null ? '' : $analisis->saran }}</textarea>
                                         </div>
                                     </div>

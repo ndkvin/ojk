@@ -14,11 +14,11 @@ class FungsionalitasController extends Controller
     public function create()
     {
         $functions = Fungsi::all();
-        $types = Type::all();
-        $satkers = Satker::all();
-        $bidangs = Bidang::all();
+        // $types = Type::all();
+        // $satkers = Satker::all();
+        // $bidangs = Bidang::all();
 
-        return view('pages.fungsi', compact('functions', 'types', 'satkers', 'bidangs'));
+        return view('pages.fungsi', compact('functions'));
     }
 
     public function store(Request $request)

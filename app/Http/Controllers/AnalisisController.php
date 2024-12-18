@@ -46,7 +46,6 @@ class AnalisisController extends Controller
             'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
-            'kritik' => 'required|string',
             'saran' => 'required|string'
         ]);
 
@@ -56,11 +55,16 @@ class AnalisisController extends Controller
             'type_id' => $request->type_id,
             'satker_id' => $request->satker_id,
             'bidang_id' => $request->bidang_id,
-            'kritik' => $request->kritik,
             'saran' => $request->saran,
         ]);
 
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
+        return redirect()->route('fungsionalitas.show', [
+            'pilih',
+            'function_id' => $request->function_id,
+            'type_id' => $request->type_id,
+            'satker_id' => $request->satker_id,
+            'bidang_id' => $request->bidang_id,
+        ])->with('success', 'Data berhasil diperbarui');
     }
 
     /**
@@ -89,7 +93,6 @@ class AnalisisController extends Controller
             'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
-            'kritik' => 'required|string',
             'saran' => 'required|string'
         ]);
 
@@ -101,11 +104,16 @@ class AnalisisController extends Controller
         
 
         $analisis->update([
-            'kritik' => $request->kritik,
             'saran' => $request->saran,
         ]);
 
-        return redirect()->back()->with('success', 'Data berhasil diperbarui');
+        return redirect()->route('fungsionalitas.show', [
+            'pilih',
+            'function_id' => $request->function_id,
+            'type_id' => $request->type_id,
+            'satker_id' => $request->satker_id,
+            'bidang_id' => $request->bidang_id,
+        ])->with('success', 'Data berhasil diperbarui');
     }
 
     /**

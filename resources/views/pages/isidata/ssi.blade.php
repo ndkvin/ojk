@@ -35,19 +35,19 @@
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="rp">Resource Perception</label>
-                                            <input class="form-control" value="{{ $existingData->rp ?? old('rp') }}" type="number" name="rp" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->rp ?? old('rp') }}" type="number" name="rp" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="pd">Peformance Delivery</label>
-                                            <input class="form-control" value="{{ $existingData->pd ?? old('pd') }}" type="number" name="pd" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->pd ?? old('pd') }}" type="number" name="pd" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="os">Outcome Satisfaction</label>
-                                            <input class="form-control" value="{{ $existingData->os ?? old('os') }}" type="number" name="os" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->os ?? old('os') }}" type="number" name="os" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                 </div>            
@@ -56,25 +56,25 @@
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="af_1_oq">Adjusment Factor 1 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->af_1_oq ?? old('af_1_oq') }}" type="number" name="af_1_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->af_1_oq ?? old('af_1_oq') }}" type="number" name="af_1_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="af_2_oq">Adjusment Factor 2 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->af_2_oq ?? old('af_2_oq') }}" type="number" name="af_2_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->af_2_oq ?? old('af_2_oq') }}" type="number" name="af_2_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="cf_1_oq">Confirmation Factor 1 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->cf_1_oq ?? old('cf_1_oq') }}" type="number" name="cf_1_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->cf_1_oq ?? old('cf_1_oq') }}" type="number" name="cf_1_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="cf_2_oq">Confirmation Factor 2 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->cf_2_oq ?? old('cf_2_oq') }}" type="number" name="cf_2_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->cf_2_oq ?? old('cf_2_oq') }}" type="number" name="cf_2_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                 </div>
@@ -86,19 +86,19 @@
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="indirect_os_subject">Outcome Satisfaction Subject</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_os_subject ?? old('indirect_os_subject') }}" type="number" name="indirect_os_subject" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->indirect_os_subject ?? old('indirect_os_subject') }}" type="number" name="indirect_os_subject" step="0.01" min="1" max="6"</input>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="indirect_os_context">Outcome Satisfaction Context Setter</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_os_context ?? old('indirect_os_context') }}" type="number" name="indirect_os_context" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->indirect_os_context ?? old('indirect_os_context') }}" type="number" name="indirect_os_context" step="0.01" min="1" max="6"></input>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="indirect_os_low_power">Outcome Satisfaction Crowds</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_os_low_power ?? old('indirect_os_low_power') }}" type="number" name="indirect_os_low_power" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->indirect_os_low_power ?? old('indirect_os_low_power') }}" type="number" name="indirect_os_low_power" step="0.01" min="1" max="6"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -107,25 +107,25 @@
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="indirect_af_1_oq">Adjusment Factor 1 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_af_1_oq ?? old('indirect_af_1_oq') }}" type="number" name="indirect_af_1_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->indirect_af_1_oq ?? old('indirect_af_1_oq') }}" type="number" name="indirect_af_1_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="indirect_af_2_oq">Adjusment Factor 2 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_af_2_oq ?? old('indirect_af_2_oq') }}" type="number" name="indirect_af_2_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->indirect_af_2_oq ?? old('indirect_af_2_oq') }}" type="number" name="indirect_af_2_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="indirect_cf_1_oq">Confirmation Factor 1 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_cf_1_oq ?? old('indirect_cf_1_oq') }}" type="number" name="indirect_cf_1_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->indirect_cf_1_oq ?? old('indirect_cf_1_oq') }}" type="number" name="indirect_cf_1_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="indirect_cf_2_oq">Confirmation Factor 2 Open Question</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_cf_2_oq ?? old('indirect_cf_2_oq') }}" type="number" name="indirect_cf_2_oq" step="0.01" min="0" max="10" required></input>
+                                            <input class="form-control" value="{{ $existingData->indirect_cf_2_oq ?? old('indirect_cf_2_oq') }}" type="number" name="indirect_cf_2_oq" step="0.01" min="1" max="6" required></input>
                                         </div>
                                     </div>
                                 </div>

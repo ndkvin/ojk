@@ -1,14 +1,9 @@
 <?php
 
-use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SSIController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AnalisisController;
-use App\Http\Controllers\DashoardController;
-use App\Http\Controllers\FungsionalitasController;
 use App\Http\Controllers\KanoController;
 use App\Models\Type;
 
@@ -44,4 +39,4 @@ Route::group([
     Route::get('/satker/{bidang_id}', [App\Http\Controllers\ApiController::class, 'satker']);
 });
 
-Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.show');
+Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.showw');

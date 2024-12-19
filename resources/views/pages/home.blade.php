@@ -101,7 +101,7 @@
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" id="typeDropdownBtn" class="dropdown-btn"
-                                                            onclick="toggleDropdown('typeDropdown')">
+                                                            onclick="toggleDropdown('typeDropdown')" {{  request()->get('type_id') ? "" : 'disabled' }}>
                                                             {{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->type : 'Tipe' }}
                                                         </button>
                                                         <div class="dropdown-content" id="typeDropdown">
@@ -129,7 +129,7 @@
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn" id="bidangDropdownBtn"
-                                                            onclick="toggleDropdown('bidangDropdown')">
+                                                            onclick="toggleDropdown('bidangDropdown')" {{  request()->get('bidang_id') ? '': 'disabled' }}>
                                                             {{ request()->get('bidang_id') ? $bidangs->where('id', request()->get('bidang_id'))->first()->bidang : 'Bidang' }}
                                                         </button>
                                                         <div class="dropdown-content" id="bidangDropdown">
@@ -158,7 +158,7 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn"
                                                             id="satkerDropdownBtn"
-                                                            onclick="toggleDropdown('satkerDropdown')">
+                                                            onclick="toggleDropdown('satkerDropdown')" {{ request()->get('satker_id') ?  '': 'disabled' }}>
                                                             {{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->satker : 'Satker' }}
                                                         </button>
                                                         <div class="dropdown-content" id="satkerDropdown">
@@ -634,7 +634,7 @@
         function selectBidang(element) {
             selectDropdownItem(element, 'bidang_id')
             const bidangId = element.getAttribute('data-value');
-            document.getElementById('type_id').value = bidangId;
+            document.getElementById('bidang_id').value = bidangId;
 
             const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
             bidangDropdownBtn.disabled = false;

@@ -106,6 +106,7 @@ class HomeController extends Controller
             $bidangs = Bidang::where('type_id', $type_id)->get();
             $satkers = Satker::where('bidang_id', $bidang_id)->get();
         } else if ($function_id && $type_id && $bidang_id) {
+            // dd('here');
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
             }
@@ -157,10 +158,14 @@ class HomeController extends Controller
             $types = Type::where('function_id', $function_id)->get();
             $bidangs = Bidang::where('type_id', $type_id)->get();
 
+            
+
             $functions = Fungsi::all();
             $types = Type::where('function_id', $function_id)->get();
             $bidangs = Bidang::where('type_id', $type_id)->get();
             $satkers = Satker::where('bidang_id', $bidang_id)->get();
+
+            // dd($bidangs);
             // dd($bidangs);
         } else if ($function_id && $type_id) {
             // dd('here');

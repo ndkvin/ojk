@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Superadmin',
                 'email' => 'superadmin@ojk.com',
-                'password' => Hash::make('sa123'),
+                'password' => Hash::make('Sandi#123'),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'role' => 'superadmin',
@@ -44,50 +44,50 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'User',
                 'email' => 'user@ojk.com',
-                'password' => Hash::make('user123'),
+                'password' => Hash::make('Sandi#123'),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'role' => 'user',
             ]
         ]);
 
-        // Insert data into `functions`
-        $functions = [
-            ['function' => 'Function A', 'created_at' => now(), 'updated_at' => now()],
-            ['function' => 'Function B', 'created_at' => now(), 'updated_at' => now()],
-            ['function' => 'Function C', 'created_at' => now(), 'updated_at' => now()],
-        ];
-        DB::table('functions')->insert($functions);
+        // // Insert data into `functions`
+        // $functions = [
+        //     ['function' => 'Function A', 'created_at' => now(), 'updated_at' => now()],
+        //     ['function' => 'Function B', 'created_at' => now(), 'updated_at' => now()],
+        //     ['function' => 'Function C', 'created_at' => now(), 'updated_at' => now()],
+        // ];
+        // DB::table('functions')->insert($functions);
 
-        // Insert data into `types`
-        $functionIds = DB::table('functions')->pluck('id');
-        $types = [];
-        foreach ($functionIds as $functionId) {
-            $types[] = ['function_id' => $functionId, 'type' => 'Type 1 of Function ' . $functionId, 'created_at' => now(), 'updated_at' => now()];
-            $types[] = ['function_id' => $functionId, 'type' => 'Type 2 of Function ' . $functionId, 'created_at' => now(), 'updated_at' => now()];
-            $types[] = ['function_id' => $functionId, 'type' => 'Type 3 of Function ' . $functionId, 'created_at' => now(), 'updated_at' => now()];
-        }
-        DB::table('types')->insert($types);
+        // // Insert data into `types`
+        // $functionIds = DB::table('functions')->pluck('id');
+        // $types = [];
+        // foreach ($functionIds as $functionId) {
+        //     $types[] = ['function_id' => $functionId, 'type' => 'Type 1 of Function ' . $functionId, 'created_at' => now(), 'updated_at' => now()];
+        //     $types[] = ['function_id' => $functionId, 'type' => 'Type 2 of Function ' . $functionId, 'created_at' => now(), 'updated_at' => now()];
+        //     $types[] = ['function_id' => $functionId, 'type' => 'Type 3 of Function ' . $functionId, 'created_at' => now(), 'updated_at' => now()];
+        // }
+        // DB::table('types')->insert($types);
 
-        // Insert data into `bidang`
-        $typeIds = DB::table('types')->pluck('id');
-        $bidang = [];
-        foreach ($typeIds as $typeId) {
-            $bidang[] = ['type_id' => $typeId, 'bidang' => 'Bidang 1 of Type ' . $typeId, 'created_at' => now(), 'updated_at' => now()];
-            $bidang[] = ['type_id' => $typeId, 'bidang' => 'Bidang 2 of Type ' . $typeId, 'created_at' => now(), 'updated_at' => now()];
-            $bidang[] = ['type_id' => $typeId, 'bidang' => 'Bidang 3 of Type ' . $typeId, 'created_at' => now(), 'updated_at' => now()];
-        }
-        DB::table('bidang')->insert($bidang);
+        // // Insert data into `bidang`
+        // $typeIds = DB::table('types')->pluck('id');
+        // $bidang = [];
+        // foreach ($typeIds as $typeId) {
+        //     $bidang[] = ['type_id' => $typeId, 'bidang' => 'Bidang 1 of Type ' . $typeId, 'created_at' => now(), 'updated_at' => now()];
+        //     $bidang[] = ['type_id' => $typeId, 'bidang' => 'Bidang 2 of Type ' . $typeId, 'created_at' => now(), 'updated_at' => now()];
+        //     $bidang[] = ['type_id' => $typeId, 'bidang' => 'Bidang 3 of Type ' . $typeId, 'created_at' => now(), 'updated_at' => now()];
+        // }
+        // DB::table('bidang')->insert($bidang);
 
-        // Insert data into `satuan_kerja`
-        $bidangIds = DB::table('bidang')->pluck('id');
-        $satker = [];
-        foreach ($bidangIds as $bidangId) {
-            $satker[] = ['bidang_id' => $bidangId, 'satker' => 'Satker 1 of Bidang ' . $bidangId, 'created_at' => now(), 'updated_at' => now()];
-            $satker[] = ['bidang_id' => $bidangId, 'satker' => 'Satker 2 of Bidang ' . $bidangId, 'created_at' => now(), 'updated_at' => now()];
-            $satker[] = ['bidang_id' => $bidangId, 'satker' => 'Satker 3 of Bidang ' . $bidangId, 'created_at' => now(), 'updated_at' => now()];
-        }
-        DB::table('satuan_kerja')->insert($satker);
+        // // Insert data into `satuan_kerja`
+        // $bidangIds = DB::table('bidang')->pluck('id');
+        // $satker = [];
+        // foreach ($bidangIds as $bidangId) {
+        //     $satker[] = ['bidang_id' => $bidangId, 'satker' => 'Satker 1 of Bidang ' . $bidangId, 'created_at' => now(), 'updated_at' => now()];
+        //     $satker[] = ['bidang_id' => $bidangId, 'satker' => 'Satker 2 of Bidang ' . $bidangId, 'created_at' => now(), 'updated_at' => now()];
+        //     $satker[] = ['bidang_id' => $bidangId, 'satker' => 'Satker 3 of Bidang ' . $bidangId, 'created_at' => now(), 'updated_at' => now()];
+        // }
+        // DB::table('satuan_kerja')->insert($satker);
     }
     private function generateRandomEntries($field, $count)
     {

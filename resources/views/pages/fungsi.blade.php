@@ -117,6 +117,21 @@
             const typeDropdownBtn = document.getElementById('typeDropdownBtn');
             typeDropdownBtn.disabled = false;
 
+            // Reset fields
+            document.getElementById('type_id').value = '';
+            document.getElementById('bidang_id').value = '';
+            document.getElementById('satker_id').value = '';
+
+            typeDropdownBtn.textContent = 'Tipe';
+            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+            bidangDropdownBtn.textContent = 'Bidang';
+            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+            satkerDropdownBtn.textContent = 'Satker';
+
+            // Disable subsequent dropdowns initially
+            bidangDropdownBtn.disabled = true;
+            satkerDropdownBtn.disabled = true;
+
             fetchTypes(functionId);
         }
 
@@ -146,8 +161,23 @@
             const typeId = element.getAttribute('data-value');
             document.getElementById('type_id').value = typeId;
 
-            const typeDropdownBtn = document.getElementById('bidangDropdownBtn');
+            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
             bidangDropdownBtn.disabled = false;
+
+            // document.getElementById('bidang_id').value = '';
+            // document.getElementById('satker_id').value = '';
+
+            // Reset fields
+            document.getElementById('bidang_id').value = '';
+            document.getElementById('satker_id').value = '';
+
+            // Reset dropdown text
+            bidangDropdownBtn.textContent = 'Bidang';
+            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+            satkerDropdownBtn.textContent = 'Satker';
+
+            // Disable subsequent dropdowns initially
+            satkerDropdownBtn.disabled = true;
 
             fetchBidang(typeId);
         }
@@ -179,7 +209,13 @@
             document.getElementById('bidang_id').value = bidangId;
 
             const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
-            satkerDropdownBtn.disabled = false;
+            bidangDropdownBtn.disabled = false;
+
+            // Reset fields
+            document.getElementById('satker_id').value = '';
+
+            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+            satkerDropdownBtn.textContent = 'Satker';
 
             fetchSatker(bidangId);
         }

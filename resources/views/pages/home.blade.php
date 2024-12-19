@@ -303,7 +303,27 @@
                                                 </center>
                                                 <center>
                                                     <h5 class="card-text">
-                                                        {{ $ssi == null ? 'Tidak Ada Data' : $ssi['indirect_os'] * 0.9 + $indirect_af * 0.1 }}
+                                                        @if ($ssi == null)
+                                                            {{ 'Tidak Ada Data' }}
+                                                        @elseif ($ssi['indirect_os_subject'] == null && $ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                                            {{ 0 + $indirect_af * 0.1 }}
+                                                        @elseif ($ssi['indirect_os_low_power'] == null && $ssi['indirect_os_subject'] == null)
+                                                            {{ ($ssi['indirect_os_context']) * 0.9 + $indirect_af * 0.1 }}
+                                                        @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_subject'] == null)
+                                                            {{ ($ssi['indirect_os_low_power']) * 0.9 + $indirect_af * 0.1 }}
+                                                        @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                                            {{ ($ssi['indirect_os_subject']) * 0.9 + $indirect_af * 0.1 }}
+                                                        @elseif ($ssi['indirect_os_subject'] == null)
+                                                            {{ (($ssi['indirect_os_context'] + $ssi['indirect_os_low_power']) / 2) * 0.9 + $indirect_af * 0.1 }}
+                                                        @elseif ($ssi['indirect_os_context'] == null)
+                                                            {{ (($ssi['indirect_os_subject'] + $ssi['indirect_os_low_power']) / 2) * 0.9 + $indirect_af * 0.1 }}
+                                                        @elseif ($ssi['indirect_os_low_power'] == null)
+                                                            {{ (($ssi['indirect_os_subject'] + $ssi['indirect_os_context']) / 2) * 0.9 + $indirect_af * 0.1 }}
+                                                        @else
+                                                            {{ (($ssi['indirect_os_context'] + $ssi['indirect_os_low_power'] + $ssi['indirect_os_subject']) / 3) * 0.9 + $indirect_af * 0.1 }}
+                                                        @endif                                                      
+
+                                                        {{-- {{ $ssi['indirect_os_subject'] }} --}}
                                                     </h5>
                                                 </center>
                                             </div>
@@ -322,7 +342,25 @@
                                             </center>
                                             <center>
                                                 <h5 class="card-text">
-                                                    {{ $ssi == null ? 'Tidak Ada Data' : ($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + ($ssi['indirect_os'] * 0.9 + $indirect_af * 0.1) * 0.2 }}
+                                                    @if ($ssi == null)
+                                                        {{ 'Tidak Ada Data' }}
+                                                    @elseif ($ssi['indirect_os_subject'] == null && $ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8, 2) }}
+                                                    @elseif ($ssi['indirect_os_subject'] == null && $ssi['indirect_os_low_power'] == null)
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + $ssi['indirect_os_context'] * 0.2, 2) }}
+                                                    @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_subject'] == null)
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + $ssi['indirect_os_low_power'] * 0.2, 2) }}
+                                                    @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.2, 2) }}
+                                                    @elseif ($ssi['indirect_os_subject'] == null)
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + $ssi['indirect_os_context'] * 0.1 + $ssi['indirect_os_low_power'] * 0.1, 2) }}
+                                                    @elseif ($ssi['indirect_os_context'] == null)
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.1 + $ssi['indirect_os_low_power'] * 0.1, 2) }}
+                                                    @elseif ($ssi['indirect_os_low_power'] == null)
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.1 + $ssi['indirect_os_context'] * 0.1, 2) }}
+                                                    @else
+                                                        {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $direct_af * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.1 + $ssi['indirect_os_context'] * 0.075 + $ssi['indirect_os_low_power'] * 0.025, 2) }}
+                                                    @endif
                                                 </h5>
                                             </center>
                                         </div>
@@ -368,8 +406,22 @@
                                     @if (session('success'))
                                         <div>{{ session('success') }}</div>
                                     @endif
-                                    <div>
-                                        <canvas id="quadrantChart"></canvas>
+                                    <div class="col-12">
+                                        <h6 class="text-center">Penting</h6>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-1">
+                                            <h6 class="text-center">Tidak Puas</h6>
+                                        </div>
+                                        <div class="col-10">
+                                            <canvas id="quadrantChart"></canvas>
+                                        </div>
+                                        <div class="col-1">
+                                            <h6 class="text-center">Puas</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h6 class="text-center">Tidak Penting</h6>
                                     </div>
                                 </div>
                             </div>
@@ -618,105 +670,110 @@
             button.click();
         }
     </script>
-    <script>
-        // Data dari Controller
-        const chartData = @json($kano);
+<script>
+    // Data dari Controller
+    const chartData = @json($kano);
 
+    function getRandomColor() {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
+    }
 
-        function getRandomColor() {
-            const r = Math.floor(Math.random() * 255);
-            const g = Math.floor(Math.random() * 255);
-            const b = Math.floor(Math.random() * 255);
-            return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
-        }
+    // Tambahkan warna random ke setiap titik dalam data
+    const dataWithColors = chartData.map(point => ({
+        ...point,
+        backgroundColor: getRandomColor()
+    }));
 
-        // Tambahkan warna random ke setiap titik dalam data
-        const dataWithColors = chartData.map(point => ({
-            ...point,
-            backgroundColor: getRandomColor()
-        }));
-
-        const ctx = document.getElementById('quadrantChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'lalala',
-                    data: dataWithColors,
-                    pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
-                    radius: 15,
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        min: 0,
-                        max: 6,
-                        title: {
-                            display: true,
-                            text: 'Tingkat Kepuasan (X-Axis)'
-                        },
-                        grid: {
-                            drawBorder: false,
-                            color: function(context) {
-                                return context.tick.value === 0 ? '#000' : '#ddd';
-                            }
-                        }
+    const ctx = document.getElementById('quadrantChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'lalala',
+                data: dataWithColors,
+                pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
+                radius: 15,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    min: 1,
+                    max: 6,
+                    title: {
+                        display: false,
+                        text: 'Tingkat Kepuasan (X-Axis)'
                     },
-                    y: {
-                        min: 0,
-                        max: 6,
-                        title: {
-                            display: true,
-                            text: 'Tingkat Kepentingan (Y-Axis)'
+                    grid: {
+                        drawBorder: false,
+                        color: function(context) {
+                            return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
                         },
-                        grid: {
-                            drawBorder: false,
-                            color: function(context) {
-                                return context.tick.value === 0 ? '#000' : '#ddd';
-                            }
+                        lineWidth: function(context) {
+                            return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
                         }
                     }
                 },
-                plugins: {
-                    legend: {
-                        display: false // Hilangkan legend dari chart
+                y: {
+                    min: 1,
+                    max: 6,
+                    title: {
+                        display: false,
+                        text: 'Tingkat Kepentingan (Y-Axis)'
                     },
-                    tooltip: {
-                        backgroundColor: '#BCCCDC', // Warna background tooltip
-                        titleColor: '#000000', // Warna judul
-                        bodyColor: '#000000', // Warna isi teks
-                        borderColor: '#00BFFF',
-                        titleFont: {
-                            size: 16,
-                            weight: 'bold'
-                        }, // Styling font title
-                        bodyFont: {
-                            size: 14
-                        }, // Styling font body
-                        padding: 12, // Padding dalam tooltip
-                        cornerRadius: 8, // Sudut melengkung tooltip
-                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0)', // Bayangan (custom CSS)
-                        callbacks: {
-                            label: function(context) {
-                                const dataPoint = context.raw;
-                                return [
-                                    `Nama Attribute          : ${dataPoint.label}`,
-                                    `Tingkat Kepentingan : ${dataPoint.y}`,
-                                    `Tingkat Kepuasan     : ${dataPoint.x}`
-                                ];
-                            }
+                    grid: {
+                        drawBorder: false,
+                        color: function(context) {
+                            return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
+                        },
+                        lineWidth: function(context) {
+                            return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
                         }
                     }
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
                 }
+            },
+            plugins: {
+                legend: {
+                    display: false // Hilangkan legend dari chart
+                },
+                tooltip: {
+                    backgroundColor: '#BCCCDC', // Warna background tooltip
+                    titleColor: '#000000', // Warna judul
+                    bodyColor: '#000000', // Warna isi teks
+                    borderColor: '#00BFFF',
+                    titleFont: {
+                        size: 16,
+                        weight: 'bold'
+                    }, // Styling font title
+                    bodyFont: {
+                        size: 14
+                    }, // Styling font body
+                    padding: 12, // Padding dalam tooltip
+                    cornerRadius: 8, // Sudut melengkung tooltip
+                    callbacks: {
+                        label: function(context) {
+                            const dataPoint = context.raw;
+                            return [
+                                `Nama Attribute          : ${dataPoint.label}`,
+                                `Tingkat Kepentingan : ${dataPoint.y}`,
+                                `Tingkat Kepuasan     : ${dataPoint.x}`
+                            ];
+                        }
+                    }
+                }
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
             }
-        });
-    </script>
+        }
+    });
+</script>
+
     <script>
         function toggleDropdown(dropdownId) {
             const dropdown = document.getElementById(dropdownId);

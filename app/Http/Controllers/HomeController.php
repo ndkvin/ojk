@@ -67,7 +67,9 @@ class HomeController extends Controller
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
                 'cf_2_oq' => $ssi->avg('cf_2_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
@@ -120,7 +122,9 @@ class HomeController extends Controller
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
                 'cf_2_oq' => $ssi->avg('cf_2_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
@@ -149,15 +153,15 @@ class HomeController extends Controller
                 ->where('type_id', $type_id)
                 ->get();
 
-                $functions = Fungsi::all();
-                $types = Type::where('function_id', $function_id)->get();
-                $bidangs = Bidang::where('type_id', $type_id)->get();
+            $functions = Fungsi::all();
+            $types = Type::where('function_id', $function_id)->get();
+            $bidangs = Bidang::where('type_id', $type_id)->get();
 
-                $functions = Fungsi::all();
-                $types = Type::where('function_id', $function_id)->get();
-                $bidangs = Bidang::where('type_id', $type_id)->get();
-                $satkers = Satker::where('bidang_id', $bidang_id)->get();
-                // dd($bidangs);
+            $functions = Fungsi::all();
+            $types = Type::where('function_id', $function_id)->get();
+            $bidangs = Bidang::where('type_id', $type_id)->get();
+            $satkers = Satker::where('bidang_id', $bidang_id)->get();
+            // dd($bidangs);
         } else if ($function_id && $type_id) {
             // dd('here');
             if (!$request->get('af')) {
@@ -175,7 +179,9 @@ class HomeController extends Controller
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
                 'cf_2_oq' => $ssi->avg('cf_2_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
@@ -200,7 +206,7 @@ class HomeController extends Controller
             $analisis = Analisis::where('function_id', $function_id)
                 ->where('type_id', $type_id)
                 ->get();
-        
+
             $functions = Fungsi::all();
             $types = Type::where('function_id', $function_id)->get();
             $bidangs = Bidang::where('type_id', $type_id)->get();
@@ -219,7 +225,9 @@ class HomeController extends Controller
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
                 'cf_2_oq' => $ssi->avg('cf_2_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
@@ -244,7 +252,7 @@ class HomeController extends Controller
 
             $functions = Fungsi::all();
             $types = Type::where('function_id', $function_id)->get();
-        } 
+        }
 
         return view('pages.home', [
             'functions' => $functions,

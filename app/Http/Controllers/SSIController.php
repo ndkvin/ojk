@@ -44,7 +44,9 @@ class SSIController extends Controller
             'af_2_oq' => 'nullable|numeric',
             'cf_1_oq' => 'nullable|numeric',
             'cf_2_oq' => 'nullable|numeric',
-            'indirect_os' => 'nullable|numeric',
+            'indirect_os_subject' => 'nullable|numeric',
+            'indirect_os_context' => 'nullable|numeric',
+            'indirect_os_low_power' => 'nullable|numeric',
             'indirect_af_1_oq' => 'nullable|numeric',
             'indirect_af_2_oq' => 'nullable|numeric',
             'indirect_cf_1_oq' => 'nullable|numeric',
@@ -108,13 +110,13 @@ class SSIController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
             ];
-
-            
         } else if ($function_id && $type_id && $satker_id) {
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
@@ -131,13 +133,13 @@ class SSIController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
             ];
-
-            
         } else if ($function_id && $type_id) {
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
@@ -153,13 +155,13 @@ class SSIController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
             ];
-
-            
         } else if ($function_id) {
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
@@ -174,12 +176,13 @@ class SSIController extends Controller
                 'af_1_oq' => $ssi->avg('af_1_oq'),
                 'af_2_oq' => $ssi->avg('af_2_oq'),
                 'cf_1_oq' => $ssi->avg('cf_1_oq'),
-                'indirect_os' => $ssi->avg('indirect_os'),
+                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
+                'indirect_os_context' => $ssi->avg('indirect_os_context'),
+                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
                 'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
             ];
-            
         }
 
         if ($jenis_af == 'af_1_oq') {

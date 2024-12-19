@@ -41,7 +41,27 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <h1>{{ $ssi['indirect_os'] * 0.9 + $ssi['indirect_af'] * 0.1}}</h1>
+                            <h1>
+                                @if ($ssi == null)
+                                    {{ 'Tidak Ada Data' }}
+                                @elseif ($ssi['indirect_os_subject'] == null && $ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                    {{ 0 + $ssi['indirect_af'] * 0.1 }}
+                                @elseif ($ssi['indirect_os_low_power'] == null && $ssi['indirect_os_subject'] == null)
+                                    {{ ($ssi['indirect_os_context']) * 0.9 + $ssi['indirect_af'] * 0.1 }}
+                                @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_subject'] == null)
+                                    {{ ($ssi['indirect_os_low_power']) * 0.9 + $ssi['indirect_af'] * 0.1 }}
+                                @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                    {{ ($ssi['indirect_os_subject']) * 0.9 + $ssi['indirect_af'] * 0.1 }}
+                                @elseif ($ssi['indirect_os_subject'] == null)
+                                    {{ (($ssi['indirect_os_context'] + $ssi['indirect_os_low_power']) / 2) * 0.9 + $ssi['indirect_af'] * 0.1 }}
+                                @elseif ($ssi['indirect_os_context'] == null)
+                                    {{ (($ssi['indirect_os_subject'] + $ssi['indirect_os_low_power']) / 2) * 0.9 + $ssi['indirect_af'] * 0.1 }}
+                                @elseif ($ssi['indirect_os_low_power'] == null)
+                                    {{ (($ssi['indirect_os_subject'] + $ssi['indirect_os_context']) / 2) * 0.9 + $ssi['indirect_af'] * 0.1 }}
+                                @else
+                                    {{ (($ssi['indirect_os_context'] + $ssi['indirect_os_low_power'] + $ssi['indirect_os_subject']) / 3) * 0.9 + $ssi['indirect_af'] * 0.1 }}
+                                @endif 
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -55,7 +75,27 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body d-flex justify-content-center align-items-center">
-                            <h1>{{ ($ssi['pd'] * 0.3 + $ssi['rp'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1)*0.8 + ($ssi['indirect_os'] * 0.9 + $ssi['indirect_af'] * 0.1)*0.2 }}</h1>
+                            <h1>
+                                @if ($ssi == null)
+                                    {{ 'Tidak Ada Data' }}
+                                @elseif ($ssi['indirect_os_subject'] == null && $ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8, 2) }}
+                                @elseif ($ssi['indirect_os_subject'] == null && $ssi['indirect_os_low_power'] == null)
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8 + $ssi['indirect_os_context'] * 0.2, 2) }}
+                                @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_subject'] == null)
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8 + $ssi['indirect_os_low_power'] * 0.2, 2) }}
+                                @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.2, 2) }}
+                                @elseif ($ssi['indirect_os_subject'] == null)
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8 + $ssi['indirect_os_context'] * 0.1 + $ssi['indirect_os_low_power'] * 0.1, 2) }}
+                                @elseif ($ssi['indirect_os_context'] == null)
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.1 + $ssi['indirect_os_low_power'] * 0.1, 2) }}
+                                @elseif ($ssi['indirect_os_low_power'] == null)
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.1 + $ssi['indirect_os_context'] * 0.1, 2) }}
+                                @else
+                                    {{ round(($ssi['rp'] * 0.3 + $ssi['pd'] * 0.3 + $ssi['os'] * 0.3 + $ssi['direct_af'] * 0.1) * 0.8 + $ssi['indirect_os_subject'] * 0.1 + $ssi['indirect_os_context'] * 0.075 + $ssi['indirect_os_low_power'] * 0.025, 2) }}
+                                @endif 
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -99,10 +139,10 @@
                                 <div class="col-md-6">
                                     <h4>Indirect</h4>
                                     <table class="table table-bordered">
-                                        <tr>
+                                        {{-- <tr>
                                             <th>Outcome Satisfaction</th>
-                                            <td>{{ $ssi['indirect_os'] }}</td>
-                                        </tr>
+                                            <td>{{ $ssi['indirect_'] }}</td>
+                                        </tr> --}}
                                         <tr>
                                             <th>Adjustment Factor</th>
                                             <td>{{ $ssi['indirect_af'] }}</td>

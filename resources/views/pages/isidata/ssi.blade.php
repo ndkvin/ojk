@@ -85,8 +85,20 @@
                                 <div class="row">
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
-                                            <label for="indirect_os">Outcome Satisfaction</label>
-                                            <input class="form-control" value="{{ $existingData->indirect_os ?? old('indirect_os') }}" type="number" name="indirect_os" step="0.01" min="0" max="10" required></input>
+                                            <label for="indirect_os_subject">Outcome Satisfaction Subject</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_os_subject ?? old('indirect_os_subject') }}" type="number" name="indirect_os_subject" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="indirect_os_context">Outcome Satisfaction Context Setter</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_os_context ?? old('indirect_os_context') }}" type="number" name="indirect_os_context" step="0.01" min="0" max="10" required></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="indirect_os_low_power">Outcome Satisfaction Crowds</label>
+                                            <input class="form-control" value="{{ $existingData->indirect_os_low_power ?? old('indirect_os_low_power') }}" type="number" name="indirect_os_low_power" step="0.01" min="0" max="10" required></input>
                                         </div>
                                     </div>
                                 </div>

@@ -26,7 +26,9 @@ return new class extends Migration
             $table->decimal('cf_1_oq', 10, 2)->nullable();
             $table->decimal('cf_2_oq', 10, 2)->nullable();
 
-            $table->decimal('indirect_os', 10, 2)->nullable();
+            $table->decimal('indirect_os_subject', 10, 2)->nullable();
+            $table->decimal('indirect_os_context', 10, 2)->nullable();
+            $table->decimal('indirect_os_low_power', 10, 2)->nullable();
             $table->decimal('indirect_af_1_oq', 10, 2)->nullable();
             $table->decimal('indirect_af_2_oq', 10, 2)->nullable();
             $table->decimal('indirect_cf_1_oq', 10, 2)->nullable();

@@ -24,7 +24,7 @@ Route::group([
 ], function () {
     Route::resource('/fungsionalitas', App\Http\Controllers\FungsionalitasController::class)->only(['create', 'store', 'show', 'update']);
     Route::resource('/analisis', App\Http\Controllers\AnalisisController::class);
-    Route::resource('/kano', App\Http\Controllers\KanoController::class)->only(['create', 'store', 'show']);
+    Route::resource('/kano', App\Http\Controllers\KanoController::class)->only(['create', 'store']);
     Route::resource('/ipa', App\Http\Controllers\IPAController::class)->only(['create', 'store']);
     Route::get('/ssi/create', [SSIController::class, 'create'])->name('ssi.create');
     Route::post('/ssi', [SSIController::class, 'store'])->name('ssi.store');
@@ -39,4 +39,4 @@ Route::group([
     Route::get('/satker/{bidang_id}', [App\Http\Controllers\ApiController::class, 'satker']);
 });
 
-Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.showw');
+Route::get('/kano/{function_id}/{type_id}/{satker_id}/{bidang_id}', [KanoController::class, 'show'])->name('kano.show');

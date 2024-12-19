@@ -66,7 +66,7 @@
                         </li>
                     @endif
                     @if (Auth::user()->role === 'superadmin' || Auth::user()->role === 'admin')
-                        <li class="sidebar-item {{ request()->is('fungsionalitas*') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('fungsionalitas*') || request()->is('kano*') || request()->is('ipa*') || request()->is('analisis*') || request()->is('ssi*')  ? 'active' : '' }}">
                             <a href="{{ route('fungsionalitas.create') }}" class='sidebar-link'>
                                 <i class="bi bi-gear"></i>
                                 <span>Fungsi</span>

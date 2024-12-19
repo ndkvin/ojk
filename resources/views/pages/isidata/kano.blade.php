@@ -56,12 +56,12 @@
                                     <div class="col-md-2 col-12">
                                         <div class="form-group">
 
-                                            <input class="form-control" name="puas[]" type="number" max="5" min="-5" step="0.1" required></input>
+                                            <input class="form-control" name="puas[]" type="number" max="6" min="1" step="0.1" required></input>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-12">
                                         <div class="form-group">
-                                            <input class="form-control" name="penting[]" type="number" max="5" min="-5" step="0.1" required></input>
+                                            <input class="form-control" name="penting[]" type="number" max="6" min="1" step="0.1" required></input>
                                         </div>
                                     </div>
                                 </div>
@@ -104,12 +104,12 @@
                 </div>
                 <div class="col-md-2 col-12">
                     <div class="form-group">
-                        <input class="form-control" name="puas[]" type="number" max="5" min="-5" step="0.1" required></input>
+                        <input class="form-control" name="puas[]" type="number" max="6" min="1" step="0.1" required></input>
                     </div>
                 </div>
                 <div class="col-md-2 col-12">
                     <div class="form-group">
-                        <input class="form-control" name="penting[]" type="number" max="5" min="-5" step="0.1" required></input>
+                        <input class="form-control" name="penting[]" type="number" max="6" min="1" step="0.1" required></input>
                     </div>
                 </div>`;
 

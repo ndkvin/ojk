@@ -27,22 +27,36 @@
     </style>
     <style>
         .header {
-            background-color: rgb(255, 255, 255); /* Set the background color to red */
-            max-height: 200px; /* Set the maximum height to 200px */
-            color: white; /* Set text color to white for contrast */
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; /* Center items vertically */
-            padding: 10px; /* Add some padding */
-            font-family: 'Roboto', sans-serif; /* Change font to Roboto */
-            justify-content: center; /* Center the image */
+            background-color: rgb(255, 255, 255);
+            /* Set the background color to red */
+            max-height: 200px;
+            /* Set the maximum height to 200px */
+            color: white;
+            /* Set text color to white for contrast */
+            display: flex;
+            /* Use flexbox for alignment */
+            align-items: center;
+            /* Center items vertically */
+            padding: 10px;
+            /* Add some padding */
+            font-family: 'Roboto', sans-serif;
+            /* Change font to Roboto */
+            justify-content: center;
+            /* Center the image */
             border-radius: 10px;
         }
+
         .header img {
-            max-height: 150px; /* Set a maximum height for the image */
-            margin-right: 15px; /* Add some space between the image and text */
+            max-height: 150px;
+            /* Set a maximum height for the image */
+            margin-right: 15px;
+            /* Add some space between the image and text */
         }
+
         .header h1 {
-            margin: 0; /* Remove default margin from h1 */ /* Allow h1 to take up remaining space */
+            margin: 0;
+            /* Remove default margin from h1 */
+            /* Allow h1 to take up remaining space */
         }
     </style>
 @endsection
@@ -50,14 +64,16 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="row">
-    <div class="col-12 mb-3" style="max-height: 400px">
-        <header class="header" >
-            <img src="{{ asset('assets\img\OJK_Logo.png') }}" class="mb-3 mt-3" style="max-width: 150px" alt="Logo" /> <!-- Replace with your image URL -->
-            <h4 class="d-none d-md-block mb-3 mt-4" style="color: rgb(142, 141, 141)">SURVEY TINGKAT KEPUASAN STAKEHOLDERS OJK</h4>
-        </header>
+    <div class="row">
+        <div class="col-12 mb-3" style="max-height: 400px">
+            <header class="header">
+                <img src="{{ asset('assets\img\OJK_Logo.png') }}" class="mb-3 mt-3" style="max-width: 150px" alt="Logo" />
+                <!-- Replace with your image URL -->
+                <h4 class="d-none d-md-block mb-3 mt-4" style="color: rgb(142, 141, 141)">SURVEY TINGKAT KEPUASAN STAKEHOLDERS
+                    OJK</h4>
+            </header>
+        </div>
     </div>
-</div>
     <div class="page-heading">
         <section id="multiple-column-form">
             <div class="row match-height">
@@ -76,7 +92,7 @@
                                                             onclick="toggleDropdown('functionDropdown')">
                                                             {{ request()->get('function_id') ? $functions->where('id', request()->get('function_id'))->first()->function : 'Fungsi' }}
                                                         </button>
-                                                    <div class="dropdown-content" id="functionDropdown">
+                                                        <div class="dropdown-content" id="functionDropdown">
                                                             <input type="text" class="dropdown-search"
                                                                 placeholder="Search..." oninput="filterDropdown(this)">
                                                             <ul class="dropdown-list">
@@ -101,7 +117,8 @@
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" id="typeDropdownBtn" class="dropdown-btn"
-                                                            onclick="toggleDropdown('typeDropdown')" {{  request()->get('type_id') ? "" : 'disabled' }}>
+                                                            onclick="toggleDropdown('typeDropdown')"
+                                                            {{ request()->get('function_id') ? '' : 'disabled' }}>
                                                             {{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->type : 'Tipe' }}
                                                         </button>
                                                         <div class="dropdown-content" id="typeDropdown">
@@ -129,7 +146,8 @@
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn" id="bidangDropdownBtn"
-                                                            onclick="toggleDropdown('bidangDropdown')" {{  request()->get('bidang_id') ? '': 'disabled' }}>
+                                                            onclick="toggleDropdown('bidangDropdown')"
+                                                            {{ request()->get('type_id') ? '' : 'disabled' }}>
                                                             {{ request()->get('bidang_id') ? $bidangs->where('id', request()->get('bidang_id'))->first()->bidang : 'Bidang' }}
                                                         </button>
                                                         <div class="dropdown-content" id="bidangDropdown">
@@ -156,9 +174,9 @@
                                                 <label for="satker_id" class="form-label">Satuan Kerja</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
-                                                        <button type="button" class="dropdown-btn"
-                                                            id="satkerDropdownBtn"
-                                                            onclick="toggleDropdown('satkerDropdown')" {{ request()->get('satker_id') ?  '': 'disabled' }}>
+                                                        <button type="button" class="dropdown-btn" id="satkerDropdownBtn"
+                                                            onclick="toggleDropdown('satkerDropdown')"
+                                                            {{ request()->get('bidang_id') ? '' : 'disabled' }}>
                                                             {{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->satker : 'Satker' }}
                                                         </button>
                                                         <div class="dropdown-content" id="satkerDropdown">
@@ -308,11 +326,11 @@
                                                         @elseif ($ssi['indirect_os_subject'] == null && $ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
                                                             {{ 0 + $indirect_af * 0.1 }}
                                                         @elseif ($ssi['indirect_os_low_power'] == null && $ssi['indirect_os_subject'] == null)
-                                                            {{ ($ssi['indirect_os_context']) * 0.9 + $indirect_af * 0.1 }}
+                                                            {{ $ssi['indirect_os_context'] * 0.9 + $indirect_af * 0.1 }}
                                                         @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_subject'] == null)
-                                                            {{ ($ssi['indirect_os_low_power']) * 0.9 + $indirect_af * 0.1 }}
+                                                            {{ $ssi['indirect_os_low_power'] * 0.9 + $indirect_af * 0.1 }}
                                                         @elseif ($ssi['indirect_os_context'] == null && $ssi['indirect_os_low_power'] == null)
-                                                            {{ ($ssi['indirect_os_subject']) * 0.9 + $indirect_af * 0.1 }}
+                                                            {{ $ssi['indirect_os_subject'] * 0.9 + $indirect_af * 0.1 }}
                                                         @elseif ($ssi['indirect_os_subject'] == null)
                                                             {{ (($ssi['indirect_os_context'] + $ssi['indirect_os_low_power']) / 2) * 0.9 + $indirect_af * 0.1 }}
                                                         @elseif ($ssi['indirect_os_context'] == null)
@@ -321,7 +339,7 @@
                                                             {{ (($ssi['indirect_os_subject'] + $ssi['indirect_os_context']) / 2) * 0.9 + $indirect_af * 0.1 }}
                                                         @else
                                                             {{ (($ssi['indirect_os_context'] + $ssi['indirect_os_low_power'] + $ssi['indirect_os_subject']) / 3) * 0.9 + $indirect_af * 0.1 }}
-                                                        @endif                                                      
+                                                        @endif
 
                                                         {{-- {{ $ssi['indirect_os_subject'] }} --}}
                                                     </h5>
@@ -377,8 +395,8 @@
                                         'type_id' => request()->query('type_id'),
                                         'satker_id' => request()->query('satker_id'),
                                         'bidang_id' => request()->query('bidang_id'),
-                                        'af' => request()->query('af')
-                                        ]) }}">Detail</a>
+                                        'af' => request()->query('af'),
+                                    ]) }}">Detail</a>
                             </div>
                         @endif
                     </div>
@@ -569,15 +587,36 @@
         }
 
         function selectFunction(element) {
-            selectDropdownItem(element, 'function_id')
+            selectDropdownItem(element, 'function_id');
+
+            // Ensure `data-value` exists
             const functionId = element.getAttribute('data-value');
             document.getElementById('function_id').value = functionId;
 
+            // Access elements and update
             const typeDropdownBtn = document.getElementById('typeDropdownBtn');
-            typeDropdownBtn.disabled = false;
+            typeDropdownBtn.disabled = false; // Enable typeDropdownBtn when function is selected
 
+            // Reset fields
+            document.getElementById('type_id').value = '';
+            document.getElementById('bidang_id').value = '';
+            document.getElementById('satker_id').value = '';
+
+            // Reset dropdown text
+            typeDropdownBtn.textContent = 'Tipe';
+            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+            bidangDropdownBtn.textContent = 'Bidang';
+            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+            satkerDropdownBtn.textContent = 'Satker';
+
+            // Disable subsequent dropdowns initially
+            bidangDropdownBtn.disabled = true;
+            satkerDropdownBtn.disabled = true;
+
+            // Call fetchTypes with the selected functionId
             fetchTypes(functionId);
         }
+
 
         function fetchTypes(functionId) {
             // Make an AJAX request to fetch types based on the selected function
@@ -607,6 +646,18 @@
 
             const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
             bidangDropdownBtn.disabled = false;
+
+            // Reset fields
+            document.getElementById('bidang_id').value = '';
+            document.getElementById('satker_id').value = '';
+
+            // Reset dropdown text
+            bidangDropdownBtn.textContent = 'Bidang';
+            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+            satkerDropdownBtn.textContent = 'Satker';
+
+            // Disable subsequent dropdowns initially
+            satkerDropdownBtn.disabled = true;
 
             fetchBidang(typeId);
         }
@@ -639,6 +690,12 @@
             const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
             bidangDropdownBtn.disabled = false;
 
+            // Reset fields
+            document.getElementById('satker_id').value = '';
+
+            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+            satkerDropdownBtn.textContent = 'Satker';
+
             fetchSatker(bidangId);
         }
 
@@ -670,109 +727,109 @@
             button.click();
         }
     </script>
-<script>
-    // Data dari Controller
-    const chartData = @json($kano);
+    <script>
+        // Data dari Controller
+        const chartData = @json($kano);
 
-    function getRandomColor() {
-        const r = Math.floor(Math.random() * 255);
-        const g = Math.floor(Math.random() * 255);
-        const b = Math.floor(Math.random() * 255);
-        return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
-    }
-
-    // Tambahkan warna random ke setiap titik dalam data
-    const dataWithColors = chartData.map(point => ({
-        ...point,
-        backgroundColor: getRandomColor()
-    }));
-
-    const ctx = document.getElementById('quadrantChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'lalala',
-                data: dataWithColors,
-                pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
-                radius: 15,
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    min: 1,
-                    max: 6,
-                    title: {
-                        display: false,
-                        text: 'Tingkat Kepuasan (X-Axis)'
-                    },
-                    grid: {
-                        drawBorder: false,
-                        color: function(context) {
-                            return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
-                        },
-                        lineWidth: function(context) {
-                            return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
-                        }
-                    }
-                },
-                y: {
-                    min: 1,
-                    max: 6,
-                    title: {
-                        display: false,
-                        text: 'Tingkat Kepentingan (Y-Axis)'
-                    },
-                    grid: {
-                        drawBorder: false,
-                        color: function(context) {
-                            return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
-                        },
-                        lineWidth: function(context) {
-                            return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
-                        }
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false // Hilangkan legend dari chart
-                },
-                tooltip: {
-                    backgroundColor: '#BCCCDC', // Warna background tooltip
-                    titleColor: '#000000', // Warna judul
-                    bodyColor: '#000000', // Warna isi teks
-                    borderColor: '#00BFFF',
-                    titleFont: {
-                        size: 16,
-                        weight: 'bold'
-                    }, // Styling font title
-                    bodyFont: {
-                        size: 14
-                    }, // Styling font body
-                    padding: 12, // Padding dalam tooltip
-                    cornerRadius: 8, // Sudut melengkung tooltip
-                    callbacks: {
-                        label: function(context) {
-                            const dataPoint = context.raw;
-                            return [
-                                `Nama Attribute          : ${dataPoint.label}`,
-                                `Tingkat Kepentingan : ${dataPoint.y}`,
-                                `Tingkat Kepuasan     : ${dataPoint.x}`
-                            ];
-                        }
-                    }
-                }
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            }
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
+            return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
         }
-    });
-</script>
+
+        // Tambahkan warna random ke setiap titik dalam data
+        const dataWithColors = chartData.map(point => ({
+            ...point,
+            backgroundColor: getRandomColor()
+        }));
+
+        const ctx = document.getElementById('quadrantChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'lalala',
+                    data: dataWithColors,
+                    pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
+                    radius: 15,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        min: 1,
+                        max: 6,
+                        title: {
+                            display: false,
+                            text: 'Tingkat Kepuasan (X-Axis)'
+                        },
+                        grid: {
+                            drawBorder: false,
+                            color: function(context) {
+                                return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
+                            },
+                            lineWidth: function(context) {
+                                return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
+                            }
+                        }
+                    },
+                    y: {
+                        min: 1,
+                        max: 6,
+                        title: {
+                            display: false,
+                            text: 'Tingkat Kepentingan (Y-Axis)'
+                        },
+                        grid: {
+                            drawBorder: false,
+                            color: function(context) {
+                                return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
+                            },
+                            lineWidth: function(context) {
+                                return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Hilangkan legend dari chart
+                    },
+                    tooltip: {
+                        backgroundColor: '#BCCCDC', // Warna background tooltip
+                        titleColor: '#000000', // Warna judul
+                        bodyColor: '#000000', // Warna isi teks
+                        borderColor: '#00BFFF',
+                        titleFont: {
+                            size: 16,
+                            weight: 'bold'
+                        }, // Styling font title
+                        bodyFont: {
+                            size: 14
+                        }, // Styling font body
+                        padding: 12, // Padding dalam tooltip
+                        cornerRadius: 8, // Sudut melengkung tooltip
+                        callbacks: {
+                            label: function(context) {
+                                const dataPoint = context.raw;
+                                return [
+                                    `Nama Attribute          : ${dataPoint.label}`,
+                                    `Tingkat Kepentingan : ${dataPoint.y}`,
+                                    `Tingkat Kepuasan     : ${dataPoint.x}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                }
+            }
+        });
+    </script>
 
     <script>
         function toggleDropdown(dropdownId) {

@@ -95,9 +95,9 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
-                                <h4 class="card-title">Analisis</h4>
+                                <h4 class="card-title">Rekomendasi</h4>
                                 <div class="card-text">
-                                    Data Analisis
+                                    Data Rekomendasi
                                 </div>
                             </div>
                         </div>

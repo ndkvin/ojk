@@ -38,42 +38,42 @@
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Nama" name='name'
-                                required>
+                                value="{{ old('name') }}" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="email" class="form-control form-control-xl" placeholder="Email"
-                                name='email' required>
+                            value="{{ old('email') }}" name='email' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="NIK" name='nik'
-                                min="16" max="6" required>
+                                value="{{ old('nik') }}" min="16" max="16" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-123"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="NIM" name='nim'
-                                min="8" max="8" required>
+                                value="{{ old('nim') }}" min="8" max="8" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-123"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Fakultas"
-                                name='fakultas' required>
+                                value="{{ old('fakultas') }}" name='fakultas' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-house"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Prodi"
-                                name='prodi' required>
+                            value="{{ old('prodi') }}" name='prodi' required>
                             <div class="form-control-icon">
                                 <i class="bi bi-house"></i>
                             </div>

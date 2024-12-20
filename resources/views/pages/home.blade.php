@@ -514,7 +514,7 @@
 
             <section class="section card">
                 <h3 class="pt-5">
-                    <center>Analisis</center>
+                    <center>Rekomendasi</center>
                 </h3>
                 <div class="row" id="basic-table">
                     @if ($analisis != null)

@@ -33,7 +33,6 @@ class HomeController extends Controller
     {
         // dd($request->all());
         $function_id =  $request->get('function_id');
-        $type_id = $request->get('type_id');
         $bidang_id = $request->get('bidang_id');
         $satker_id = $request->get('satker_id');
 
@@ -45,16 +44,14 @@ class HomeController extends Controller
         $analisis = null;
 
         $functions = Fungsi::all();
-        $types = Type::all();
         $satkers = Satker::all();
         $bidangs = Bidang::all();
 
-        if ($function_id && $type_id && $bidang_id && $satker_id) {
+        if ($function_id  && $bidang_id && $satker_id) {
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
             }
             $ssi = SSI::where('function_id', $function_id)
-                ->where('type_id', $type_id)
                 ->where('satker_id', $satker_id)
                 ->where('bidang_id', $bidang_id)
                 ->get();
@@ -79,7 +76,6 @@ class HomeController extends Controller
             $kano = Kano::where('function_id', $function_id)
                 ->where('bidang_id', $bidang_id)
                 ->where('satker_id', $satker_id)
-                ->where('type_id', $type_id)
                 ->get()
                 ->map(function ($item) {
                     return [
@@ -92,26 +88,22 @@ class HomeController extends Controller
             $ipa = IPA::where('function_id', $function_id)
                 ->where('bidang_id', $bidang_id)
                 ->where('satker_id', $satker_id)
-                ->where('type_id', $type_id)
                 ->get();
 
             $analisis = Analisis::where('function_id', $function_id)
                 ->where('bidang_id', $bidang_id)
                 ->where('satker_id', $satker_id)
-                ->where('type_id', $type_id)
                 ->get();
 
             $functions = Fungsi::all();
-            $types = Type::where('function_id', $function_id)->get();
-            $bidangs = Bidang::where('type_id', $type_id)->get();
+            $bidangs = Bidang::where('function_id', $function_id)->get();
             $satkers = Satker::where('bidang_id', $bidang_id)->get();
-        } else if ($function_id && $type_id && $bidang_id) {
+        } else if ($function_id && $bidang_id) {
             // dd('here');
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
             }
             $ssi = SSI::where('function_id', $function_id)
-                ->where('type_id', $type_id)
                 ->where('satker_id', $satker_id)
                 ->get();
 
@@ -134,7 +126,6 @@ class HomeController extends Controller
 
             $kano = Kano::where('function_id', $function_id)
                 ->where('satker_id', $satker_id)
-                ->where('type_id', $type_id)
                 ->get()
                 ->map(function ($item) {
                     return [
@@ -146,80 +137,29 @@ class HomeController extends Controller
 
             $ipa = IPA::where('function_id', $function_id)
                 ->where('satker_id', $satker_id)
-                ->where('type_id', $type_id)
                 ->get();
 
             $analisis = Analisis::where('function_id', $function_id)
                 ->where('satker_id', $satker_id)
-                ->where('type_id', $type_id)
                 ->get();
 
             $functions = Fungsi::all();
-            $types = Type::where('function_id', $function_id)->get();
-            $bidangs = Bidang::where('type_id', $type_id)->get();
+            $bidangs = Bidang::where('function_id', $function_id)->get();
 
             
 
             $functions = Fungsi::all();
-            $types = Type::where('function_id', $function_id)->get();
-            $bidangs = Bidang::where('type_id', $type_id)->get();
+            $bidangs = Bidang::where('function_id', $function_id)->get();
             $satkers = Satker::where('bidang_id', $bidang_id)->get();
 
             // dd($bidangs);
             // dd($bidangs);
-        } else if ($function_id && $type_id) {
+        } else if ($function_id) {
             // dd('here');
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
             }
             $ssi = SSI::where('function_id', $function_id)
-                ->where('type_id', $type_id)
-                ->get();
-
-            $ssi = [
-                'rp' => $ssi->avg('rp'),
-                'pd' => $ssi->avg('pd'),
-                'os' => $ssi->avg('os'),
-                'af_1_oq' => $ssi->avg('af_1_oq'),
-                'af_2_oq' => $ssi->avg('af_2_oq'),
-                'cf_1_oq' => $ssi->avg('cf_1_oq'),
-                'cf_2_oq' => $ssi->avg('cf_2_oq'),
-                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
-                'indirect_os_context' => $ssi->avg('indirect_os_context'),
-                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
-                'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
-                'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
-                'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
-                'indirect_cf_2_oq' => $ssi->avg('indirect_cf_2_oq'),
-            ];
-
-            $kano = Kano::where('function_id', $function_id)
-                ->where('type_id', $type_id)
-                ->get()
-                ->map(function ($item) {
-                    return [
-                        'x' => $item->puas,  // Misalnya kolom puas sebagai X-axis
-                        'y' => $item->penting, // Misalnya kolom penting sebagai Y-axis
-                        'label' => $item->attribute, // Label untuk setiap titik
-                    ];
-                });
-
-            $ipa = IPA::where('function_id', $function_id)
-                ->where('type_id', $type_id)
-                ->get();
-
-            $analisis = Analisis::where('function_id', $function_id)
-                ->where('type_id', $type_id)
-                ->get();
-
-            $functions = Fungsi::all();
-            $types = Type::where('function_id', $function_id)->get();
-            $bidangs = Bidang::where('type_id', $type_id)->get();
-        } else if ($function_id) {
-            if (!$request->get('af')) {
-                return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
-            }
-            $ssi = SSI::where('function_id', $function_id)
                 ->get();
 
             $ssi = [
@@ -256,12 +196,11 @@ class HomeController extends Controller
                 ->get();
 
             $functions = Fungsi::all();
-            $types = Type::where('function_id', $function_id)->get();
+            $bidangs = Bidang::where('function_id', $function_id)->get();
         }
-
+        // dd($bidangs);
         return view('pages.home', [
             'functions' => $functions,
-            'types' => $types,
             'satkers' => $satkers,
             'bidangs' => $bidangs,
             'ssi' => $ssi,

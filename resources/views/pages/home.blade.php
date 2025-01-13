@@ -113,41 +113,12 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label for="type_id" class="form-label">Tipe</label>
-                                                <div class="dropdown-container">
-                                                    <div class="dropdown">
-                                                        <button type="button" id="typeDropdownBtn" class="dropdown-btn"
-                                                            onclick="toggleDropdown('typeDropdown')"
-                                                            {{ request()->get('function_id') ? '' : 'disabled' }}>
-                                                            {{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->type : 'Tipe' }}
-                                                        </button>
-                                                        <div class="dropdown-content" id="typeDropdown">
-                                                            <input type="text" class="dropdown-search"
-                                                                placeholder="Search..." oninput="filterDropdown(this)">
-                                                            <ul class="dropdown-list" id="typeDropdownList">
-                                                                @foreach ($types as $type)
-                                                                    <li data-value="{{ $type->id }}"
-                                                                        onclick="selectType(this)">
-                                                                        {{ $type->type }}
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" id="type_id"
-                                                        value="{{ request()->get('type_id') ? $types->where('id', request()->get('type_id'))->first()->id : '' }}"
-                                                        name="type_id" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-12">
-                                            <div class="form-group">
                                                 <label for="bidang_id" class="form-label">Bidang</label>
                                                 <div class="dropdown-container">
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn" id="bidangDropdownBtn"
                                                             onclick="toggleDropdown('bidangDropdown')"
-                                                            {{ request()->get('type_id') ? '' : 'disabled' }}>
+                                                            {{ request()->get('function_id') ? '' : 'disabled' }}>
                                                             {{ request()->get('bidang_id') ? $bidangs->where('id', request()->get('bidang_id'))->first()->bidang : 'Bidang' }}
                                                         </button>
                                                         <div class="dropdown-content" id="bidangDropdown">
@@ -568,15 +539,11 @@
     <script>
         function clearFilter() {
             document.getElementById('function_id').value = '';
-            document.getElementById('type_id').value = '';
-            document.getElementById('bidang_id').value = '';
             document.getElementById('satker_id').value = '';
             document.getElementById('af').value = '';
 
             const functionDropdownBtn = document.getElementById('functionDropdownBtn');
             functionDropdownBtn.textContent = 'Fungsi';
-            const typeDropdownBtn = document.getElementById('typeDropdownBtn');
-            typeDropdownBtn.textContent = 'Tipe';
             const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
             bidangDropdownBtn.textContent = 'Bidang';
             const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
@@ -594,75 +561,28 @@
             document.getElementById('function_id').value = functionId;
 
             // Access elements and update
-            const typeDropdownBtn = document.getElementById('typeDropdownBtn');
+            const typeDropdownBtn = document.getElementById('bidangDropdownBtn');
             typeDropdownBtn.disabled = false; // Enable typeDropdownBtn when function is selected
 
             // Reset fields
-            document.getElementById('type_id').value = '';
             document.getElementById('bidang_id').value = '';
             document.getElementById('satker_id').value = '';
 
             // Reset dropdown text
-            typeDropdownBtn.textContent = 'Tipe';
-            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
             bidangDropdownBtn.textContent = 'Bidang';
             const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
             satkerDropdownBtn.textContent = 'Satker';
 
             // Disable subsequent dropdowns initially
-            bidangDropdownBtn.disabled = true;
+            // bidangDropdownBtn.disabled = true;
             satkerDropdownBtn.disabled = true;
 
             // Call fetchTypes with the selected functionId
-            fetchTypes(functionId);
-        }
-
-
-        function fetchTypes(functionId) {
-            // Make an AJAX request to fetch types based on the selected function
-            fetch(`/api/type/${functionId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const typeDropdownList = document.getElementById('typeDropdownList');
-                    typeDropdownList.innerHTML = ''; // Clear existing options
-
-                    data.forEach(type => {
-                        const li = document.createElement('li');
-                        li.setAttribute('data-value', type.id);
-                        li.onclick = function() {
-                            selectType(this);
-                        };
-                        li.textContent = type.type;
-                        typeDropdownList.appendChild(li);
-                    });
-                })
-                .catch(error => console.error('Error fetching types:', error));
-        }
-
-        function selectType(element) {
-            selectDropdownItem(element, 'type_id')
-            const typeId = element.getAttribute('data-value');
-            document.getElementById('type_id').value = typeId;
-
-            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
-            bidangDropdownBtn.disabled = false;
-
-            // Reset fields
-            document.getElementById('bidang_id').value = '';
-            document.getElementById('satker_id').value = '';
-
-            // Reset dropdown text
-            bidangDropdownBtn.textContent = 'Bidang';
-            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
-            satkerDropdownBtn.textContent = 'Satker';
-
-            // Disable subsequent dropdowns initially
-            satkerDropdownBtn.disabled = true;
-
-            fetchBidang(typeId);
+            fetchBidang(functionId);
         }
 
         function fetchBidang(typeId) {
+            console.log('im clicked');
             fetch(`/api/bidang/${typeId}`)
                 .then(response => response.json())
                 .then(data => {

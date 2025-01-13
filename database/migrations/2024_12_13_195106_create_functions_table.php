@@ -17,16 +17,10 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('types', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('function_id')->constrained('functions')->onDelete('cascade');
-            $table->string('type');
-            $table->timestamps();
-        });
 
         Schema::create('bidang', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
+            $table->foreignId('function_id')->constrained('functions')->onDelete('cascade');
             $table->string('bidang');
             $table->timestamps();
         });

@@ -131,7 +131,7 @@
                                 </div>
                                 @endif    
                                 <input type="hidden" name='function_id' value="{{ request()->query('function_id') }}">
-                                <input type="hidden" name='type_id' value="{{ request()->query('type_id') }}">
+                                <!-- <input type="hidden" name='type_id' value="{{ request()->query('type_id') }}"> -->
                                 <input type="hidden" name='satker_id' value="{{ request()->query('satker_id') }}">
                                 <input type="hidden" name='bidang_id' value="{{ request()->query('bidang_id') }}">
                                 <button type="submit" class="btn btn-danger me-1 mb-1" id="submit">Submit</button>

@@ -15,26 +15,26 @@ class SSIController extends Controller
     public function create(Request $request)
     {
         $functionId = $request->query('function_id');
-        $typeId = $request->query('type_id');
+        // $typeId = $request->query('type_id');
         $satkerId = $request->query('satker_id');
         $bidangId = $request->query('bidang_id');
 
         // Cek data lama berdasarkan kombinasi
         $existingData = SSI::where('function_id', $functionId)
-            ->where('type_id', $typeId)
+            // ->where('type_id', $typeId)
             ->where('satker_id', $satkerId)
             ->where('bidang_id', $bidangId)
             ->first();
 
         // Kirim data lama (jika ada) ke view
-        return view('pages.isidata.ssi', compact('existingData', 'functionId', 'typeId', 'satkerId', 'bidangId'));
+        return view('pages.isidata.ssi', compact('existingData', 'functionId', 'satkerId', 'bidangId'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'function_id' => 'required|exists:functions,id',
-            'type_id' => 'required|exists:types,id',
+            // 'type_id' => 'required|exists:types,id',
             'satker_id' => 'required|exists:satuan_kerja,id',
             'bidang_id' => 'required|exists:bidang,id',
             'rp' => 'nullable|numeric',
@@ -54,7 +54,6 @@ class SSIController extends Controller
         ]);
 
         $existingData = SSI::where('function_id', $validated['function_id'])
-            ->where('type_id', $validated['type_id'])
             ->where('satker_id', $validated['satker_id'])
             ->where('bidang_id', $validated['bidang_id'])
             ->first();
@@ -74,7 +73,6 @@ class SSIController extends Controller
         return redirect()->route('fungsionalitas.show', [
             'pilih',
             'function_id' => $validated['function_id'],
-            'type_id' => $validated['type_id'],
             'satker_id' => $validated['satker_id'],
             'bidang_id' => $validated['bidang_id'],
         ])->with('success', $existingData ? 'Data berhasil diperbarui.' : 'Data berhasil disimpan.');
@@ -86,19 +84,17 @@ class SSIController extends Controller
     {
         // dd($request);
         $function_id =  $request->get('function_id');
-        $type_id = $request->get('type_id');
         $satker_id = $request->get('satker_id');
         $bidang_id = $request->get('bidang_id');
         $jenis_af = $request->get('af');
 
         $ssi = null;
 
-        if ($function_id && $type_id && $satker_id && $bidang_id) {
+        if ($function_id && $satker_id && $bidang_id) {
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
             }
             $ssi = SSI::where('function_id', $function_id)
-                ->where('type_id', $type_id)
                 ->where('satker_id', $satker_id)
                 ->where('bidang_id', $bidang_id)
                 ->get();
@@ -117,35 +113,12 @@ class SSIController extends Controller
                 'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
                 'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
             ];
-        } else if ($function_id && $type_id && $satker_id) {
+        } else if ($function_id && $satker_id) {
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
             }
             $ssi = SSI::where('function_id', $function_id)
-                ->where('type_id', $type_id)
                 ->where('satker_id', $satker_id)
-                ->get();
-
-            $ssi = [
-                'rp' => $ssi->avg('rp'),
-                'pd' => $ssi->avg('pd'),
-                'os' => $ssi->avg('os'),
-                'af_1_oq' => $ssi->avg('af_1_oq'),
-                'af_2_oq' => $ssi->avg('af_2_oq'),
-                'cf_1_oq' => $ssi->avg('cf_1_oq'),
-                'indirect_os_subject' => $ssi->avg('indirect_os_subject'),
-                'indirect_os_context' => $ssi->avg('indirect_os_context'),
-                'indirect_os_low_power' => $ssi->avg('indirect_os_low_power'),
-                'indirect_af_1_oq' => $ssi->avg('indirect_af_1_oq'),
-                'indirect_af_2_oq' => $ssi->avg('indirect_af_2_oq'),
-                'indirect_cf_1_oq' => $ssi->avg('indirect_cf_1_oq'),
-            ];
-        } else if ($function_id && $type_id) {
-            if (!$request->get('af')) {
-                return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
-            }
-            $ssi = SSI::where('function_id', $function_id)
-                ->where('type_id', $type_id)
                 ->get();
 
             $ssi = [

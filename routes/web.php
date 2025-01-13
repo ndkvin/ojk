@@ -34,8 +34,7 @@ Route::get('/ssi/{ssi}', [SSIController::class, 'show'])->name('ssi.show');
 Route::group([
     'prefix' => 'api'
 ], function () {
-    Route::get('/type/{function_id}', [App\Http\Controllers\ApiController::class, 'type']);
-    Route::get('/bidang/{type_id}', [App\Http\Controllers\ApiController::class, 'bidang']);
+    Route::get('/bidang/{function_id}', [App\Http\Controllers\ApiController::class, 'bidang']);
     Route::get('/satker/{bidang_id}', [App\Http\Controllers\ApiController::class, 'satker']);
 });
 

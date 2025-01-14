@@ -32,6 +32,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('wilayah_kerja', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
+            $table->string('wilker');
+            $table->timestamps();
+        });
+
 
     }
 
@@ -44,6 +51,7 @@ return new class extends Migration
         Schema::dropIfExists('functions');
         Schema::dropIfExists('types');
         Schema::dropIfExists('satuan_kerja');
+        Schema::dropIfExists('wilayah_kerja');
         Schema::dropIfExists('bidang');
     }
 };

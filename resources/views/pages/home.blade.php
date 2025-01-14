@@ -147,8 +147,8 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="dropdown-btn" id="satkerDropdownBtn"
                                                             onclick="toggleDropdown('satkerDropdown')"
-                                                            {{ request()->get('bidang_id') ? '' : 'disabled' }}>
-                                                            {{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->satker : 'Satker' }}
+                                                            {{ request()->get('function_id') ? '' : 'disabled' }}>
+                                                            {{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->satker : 'Satuan kerja' }}
                                                         </button>
                                                         <div class="dropdown-content" id="satkerDropdown">
                                                             <input type="text" class="dropdown-search"
@@ -156,16 +156,45 @@
                                                             <ul class="dropdown-list" id="satkerDropdownList">
                                                                 @foreach ($satkers as $satker)
                                                                     <li data-value="{{ $satker->id }}"
-                                                                        onclick="selectDropdownItem(this, 'satker_id')">
+                                                                        onclick="selectSatker(this)">
                                                                         {{ $satker->satker }}
                                                                     </li>
                                                                 @endforeach
                                                             </ul>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <input type="hidden"
+                                                    value="{{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->id : '' }}"
+                                                    id="satker_id" name="satker_id" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="wilker_id" class="form-label">KOJK Wilayah Kerja</label>
+                                                <div class="dropdown-container">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="dropdown-btn" id="wilkerDropdownBtn"
+                                                            onclick="toggleDropdown('wilkerDropdown')"
+                                                            {{ request()->get('satker_id') ? '' : 'disabled' }}>
+                                                            {{ request()->get('wilker_id') ? $wilkers->where('id', request()->get('wilker_id'))->first()->wilker : 'Wilayah Kerja' }}
+                                                        </button>
+                                                        <div class="dropdown-content" id="wilkerDropdown">
+                                                            <input type="text" class="dropdown-search"
+                                                                placeholder="Search..." oninput="filterDropdown(this)">
+                                                            <ul class="dropdown-list" id="wilkerDropdownList">
+                                                                @foreach ($wilkers as $wilker)
+                                                                    <li data-value="{{ $wilker->id }}"
+                                                                        onclick="selectDropdownItem(this, 'wilker_id')">
+                                                                        {{ $wilker->wilker }}
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                     <input type="hidden"
-                                                        value="{{ request()->get('satker_id') ? $satkers->where('id', request()->get('satker_id'))->first()->id : '' }}"
-                                                        id="satker_id" name="satker_id" required>
+                                                        value="{{ request()->get('wilker_id') ? $wilkers->where('id', request()->get('wilker_id'))->first()->id : '' }}"
+                                                        id="wilker_id" name="wilker_id" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -539,14 +568,20 @@
                 function clearFilter() {
                     document.getElementById('function_id').value = '';
                     document.getElementById('satker_id').value = '';
+                    document.getElementById('wilker_id').value = '';
                     document.getElementById('af').value = '';
 
                     const functionDropdownBtn = document.getElementById('functionDropdownBtn');
                     functionDropdownBtn.textContent = 'Fungsi';
                     const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
                     bidangDropdownBtn.textContent = 'Bidang';
+                    bidangDropdownBtn.disabled = true;
                     const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
-                    satkerDropdownBtn.textContent = 'Satker';
+                    satkerDropdownBtn.textContent = 'Satuan Kerja';
+                    satkerDropdownBtn.disabled = true;
+                    const wilkerDropdownBtn = document.getElementById('wilkerDropdownBtn');
+                    wilkerDropdownBtn.textContent = 'Wilayah Kerja';
+                    wilkerDropdownBtn.disabled = true;
                     const afDropdownBtn = document.getElementById('afDropdownBtn');
                     afDropdownBtn.textContent = 'AF';
 
@@ -566,15 +601,19 @@
                     // Reset fields
                     document.getElementById('bidang_id').value = '';
                     document.getElementById('satker_id').value = '';
+                    document.getElementById('wilker_id').value = '';
 
                     // Reset dropdown text
                     bidangDropdownBtn.textContent = 'Bidang';
                     const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
                     satkerDropdownBtn.textContent = 'Satker';
+                    const wilerDropdownBtn = document.getElementById('wilkerDropdownBtn');
+                    wilkerDropdownBtn.textContent = 'Wilayah Kerja';
 
                     // Disable subsequent dropdowns initially
                     // bidangDropdownBtn.disabled = true;
                     satkerDropdownBtn.disabled = true;
+                    wilkerDropdownBtn.disabled = true;
 
                     // Call fetchTypes with the selected functionId
                     fetchBidang(functionId);
@@ -602,6 +641,7 @@
                 }
 
                 function selectBidang(element) {
+                    console.log('Anang Ganteng');
                     selectDropdownItem(element, 'bidang_id')
                     const bidangId = element.getAttribute('data-value');
                     document.getElementById('bidang_id').value = bidangId;
@@ -629,7 +669,7 @@
                                 const li = document.createElement('li');
                                 li.setAttribute('data-value', type.id);
                                 li.onclick = function() {
-                                    selectDropdownItem(this, 'satker_id');
+                                    selectSatker(this, 'satker_id');
                                 };
                                 li.textContent = type.satker;
                                 bidangDropdownList.appendChild(li);
@@ -637,6 +677,46 @@
                         })
                         .catch(error => console.error('Error fetching types:', error));
                 }
+
+                function selectBebas(element) {
+                    console.log(element);
+                }
+
+                function selectSatker(element) {
+                    selectDropdownItem(element, 'satker_id');
+                    const satkerId = element.getAttribute('data-value');
+                    document.getElementById('satker_id').value = satkerId;
+
+                    const wilkerDropdownBtn = document.getElementById('wilkerDropdownBtn');
+                    wilkerDropdownBtn.disabled = false;
+
+                    // Reset fields
+                    document.getElementById('wilker_id').value = '';
+
+                    wilkerDropdownBtn.textContent = 'Wilayah Kerja';
+
+                    fetchWilker(satkerId);
+                }
+
+                function fetchWilker(satkerId) {
+                    fetch(`/api/wilker/${satkerId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const wilkerDropdownList = document.getElementById('wilkerDropdownList');
+                            wilkerDropdownList.innerHTML = ''; // Clear existing options
+                            data.forEach(wilker => {
+                                const li = document.createElement('li');
+                                li.setAttribute('data-value', wilker.id);
+                                li.onclick = function() {
+                                    selectDropdownItem(this, 'wilker_id');
+                                };
+                                li.textContent = wilker.wilker;
+                                wilkerDropdownList.appendChild(li);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching wilayah kerja:', error));
+                }
+
             </script>
 
             <script>

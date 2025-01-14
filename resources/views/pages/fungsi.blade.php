@@ -34,7 +34,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="type_id" class="form-label">Tipe</label>
                             <div class="dropdown-container">
                                 <div class="dropdown">
@@ -46,16 +46,15 @@
                                         <input type="text" class="dropdown-search" placeholder="Search..."
                                             oninput="filterDropdown(this)">
                                         <ul class="dropdown-list" id="typeDropdownList">
-                                            <!-- Types will be populated here based on selected function -->
                                         </ul>
                                     </div>
                                 </div>
                                 <input type="hidden" id="type_id" name="type_id" required>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="mb-3">
-                            <label for="type_id" class="form-label">Bidang</label>
+                            <label for="bidang_id" class="form-label">Bidang</label>
                             <div class="dropdown-container">
                                 <div class="dropdown">
                                     <button type="button" class="dropdown-btn" id="bidangDropdownBtn"
@@ -114,73 +113,73 @@
             const functionId = element.getAttribute('data-value');
             document.getElementById('function_id').value = functionId;
 
-            const typeDropdownBtn = document.getElementById('typeDropdownBtn');
-            typeDropdownBtn.disabled = false;
-
-            // Reset fields
-            document.getElementById('type_id').value = '';
-            document.getElementById('bidang_id').value = '';
-            document.getElementById('satker_id').value = '';
-
-            typeDropdownBtn.textContent = 'Tipe';
-            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
-            bidangDropdownBtn.textContent = 'Bidang';
-            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
-            satkerDropdownBtn.textContent = 'Satker';
-
-            // Disable subsequent dropdowns initially
-            bidangDropdownBtn.disabled = true;
-            satkerDropdownBtn.disabled = true;
-
-            fetchTypes(functionId);
-        }
-
-        function fetchTypes(functionId) {
-            // Make an AJAX request to fetch types based on the selected function
-            fetch(`/api/type/${functionId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const typeDropdownList = document.getElementById('typeDropdownList');
-                    typeDropdownList.innerHTML = ''; // Clear existing options
-
-                    data.forEach(type => {
-                        const li = document.createElement('li');
-                        li.setAttribute('data-value', type.id);
-                        li.onclick = function() {
-                            selectType(this);
-                        };
-                        li.textContent = type.type;
-                        typeDropdownList.appendChild(li);
-                    });
-                })
-                .catch(error => console.error('Error fetching types:', error));
-        }
-
-        function selectType(element) {
-            selectDropdownItem(element, 'type_id')
-            const typeId = element.getAttribute('data-value');
-            document.getElementById('type_id').value = typeId;
-
             const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
             bidangDropdownBtn.disabled = false;
 
-            // document.getElementById('bidang_id').value = '';
-            // document.getElementById('satker_id').value = '';
-
             // Reset fields
+            // document.getElementById('type_id').value = '';
             document.getElementById('bidang_id').value = '';
             document.getElementById('satker_id').value = '';
 
-            // Reset dropdown text
+            // typeDropdownBtn.textContent = 'Tipe';
+            // const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
             bidangDropdownBtn.textContent = 'Bidang';
             const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
             satkerDropdownBtn.textContent = 'Satker';
 
             // Disable subsequent dropdowns initially
+            // bidangDropdownBtn.disabled = true;
             satkerDropdownBtn.disabled = true;
 
-            fetchBidang(typeId);
+            fetchBidang(functionId);
         }
+
+        // function fetchTypes(functionId) {
+        //     // Make an AJAX request to fetch types based on the selected function
+        //     fetch(`/api/type/${functionId}`)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             const typeDropdownList = document.getElementById('typeDropdownList');
+        //             typeDropdownList.innerHTML = ''; // Clear existing options
+
+        //             data.forEach(type => {
+        //                 const li = document.createElement('li');
+        //                 li.setAttribute('data-value', type.id);
+        //                 li.onclick = function() {
+        //                     selectType(this);
+        //                 };
+        //                 li.textContent = type.type;
+        //                 typeDropdownList.appendChild(li);
+        //             });
+        //         })
+        //         .catch(error => console.error('Error fetching types:', error));
+        // }
+
+        // function selectType(element) {
+        //     selectDropdownItem(element, 'type_id')
+        //     const typeId = element.getAttribute('data-value');
+        //     document.getElementById('type_id').value = typeId;
+
+        //     const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+        //     bidangDropdownBtn.disabled = false;
+
+        //     // document.getElementById('bidang_id').value = '';
+        //     // document.getElementById('satker_id').value = '';
+
+        //     // Reset fields
+        //     document.getElementById('bidang_id').value = '';
+        //     document.getElementById('satker_id').value = '';
+
+        //     // Reset dropdown text
+        //     bidangDropdownBtn.textContent = 'Bidang';
+        //     const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+        //     satkerDropdownBtn.textContent = 'Satker';
+
+        //     // Disable subsequent dropdowns initially
+        //     satkerDropdownBtn.disabled = true;
+
+        //     fetchBidang(typeId);
+        // }
 
         function fetchBidang(typeId) {
             // Make an AJAX request to fetch types based on the selected function

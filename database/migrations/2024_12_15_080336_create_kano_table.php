@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('kano', function (Blueprint $table) {
             $table->id();
             $table->foreignId('function_id')->constrained('functions')->onDelete('cascade');
-            $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
             $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
+            $table->foreignId('wilker_id')->nullable()->constrained('wilayah_kerja')->onDelete('cascade');
             $table->string('attribute');
             $table->double('puas');
             $table->double('penting');
             $table->timestamps();
 
-            $table->index(['function_id', 'type_id', 'satker_id', 'bidang_id']);
+            $table->index(['function_id', 'satker_id', 'bidang_id']);
         });
     }
 

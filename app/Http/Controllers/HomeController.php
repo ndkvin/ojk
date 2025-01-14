@@ -156,14 +156,13 @@ class HomeController extends Controller
             $functions = Fungsi::all();
             $bidangs = Bidang::where('function_id', $function_id)->get();
             $satkers = Satker::where('bidang_id', $bidang_id)->get();
-        }
-         else if ($function_id && $bidang_id) {
+        } else if ($function_id && $bidang_id) {
             // dd('here');
             if (!$request->get('af')) {
                 return redirect()->back()->withErrors(['af' => 'Pilih AF terlebih dahulu']);
             }
             $ssi = SSI::where('function_id', $function_id)
-                ->where('satker_id', $satker_id)
+                ->where('bidang_id', $bidang_id)
                 ->get();
 
             $ssi = [
@@ -184,7 +183,7 @@ class HomeController extends Controller
             ];
 
             $kano = Kano::where('function_id', $function_id)
-                ->where('satker_id', $satker_id)
+                ->where('bidang_id', $bidang_id)
                 ->get()
                 ->map(function ($item) {
                     return [
@@ -205,14 +204,9 @@ class HomeController extends Controller
             $functions = Fungsi::all();
             $bidangs = Bidang::where('function_id', $function_id)->get();
 
-            
-
             $functions = Fungsi::all();
             $bidangs = Bidang::where('function_id', $function_id)->get();
             $satkers = Satker::where('bidang_id', $bidang_id)->get();
-
-            // dd($bidangs);
-            // dd($bidangs);
         } else if ($function_id) {
             // dd('here');
             if (!$request->get('af')) {

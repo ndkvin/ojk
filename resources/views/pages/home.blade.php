@@ -514,275 +514,274 @@
                                         </div>
                                     </div>
                                 </div>
-                </div>
-                @endforeach
-                @endif
-            @else
-                <div class="col-12 mx-auto">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <center>
-                                    <h4 class="card-title">Tidak Ada Data</h4>
-                                </center>
+                            @endforeach
+                        @endif
+                    @else
+                        <div class="col-12 mx-auto">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <center>
+                                            <h4 class="card-title">Tidak Ada Data</h4>
+                                        </center>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
-                @endif
-    </div>
-    </section>
-@endsection
+            </section>
+        @endsection
 
-@section('scripts')
-    <script>
-        function clearFilter() {
-            document.getElementById('function_id').value = '';
-            document.getElementById('satker_id').value = '';
-            document.getElementById('af').value = '';
+        @section('scripts')
+            <script>
+                function clearFilter() {
+                    document.getElementById('function_id').value = '';
+                    document.getElementById('satker_id').value = '';
+                    document.getElementById('af').value = '';
 
-            const functionDropdownBtn = document.getElementById('functionDropdownBtn');
-            functionDropdownBtn.textContent = 'Fungsi';
-            const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
-            bidangDropdownBtn.textContent = 'Bidang';
-            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
-            satkerDropdownBtn.textContent = 'Satker';
-            const afDropdownBtn = document.getElementById('afDropdownBtn');
-            afDropdownBtn.textContent = 'AF';
+                    const functionDropdownBtn = document.getElementById('functionDropdownBtn');
+                    functionDropdownBtn.textContent = 'Fungsi';
+                    const bidangDropdownBtn = document.getElementById('bidangDropdownBtn');
+                    bidangDropdownBtn.textContent = 'Bidang';
+                    const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+                    satkerDropdownBtn.textContent = 'Satker';
+                    const afDropdownBtn = document.getElementById('afDropdownBtn');
+                    afDropdownBtn.textContent = 'AF';
 
-        }
-
-        function selectFunction(element) {
-            selectDropdownItem(element, 'function_id');
-
-            // Ensure `data-value` exists
-            const functionId = element.getAttribute('data-value');
-            document.getElementById('function_id').value = functionId;
-
-            // Access elements and update
-            const typeDropdownBtn = document.getElementById('bidangDropdownBtn');
-            typeDropdownBtn.disabled = false; // Enable typeDropdownBtn when function is selected
-
-            // Reset fields
-            document.getElementById('bidang_id').value = '';
-            document.getElementById('satker_id').value = '';
-
-            // Reset dropdown text
-            bidangDropdownBtn.textContent = 'Bidang';
-            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
-            satkerDropdownBtn.textContent = 'Satker';
-
-            // Disable subsequent dropdowns initially
-            // bidangDropdownBtn.disabled = true;
-            satkerDropdownBtn.disabled = true;
-
-            // Call fetchTypes with the selected functionId
-            fetchBidang(functionId);
-        }
-
-        function fetchBidang(typeId) {
-            console.log('im clicked');
-            fetch(`/api/bidang/${typeId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const bidangDropdownList = document.getElementById('bidangDropdownList');
-                    bidangDropdownList.innerHTML = ''; // Clear existing options
-
-                    data.forEach(type => {
-                        const li = document.createElement('li');
-                        li.setAttribute('data-value', type.id);
-                        li.onclick = function() {
-                            selectBidang(this);
-                        };
-                        li.textContent = type.bidang;
-                        bidangDropdownList.appendChild(li);
-                    });
-                })
-                .catch(error => console.error('Error fetching types:', error));
-        }
-
-        function selectBidang(element) {
-            selectDropdownItem(element, 'bidang_id')
-            const bidangId = element.getAttribute('data-value');
-            document.getElementById('bidang_id').value = bidangId;
-
-            const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
-            bidangDropdownBtn.disabled = false;
-
-            // Reset fields
-            document.getElementById('satker_id').value = '';
-
-            const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
-            satkerDropdownBtn.textContent = 'Satker';
-
-            fetchSatker(bidangId);
-        }
-
-        function fetchSatker(bidangId) {
-            // Make an AJAX request to fetch types based on the selected function
-            fetch(`/api/satker/${bidangId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const bidangDropdownList = document.getElementById('satkerDropdownList');
-                    bidangDropdownList.innerHTML = ''; // Clear existing options
-                    data.forEach(type => {
-                        const li = document.createElement('li');
-                        li.setAttribute('data-value', type.id);
-                        li.onclick = function() {
-                            selectDropdownItem(this, 'satker_id');
-                        };
-                        li.textContent = type.satker;
-                        bidangDropdownList.appendChild(li);
-                    });
-                })
-                .catch(error => console.error('Error fetching types:', error));
-        }
-    </script>
-
-    <script>
-        function submit() {
-            const button = document.getElementById('submit');
-
-            button.click();
-        }
-    </script>
-    <script>
-        // Data dari Controller
-        const chartData = @json($kano);
-
-        function getRandomColor() {
-            const r = Math.floor(Math.random() * 255);
-            const g = Math.floor(Math.random() * 255);
-            const b = Math.floor(Math.random() * 255);
-            return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
-        }
-
-        // Tambahkan warna random ke setiap titik dalam data
-        const dataWithColors = chartData.map(point => ({
-            ...point,
-            backgroundColor: getRandomColor()
-        }));
-
-        const ctx = document.getElementById('quadrantChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'lalala',
-                    data: dataWithColors,
-                    pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
-                    radius: 15,
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        min: 1,
-                        max: 6,
-                        title: {
-                            display: false,
-                            text: 'Tingkat Kepuasan (X-Axis)'
-                        },
-                        grid: {
-                            drawBorder: false,
-                            color: function(context) {
-                                return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
-                            },
-                            lineWidth: function(context) {
-                                return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
-                            }
-                        }
-                    },
-                    y: {
-                        min: 1,
-                        max: 6,
-                        title: {
-                            display: false,
-                            text: 'Tingkat Kepentingan (Y-Axis)'
-                        },
-                        grid: {
-                            drawBorder: false,
-                            color: function(context) {
-                                return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
-                            },
-                            lineWidth: function(context) {
-                                return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false // Hilangkan legend dari chart
-                    },
-                    tooltip: {
-                        backgroundColor: '#BCCCDC', // Warna background tooltip
-                        titleColor: '#000000', // Warna judul
-                        bodyColor: '#000000', // Warna isi teks
-                        borderColor: '#00BFFF',
-                        titleFont: {
-                            size: 16,
-                            weight: 'bold'
-                        }, // Styling font title
-                        bodyFont: {
-                            size: 14
-                        }, // Styling font body
-                        padding: 12, // Padding dalam tooltip
-                        cornerRadius: 8, // Sudut melengkung tooltip
-                        callbacks: {
-                            label: function(context) {
-                                const dataPoint = context.raw;
-                                return [
-                                    `Nama Attribute          : ${dataPoint.label}`,
-                                    `Tingkat Kepentingan : ${dataPoint.y}`,
-                                    `Tingkat Kepuasan     : ${dataPoint.x}`
-                                ];
-                            }
-                        }
-                    }
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
                 }
-            }
-        });
-    </script>
 
-    <script>
-        function toggleDropdown(dropdownId) {
-            const dropdown = document.getElementById(dropdownId);
-            dropdown.classList.toggle('active');
-        }
+                function selectFunction(element) {
+                    selectDropdownItem(element, 'function_id');
 
-        function filterDropdown(input) {
-            const filter = input.value.toLowerCase();
-            const items = input.nextElementSibling.querySelectorAll('li');
-            items.forEach(item => {
-                const text = item.textContent || item.innerText;
-                item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
-            });
-        }
+                    // Ensure `data-value` exists
+                    const functionId = element.getAttribute('data-value');
+                    document.getElementById('function_id').value = functionId;
 
-        function selectDropdownItem(item, hiddenInputId) {
-            const dropdown = item.closest('.dropdown-content');
-            const button = dropdown.previousElementSibling;
-            const hiddenInput = document.getElementById(hiddenInputId);
+                    // Access elements and update
+                    const typeDropdownBtn = document.getElementById('bidangDropdownBtn');
+                    typeDropdownBtn.disabled = false; // Enable typeDropdownBtn when function is selected
 
-            button.textContent = item.textContent;
-            hiddenInput.value = item.getAttribute('data-value');
-            dropdown.classList.remove('active');
-        }
+                    // Reset fields
+                    document.getElementById('bidang_id').value = '';
+                    document.getElementById('satker_id').value = '';
 
-        document.addEventListener('click', function(e) {
-            const dropdowns = document.querySelectorAll('.dropdown-content');
-            dropdowns.forEach(dropdown => {
-                if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
+                    // Reset dropdown text
+                    bidangDropdownBtn.textContent = 'Bidang';
+                    const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+                    satkerDropdownBtn.textContent = 'Satker';
+
+                    // Disable subsequent dropdowns initially
+                    // bidangDropdownBtn.disabled = true;
+                    satkerDropdownBtn.disabled = true;
+
+                    // Call fetchTypes with the selected functionId
+                    fetchBidang(functionId);
+                }
+
+                function fetchBidang(typeId) {
+                    console.log('im clicked');
+                    fetch(`/api/bidang/${typeId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const bidangDropdownList = document.getElementById('bidangDropdownList');
+                            bidangDropdownList.innerHTML = ''; // Clear existing options
+
+                            data.forEach(type => {
+                                const li = document.createElement('li');
+                                li.setAttribute('data-value', type.id);
+                                li.onclick = function() {
+                                    selectBidang(this);
+                                };
+                                li.textContent = type.bidang;
+                                bidangDropdownList.appendChild(li);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching types:', error));
+                }
+
+                function selectBidang(element) {
+                    selectDropdownItem(element, 'bidang_id')
+                    const bidangId = element.getAttribute('data-value');
+                    document.getElementById('bidang_id').value = bidangId;
+
+                    const bidangDropdownBtn = document.getElementById('satkerDropdownBtn');
+                    bidangDropdownBtn.disabled = false;
+
+                    // Reset fields
+                    document.getElementById('satker_id').value = '';
+
+                    const satkerDropdownBtn = document.getElementById('satkerDropdownBtn');
+                    satkerDropdownBtn.textContent = 'Satker';
+
+                    fetchSatker(bidangId);
+                }
+
+                function fetchSatker(bidangId) {
+                    // Make an AJAX request to fetch types based on the selected function
+                    fetch(`/api/satker/${bidangId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const bidangDropdownList = document.getElementById('satkerDropdownList');
+                            bidangDropdownList.innerHTML = ''; // Clear existing options
+                            data.forEach(type => {
+                                const li = document.createElement('li');
+                                li.setAttribute('data-value', type.id);
+                                li.onclick = function() {
+                                    selectDropdownItem(this, 'satker_id');
+                                };
+                                li.textContent = type.satker;
+                                bidangDropdownList.appendChild(li);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching types:', error));
+                }
+            </script>
+
+            <script>
+                function submit() {
+                    const button = document.getElementById('submit');
+
+                    button.click();
+                }
+            </script>
+            <script>
+                // Data dari Controller
+                const chartData = @json($kano);
+
+                function getRandomColor() {
+                    const r = Math.floor(Math.random() * 255);
+                    const g = Math.floor(Math.random() * 255);
+                    const b = Math.floor(Math.random() * 255);
+                    return `rgba(${r}, ${g}, ${b}, 0.8)`; // Transparansi 0.8
+                }
+
+                // Tambahkan warna random ke setiap titik dalam data
+                const dataWithColors = chartData.map(point => ({
+                    ...point,
+                    backgroundColor: getRandomColor()
+                }));
+
+                const ctx = document.getElementById('quadrantChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: 'lalala',
+                            data: dataWithColors,
+                            pointBackgroundColor: dataWithColors.map(point => point.backgroundColor),
+                            radius: 15,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                min: 1,
+                                max: 6,
+                                title: {
+                                    display: false,
+                                    text: 'Tingkat Kepuasan (X-Axis)'
+                                },
+                                grid: {
+                                    drawBorder: false,
+                                    color: function(context) {
+                                        return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
+                                    },
+                                    lineWidth: function(context) {
+                                        return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
+                                    }
+                                }
+                            },
+                            y: {
+                                min: 1,
+                                max: 6,
+                                title: {
+                                    display: false,
+                                    text: 'Tingkat Kepentingan (Y-Axis)'
+                                },
+                                grid: {
+                                    drawBorder: false,
+                                    color: function(context) {
+                                        return context.tick.value === 3.5 ? '#000000' : '#ddd'; // Midline in red
+                                    },
+                                    lineWidth: function(context) {
+                                        return context.tick.value === 3.5 ? 2 : 1; // Highlight the midline
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false // Hilangkan legend dari chart
+                            },
+                            tooltip: {
+                                backgroundColor: '#BCCCDC', // Warna background tooltip
+                                titleColor: '#000000', // Warna judul
+                                bodyColor: '#000000', // Warna isi teks
+                                borderColor: '#00BFFF',
+                                titleFont: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }, // Styling font title
+                                bodyFont: {
+                                    size: 14
+                                }, // Styling font body
+                                padding: 12, // Padding dalam tooltip
+                                cornerRadius: 8, // Sudut melengkung tooltip
+                                callbacks: {
+                                    label: function(context) {
+                                        const dataPoint = context.raw;
+                                        return [
+                                            `Nama Attribute          : ${dataPoint.label}`,
+                                            `Tingkat Kepentingan : ${dataPoint.y}`,
+                                            `Tingkat Kepuasan     : ${dataPoint.x}`
+                                        ];
+                                    }
+                                }
+                            }
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        }
+                    }
+                });
+            </script>
+
+            <script>
+                function toggleDropdown(dropdownId) {
+                    const dropdown = document.getElementById(dropdownId);
+                    dropdown.classList.toggle('active');
+                }
+
+                function filterDropdown(input) {
+                    const filter = input.value.toLowerCase();
+                    const items = input.nextElementSibling.querySelectorAll('li');
+                    items.forEach(item => {
+                        const text = item.textContent || item.innerText;
+                        item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+                    });
+                }
+
+                function selectDropdownItem(item, hiddenInputId) {
+                    const dropdown = item.closest('.dropdown-content');
+                    const button = dropdown.previousElementSibling;
+                    const hiddenInput = document.getElementById(hiddenInputId);
+
+                    button.textContent = item.textContent;
+                    hiddenInput.value = item.getAttribute('data-value');
                     dropdown.classList.remove('active');
                 }
-            });
-        });
-    </script>
-@endsection
+
+                document.addEventListener('click', function(e) {
+                    const dropdowns = document.querySelectorAll('.dropdown-content');
+                    dropdowns.forEach(dropdown => {
+                        if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
+                            dropdown.classList.remove('active');
+                        }
+                    });
+                });
+            </script>
+        @endsection

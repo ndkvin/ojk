@@ -139,10 +139,18 @@
                                 <div class="col-md-6">
                                     <h4>Indirect</h4>
                                     <table class="table table-bordered">
-                                        {{-- <tr>
-                                            <th>Outcome Satisfaction</th>
-                                            <td>{{ $ssi['indirect_'] }}</td>
-                                        </tr> --}}
+                                        <tr>
+                                            <th>Outcome Satisfaction Subject</th>
+                                            <td>{{ $ssi['indirect_os_subject'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Outcome Satisfaction Context</th>
+                                            <td>{{ $ssi['indirect_os_context'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Outcome Satisfaction Crowds</th>
+                                            <td>{{ $ssi['indirect_os_low_power'] }}</td>
+                                        </tr>
                                         <tr>
                                             <th>Adjustment Factor</th>
                                             <td>{{ $ssi['indirect_af'] }}</td>

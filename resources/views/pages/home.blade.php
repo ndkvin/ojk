@@ -247,13 +247,9 @@
                                             </div>
                                         </div>
                                         <div class="mt-md-2 col-md-4 col-12">
-                                            <div class="mt-md-4 w-100 btn btn-secondary" style="margin-top:10px"
+                                            <div class="w-100 btn btn-secondary" style="margin-top:10px"
                                                 onclick="clearFilter()">Clear</div>
-                                           
-                                        </div>
-                                        <div class="mt-md-2 col-md-4 col-12">
-
-                                            <button type="submit" class="mt-md-4 w-100 btn btn-danger"
+                                                <button type="submit" class="w-100 btn btn-danger"
                                                 style="margin-top:10px">Filter</button>
                                         </div>
                                     </div>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('function_id')->constrained('functions')->onDelete('cascade');
             $table->foreignId('satker_id')->constrained('satuan_kerja')->onDelete('cascade');
             $table->foreignId('bidang_id')->constrained('bidang')->onDelete('cascade');
+            $table->foreignId('wilker_id')->nullable()->constrained('wilayah_kerja')->onDelete('cascade');
             $table->string('attribute');
             $table->double('puas');
             $table->double('penting');

@@ -118,7 +118,7 @@
                                     <h4>Direct</h4>
                                     <table class="table table-bordered">
                                         <tr>
-                                            <th>RP</th>
+                                            <th>Resource Perception</th>
                                             <td>{{ $ssi['rp'] }}</td>
                                         </tr>
                                         <tr>

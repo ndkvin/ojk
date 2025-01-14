@@ -396,7 +396,7 @@
                                     href="{{ route('ssi.show', [
                                         'detail',
                                         'function_id' => request()->query('function_id'),
-                                        'type_id' => request()->query('type_id'),
+                                        'wilker_id' => request()->query('wilker_id'),
                                         'satker_id' => request()->query('satker_id'),
                                         'bidang_id' => request()->query('bidang_id'),
                                         'af' => request()->query('af'),

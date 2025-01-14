@@ -93,13 +93,13 @@ class HomeController extends Controller
             $ipa = IPA::where('function_id', $function_id)
                 ->where('bidang_id', $bidang_id)
                 ->where('satker_id', $satker_id)
-                ->where('wilker_id', $wilker_id)
+                // ->where('wilker_id', $wilker_id)
                 ->get();
 
             $analisis = Analisis::where('function_id', $function_id)
                 ->where('bidang_id', $bidang_id)
                 ->where('satker_id', $satker_id)
-                ->where('wilker_id', $wilker_id)
+                // ->where('wilker_id', $wilker_id)
                 ->get();
 
             $functions = Fungsi::all();
